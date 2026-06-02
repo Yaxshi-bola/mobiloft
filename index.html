@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MOBILOFT - Premium Service</title>
+    <title>MOBILOFT - Smartfonlar ustaxonasi</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -14,18 +14,18 @@
                 extend: {
                     colors: {
                         titan: {
-                            950: '#07080a',
-                            900: '#0e1014',
-                            800: '#15181f',
-                            700: '#1f242e',
+                            950: '#050608',
+                            900: '#090b0e',
+                            800: '#11141a',
+                            700: '#1a1f29',
                             silver: '#f1f5f9',
                             chrome: '#cbd5e1'
                         }
                     },
                     boxShadow: {
-                        'silver-glow': '0 0 30px rgba(255, 255, 255, 0.05)',
-                        'gold-glow': '0 0 25px rgba(212, 163, 89, 0.15)',
-                        'ios-inner': 'inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 12px 40px rgba(0, 0, 0, 0.8)'
+                        'silver-glow': '0 0 25px rgba(255, 255, 255, 0.03)',
+                        'nav-shadow': '0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05)',
+                        'active-glow': '0 0 15px rgba(255, 255, 255, 0.08)'
                     }
                 }
             }
@@ -37,50 +37,51 @@
             background-color: #040507;
             color: #f8fafc;
             -webkit-tap-highlight-color: transparent;
-            /* Native iOS System Font stack for San Francisco experience */
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.01) 0%, transparent 40%);
         }
 
         /* SF Light/Medium weight overrides for ultra-clean look */
         h1, h2, h3, h4 {
-            font-weight: 500;
-            letter-spacing: -0.02em;
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
         /* Ultra Transparent Metallic Silver Glass */
         .silver-glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(30px) saturate(210%);
-            -webkit-backdrop-filter: blur(30px) saturate(210%);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(40px) saturate(220%);
+            -webkit-backdrop-filter: blur(40px) saturate(220%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .silver-glass-active {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+        /* Active Navigation capsule matching image_3d4cdb.png */
+        .nav-capsule-active {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.25rem;
         }
 
         /* Ambient subtle titanium flow anim */
         .ambient-titan {
             filter: blur(140px);
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0) 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.01) 0%, rgba(0, 0, 0, 0) 70%);
             animation: floatGlow 15s ease-in-out infinite alternate;
         }
 
         @keyframes floatGlow {
-            0% { transform: translate(-10%, -10%) scale(1); }
-            100% { transform: translate(15%, 15%) scale(1.2); }
+            0% { transform: translate(-15%, -15%) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.15); }
         }
 
         /* Dynamic Island Pulse and Notification */
         .island-shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
             background-size: 200% 100%;
             animation: islandMove 4s infinite linear;
         }
@@ -90,24 +91,54 @@
             100% { background-position: 200% 0; }
         }
 
-        /* Special Tracker Shimmer Input */
-        .tracker-card-glow {
+        /* Interactive Pulsating Border Glow for Search Block */
+        .search-container-glow {
             position: relative;
             z-index: 10;
         }
-        .tracker-card-glow::before {
+        .search-container-glow::before {
             content: '';
             position: absolute;
             inset: -1.5px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.25), rgba(255,255,255,0.05));
-            border-radius: 1.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.01), rgba(255,255,255,0.18), rgba(255,255,255,0.01));
+            border-radius: 2rem;
             z-index: -1;
-            animation: borderPulse 4s infinite alternate;
+            background-size: 200% 200%;
+            animation: borderPulse 3.5s ease-in-out infinite alternate, shimmerSwipe 6s infinite linear;
         }
 
         @keyframes borderPulse {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.9; }
+            0% { opacity: 0.2; }
+            100% { opacity: 0.85; }
+        }
+
+        @keyframes shimmerSwipe {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Custom Shimmer over Search Button to invite clicking */
+        .search-btn-pulse {
+            position: relative;
+            overflow: hidden;
+        }
+        .search-btn-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-20deg);
+            animation: buttonShimmer 3.5s infinite ease-in-out;
+        }
+
+        @keyframes buttonShimmer {
+            0% { left: -150%; }
+            40% { left: 150%; }
+            100% { left: 150%; }
         }
 
         /* Smooth iOS transitions */
@@ -123,7 +154,7 @@
         @keyframes iosSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(12px) scale(0.99);
+                transform: translateY(10px) scale(0.995);
             }
             to {
                 opacity: 1;
@@ -134,26 +165,26 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between pb-28">
 
-    <!-- Subtle Premium Metallic Glows -->
+    <!-- Subtle Metallic Background Glows -->
     <div class="fixed top-0 left-1/4 w-96 h-96 ambient-titan pointer-events-none z-0"></div>
 
     <!-- MAIN CONTAINER -->
     <main class="w-full max-w-md mx-auto px-4 pt-4 z-10 flex-grow">
 
-        <!-- PREMIUM DYNAMIC ISLAND TELEGRAM ALERT -->
-        <a href="https://t.me/mobiloftuz" target="_blank" class="block mb-4 relative overflow-hidden rounded-full bg-black/90 px-4 py-2 border border-white/10 shadow-silver-glow hover:scale-[1.01] active:scale-[0.99] transition-all">
+        <!-- TELEGRAM CHANNEL ALERT (DYNAMIC ISLAND NOTIFICATION STYLE) -->
+        <a href="https://t.me/mobiloftuz" target="_blank" class="block mb-5 relative overflow-hidden rounded-full bg-black/80 px-4 py-2 border border-white/5 shadow-silver-glow hover:scale-[1.01] active:scale-[0.99] transition-all">
             <div class="absolute inset-0 island-shimmer pointer-events-none"></div>
             <div class="flex items-center justify-between text-xs relative z-10">
                 <div class="flex items-center gap-2">
                     <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/20 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-white/40"></span>
                     </span>
-                    <span class="text-slate-300 font-light" data-uz="Kanalimizga qo'shiling" data-cy="Каналимизга қўшилинг">Kanalimizga qo'shiling</span>
+                    <span class="text-slate-400 font-light" data-uz="Kanalimiz" data-cy="Каналимиз">Kanalimiz</span>
                 </div>
-                <div class="flex items-center gap-1 font-medium text-sky-400">
+                <div class="flex items-center gap-1 font-light text-slate-300">
                     <span>@mobiloftuz</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5 text-slate-400">
                         <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
                     </svg>
                 </div>
@@ -164,7 +195,7 @@
         <header class="flex flex-col items-center justify-center mb-6 relative pt-2">
             <!-- Quick Tools (Lotin/Kirill Switcher & Admin Status) -->
             <div class="absolute top-2 right-0 flex items-center gap-2 z-20">
-                <div id="admin-badge" class="hidden text-[8px] bg-emerald-500/15 border border-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-md font-medium uppercase tracking-wider">
+                <div id="admin-badge" class="hidden text-[8px] bg-white/10 border border-white/10 text-white/75 px-2 py-0.5 rounded-md font-light uppercase tracking-wider">
                     Admin
                 </div>
                 <button onclick="toggleLanguage()" class="silver-glass px-2.5 py-1 rounded-lg text-[10px] font-light text-slate-300 border border-white/5 active:scale-95 transition-all">
@@ -172,23 +203,21 @@
                 </button>
             </div>
 
-            <!-- Centered Premium Circular Logo & Title Stack -->
-            <div class="flex flex-col items-center gap-2.5 text-center mt-2">
-                <!-- Circular Image Logo with glow and smooth interactive scale -->
+            <!-- Centered Circular Logo & Title Stack -->
+            <div class="flex flex-col items-center gap-2 mt-2">
+                <!-- Circular Image Logo with glow -->
                 <div onclick="requestAdminAccess()" class="relative w-16 h-16 rounded-full flex items-center justify-center overflow-hidden silver-glass border border-white/10 shadow-silver-glow cursor-pointer active:scale-95 transition-all group">
                     <img src="https://github.com/Yaxshi-bola/rasmlar/blob/main/Generated%20Image%20May%2024,%202026%20-%205_39PM.jpg?raw=true" 
-                         alt="Mobiloft Premium Logo" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                         onerror="this.src='https://placehold.co/120x120/15181f/ffffff?text=ML'">
-                    <!-- Metallic gradient lens effect over the logo -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 pointer-events-none"></div>
+                         alt="Mobiloft Logo" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='https://placehold.co/120x120/11141a/ffffff?text=ML'">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/5 pointer-events-none"></div>
                 </div>
                 
                 <div class="flex flex-col items-center">
-                    <h1 class="text-base tracking-widest text-white/95 flex items-center gap-1.5 font-normal">
+                    <h1 class="text-base tracking-widest text-white/90 font-light">
                         MOBILOFT
                     </h1>
-                    <span class="text-[8px] font-medium bg-white/5 text-white/50 border border-white/10 px-2 py-0.5 rounded-full uppercase tracking-widest mt-1">v26.0 Premium</span>
                 </div>
             </div>
         </header>
@@ -196,49 +225,49 @@
         <!-- TAB CONTENT: HOME -->
         <section id="tab-home" class="tab-content active space-y-5">
             
-            <!-- MAIN TITANIUM BANNER -->
-            <div class="relative rounded-3xl p-5 overflow-hidden silver-glass border border-white/5 shadow-silver-glow flex flex-col justify-between min-h-[120px]">
-                <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/5 rounded-full filter blur-2xl pointer-events-none"></div>
+            <!-- MAIN SIMPLIFIED INFORMATION CARD -->
+            <div class="relative rounded-3xl p-5 overflow-hidden silver-glass border border-white/5 flex flex-col justify-between min-h-[100px]">
+                <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/[0.02] rounded-full filter blur-2xl pointer-events-none"></div>
 
                 <div class="relative z-10 space-y-1.5">
-                    <span class="text-[9px] font-medium tracking-widest text-slate-400 uppercase" data-uz="ABDUJALIL USTAXONASI" data-cy="АБДУЖАЛИЛ УСТАХОНАСИ">ABDUJALIL USTAXONASI</span>
-                    <h2 class="text-lg font-light text-white" data-uz="Smartfonlar uchun premium xizmat" data-cy="Смартфонлар учун премиум хизмат">
-                        Smartfonlar uchun premium xizmat
+                    <span class="text-[9px] font-normal tracking-wider text-slate-400 uppercase" data-uz="Abdujalil ustaxonasi" data-cy="Абдужалил устахонаси">Abdujalil ustaxonasi</span>
+                    <h2 class="text-sm font-light text-white/90" data-uz="Smartfonlarni ta'mirlash" data-cy="Смартфонларни таъмирлаш">
+                        Smartfonlarni ta'mirlash
                     </h2>
-                    <p class="text-[11px] text-slate-400 leading-relaxed font-light" data-uz="Rahmatillo qishlog'idagi eng mukammal va ishonchli premium ta'mirlash markazi." data-cy="Раҳматилло қишлоғидаги энг мукаммал ва ишончли премиум таъмирлаш маркази.">
-                        Rahmatillo qishlog'idagi eng mukammal va ishonchli premium ta'mirlash markazi.
+                    <p class="text-[11px] text-slate-400 leading-relaxed font-light" data-uz="Rahmatillo qishlog'idagi smartfonlarni ta'mirlash ustaxonasi." data-cy="Раҳматилло қишлоғидаги смартфонларни таъмирлаш устахонаси.">
+                        Rahmatillo qishlog'idagi smartfonlarni ta'mirlash ustaxonasi.
                     </p>
                 </div>
             </div>
 
-            <!-- ADMIN SECRET PROMO SECTION (Faqat adminga ko'rinadi) -->
+            <!-- ADMIN SECRET PROMO SECTION (Only visible to admin) -->
             <div id="admin-promo-section" class="hidden space-y-2">
                 <div class="flex items-center justify-between px-1">
-                    <h4 class="text-[10px] font-medium text-slate-500 uppercase tracking-widest" data-uz="Aksiya & Reklama (Admin)" data-cy="Акция & Реклама (Админ)">Aksiya & Reklama (Admin)</h4>
+                    <h4 class="text-[10px] font-light text-slate-500 uppercase tracking-widest" data-uz="Aksiya (Admin)" data-cy="Акция (Админ)">Aksiya (Admin)</h4>
                     <button onclick="editPromoMessage()" class="text-[10px] bg-white/5 hover:bg-white/10 px-2.5 py-0.5 rounded-md text-slate-300 font-light transition-all" data-uz="Tahrirlash" data-cy="Таҳрирлаш">Tahrirlash</button>
                 </div>
-                <div class="relative rounded-2xl p-4 overflow-hidden bg-white/[0.03] border border-white/10 flex items-center justify-between gap-4">
+                <div class="relative rounded-2xl p-4 overflow-hidden bg-white/[0.02] border border-white/5 flex items-center justify-between gap-4">
                     <div class="space-y-1 z-10">
-                        <div class="text-[9px] font-medium text-amber-400 uppercase tracking-wider" data-uz="MAXSUS AKSIYA" data-cy="МАХСУС АКЦИЯ">MAXSUS AKSIYA</div>
+                        <div class="text-[9px] font-medium text-slate-400 uppercase tracking-wider" data-uz="AKSIYA" data-cy="АКЦИЯ">AKSIYA</div>
                         <h4 id="promo-title-display" class="font-normal text-xs text-white" data-uz="Dasturiy muammolar bepul!" data-cy="Дастурий muammolar bepul!">Dasturiy muammolar bepul!</h4>
-                        <p id="promo-desc-display" class="text-[11px] text-slate-400 font-light" data-uz="Barcha turdagi smartfonlar diagnostikasi va dasturiy ta'minoti bepul tekshirib beriladi!" data-cy="Барча турдаги смартфонлар диагностикаси ва дастурий таъминоти bepul tekshirib beriladi!">Barcha turdagi smartfonlar diagnostikasi va dasturiy ta'minoti bepul tekshirib beriladi!</p>
+                        <p id="promo-desc-display" class="text-[11px] text-slate-400 font-light" data-uz="Tizimdagi dasturiy xatoliklar bepul tekshirib beriladi." data-cy="Тизимдаги дастурий хатоликлар бепул текшириб берилади.">Tizimdagi dasturiy xatoliklar bepul tekshirib beriladi.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- FEATURED STATUS TRACKER (ALWAYS DISPLAYED & HIGHLY HIGHLIGHTED) -->
+            <!-- FEATURED STATUS TRACKER (ALWAYS DISPLAYED & HIGHLY HIGHLIGHTED WITH NEW ANIMATIONS) -->
             <div class="space-y-2.5">
-                <h3 class="text-xs text-slate-400 font-light tracking-widest uppercase pl-1" data-uz="Telefon holatini tekshirish" data-cy="Телефон ҳолатини текшириш">Telefon holatini tekshirish</h3>
+                <h3 class="text-xs text-slate-400 font-light tracking-widest uppercase pl-1" data-uz="Telefon holatini tekshirish" data-cy="Телефон ҳолатини tekshirish">Telefon holatini tekshirish</h3>
                 
-                <div class="tracker-card-glow rounded-3xl overflow-hidden">
-                    <div class="silver-glass p-5 rounded-3xl border border-white/5 space-y-4">
+                <div class="search-container-glow rounded-[2rem] overflow-hidden">
+                    <div class="silver-glass p-5 rounded-[2rem] border border-white/5 space-y-4">
                         <div class="space-y-2">
-                            <label for="tracking-id" class="text-[11px] font-light text-slate-400" data-uz="Ismingiz, Telefon yoki Buyurtma ID kodini kiriting:" data-cy="Исмингиз, Телефон ёки Буюртма ИД кодини киритинг:">Ismingiz, Telefon yoki Buyurtma ID kodini kiriting:</label>
+                            <label for="tracking-id" class="text-[11px] font-light text-slate-400" data-uz="Ismingiz, telefon raqamingiz yoki buyurtma ID kodini kiriting:" data-cy="Исмингиз, телефон рақамингиз ёки буюртма ИД кодини киритинг:">Ismingiz, telefon raqamingiz yoki buyurtma ID kodini kiriting:</label>
                             
                             <div class="relative group">
                                 <input type="text" id="tracking-id" placeholder="Masalan: Sardorbek, #1001 yoki 901230035" 
-                                       class="w-full bg-[#050608]/90 border border-white/5 rounded-2xl pl-4 pr-12 py-3.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-white/25 focus:ring-1 focus:ring-white/10 transition-all font-light">
-                                <button onclick="searchOrder()" class="absolute right-2.5 top-2.5 bottom-2.5 bg-white text-black font-medium text-xs px-4.5 rounded-xl hover:opacity-90 active:scale-95 transition-all" data-uz="Qidirish" data-cy="Қидириш">
+                                       class="w-full bg-[#050608]/95 border border-white/5 rounded-2xl pl-4 pr-12 py-3.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-white/20 transition-all font-light">
+                                <button onclick="searchOrder()" class="search-btn-pulse absolute right-2 top-2 bottom-2 bg-white text-black font-normal text-xs px-4 rounded-xl hover:opacity-90 active:scale-95 transition-all" data-uz="Qidirish" data-cy="Қидириш">
                                     Qidirish
                                 </button>
                             </div>
@@ -252,10 +281,10 @@
                 <div class="silver-glass p-5 rounded-3xl border border-white/5 space-y-4 relative overflow-hidden">
                     <div class="flex justify-between items-center pb-3 border-b border-white/5">
                         <div>
-                            <span class="text-[9px] text-slate-400 uppercase tracking-widest block" data-uz="Qurilma / Model" data-cy="Қурилма / Модель">Qurilma / Model</span>
-                            <span id="tracked-device" class="font-normal text-sm text-white">-</span>
+                            <span class="text-[9px] text-slate-500 uppercase tracking-widest block" data-uz="Qurilma / Model" data-cy="Қурилма / Модель">Qurilma / Model</span>
+                            <span id="tracked-device" class="font-normal text-sm text-white/90">-</span>
                         </div>
-                        <span id="tracked-id-label" class="text-[11px] font-light text-white bg-white/5 px-2.5 py-0.5 rounded-full border border-white/5">-</span>
+                        <span id="tracked-id-label" class="text-[10px] font-light text-white bg-white/5 px-2.5 py-0.5 rounded-full border border-white/5">-</span>
                     </div>
 
                     <!-- Process Progress Indicators -->
@@ -263,60 +292,60 @@
                         <!-- Step 1 -->
                         <div class="flex gap-4 relative" id="step-1">
                             <div class="absolute left-[11px] top-6 bottom-[-20px] w-[1px] bg-white/5" id="line-1"></div>
-                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/15 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-1">
+                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-1">
                                 <span class="w-1.5 h-1.5 rounded-full bg-transparent" id="inner-1"></span>
                             </div>
                             <div class="space-y-0.5">
                                 <h4 class="text-xs text-slate-400 font-light" id="title-1" data-uz="Qabul qilindi" data-cy="Қабул қилинди">Qabul qilindi</h4>
-                                <p class="text-[10px] text-slate-500 font-light" id="desc-1" data-uz="Qurilma usta tomonidan hisobga olindi" data-cy="Қурилма уста томонидан ҳисобга олинди">Qurilma usta tomonidan hisobga olindi</p>
+                                <p class="text-[10px] text-slate-500 font-light" id="desc-1" data-uz="Qurilma hisobga olindi" data-cy="Қурилма ҳисобга олинди">Qurilma hisobga olindi</p>
                             </div>
                         </div>
 
                         <!-- Step 2 -->
                         <div class="flex gap-4 relative" id="step-2">
                             <div class="absolute left-[11px] top-6 bottom-[-20px] w-[1px] bg-white/5" id="line-2"></div>
-                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/15 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-2">
+                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-transparent" id="inner-2"></span>
                             </div>
                             <div class="space-y-0.5">
                                 <h4 class="text-xs text-slate-400 font-light" id="title-2" data-uz="Tashxis qo'yilmoqda" data-cy="Тахшис қўйилмоқда">Tashxis qo'yilmoqda</h4>
-                                <p class="text-[10px] text-slate-500 font-light" id="desc-2" data-uz="Muammo va nuqsonlar aniqlanyapti" data-cy="Муаммо ва нуқсонлар аниқланяпти">Muammo va nuqsonlar aniqlanyapti</p>
+                                <p class="text-[10px] text-slate-500 font-light" id="desc-2" data-uz="Muammolar aniqlanyapti" data-cy="Муаммолар аниқланяпти">Muammolar aniqlanyapti</p>
                             </div>
                         </div>
 
                         <!-- Step 3 -->
                         <div class="flex gap-4 relative" id="step-3">
                             <div class="absolute left-[11px] top-6 bottom-[-20px] w-[1px] bg-white/5" id="line-3"></div>
-                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/15 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-3">
+                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-3">
                                 <span class="w-1.5 h-1.5 rounded-full bg-transparent" id="inner-3"></span>
                             </div>
                             <div class="space-y-0.5">
                                 <h4 class="text-xs text-slate-400 font-light" id="title-3" data-uz="Ta'mirlanmoqda" data-cy="Таъмирланмоқда">Ta'mirlanmoqda</h4>
-                                <p class="text-[10px] text-slate-500 font-light" id="desc-3" data-uz="Ustaxonada texnik qismlarni sozlash ketmoqda" data-cy="Устахонада техник қисмларни созлаш кетмоқда">Ustaxonada texnik qismlarni sozlash ketmoqda</p>
+                                <p class="text-[10px] text-slate-500 font-light" id="desc-3" data-uz="Texnik qismlar sozlanmoqda" data-cy="Техник қисмлар созланмоқда">Texnik qismlar sozlanmoqda</p>
                             </div>
                         </div>
 
                         <!-- Step 4 -->
                         <div class="flex gap-4" id="step-4">
-                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/15 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-4">
+                            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-4">
                                 <span class="w-1.5 h-1.5 rounded-full bg-transparent" id="inner-4"></span>
                             </div>
                             <div class="space-y-0.5">
                                 <h4 class="text-xs text-slate-400 font-light" id="title-4" data-uz="Tayyor!" data-cy="Тайёр!">Tayyor!</h4>
-                                <p class="text-[10px] text-slate-500 font-light" id="desc-4" data-uz="Qurilma to'liq ta'mirlandi va tekshirildi" data-cy="Қурилма тўлиқ таъмирланди ва текширилди">Qurilma to'liq ta'mirlandi va tekshirildi</p>
+                                <p class="text-[10px] text-slate-500 font-light" id="desc-4" data-uz="Qurilma to'liq ta'mirlandi" data-cy="Қурилма тўлиқ таъмирланди">Qurilma to'liq ta'mirlandi</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Client detail banner -->
-                    <div class="bg-[#050608]/40 p-3.5 rounded-2xl border border-white/5 space-y-1.5 mt-3">
+                    <div class="bg-white/[0.01] p-3.5 rounded-2xl border border-white/5 space-y-1.5 mt-3">
                         <div class="flex justify-between text-[11px]">
                             <span class="text-slate-500" data-uz="Egasi:" data-cy="Эгаси:">Egasi:</span>
-                            <span id="tracked-owner" class="text-slate-200 font-light">-</span>
+                            <span id="tracked-owner" class="text-slate-300 font-light">-</span>
                         </div>
                         <div class="flex justify-between text-[11px]">
                             <span class="text-slate-500" data-uz="Telefon:" data-cy="Телефон:">Telefon:</span>
-                            <span id="tracked-phone" class="text-slate-200 font-light">-</span>
+                            <span id="tracked-phone" class="text-slate-300 font-light">-</span>
                         </div>
                     </div>
                 </div>
@@ -324,14 +353,14 @@
 
             <!-- Empty / No search trigger info card -->
             <div id="tracker-not-found" class="hidden silver-glass p-5 rounded-3xl text-center border border-white/5 space-y-2">
-                <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-slate-400 mx-auto border border-white/5">
+                <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-slate-500 mx-auto border border-white/5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                     </svg>
                 </div>
                 <div class="space-y-0.5">
                     <h3 class="font-normal text-xs text-white" data-uz="Buyurtma aniqlanmadi" data-cy="Буюртма аниқланмади">Buyurtma aniqlanmadi</h3>
-                    <p class="text-[11px] text-slate-500 leading-relaxed font-light" data-uz="Qidirilgan ma'lumotlar bo'yicha hech qanday buyurtma topilmadi." data-cy="Қидирилган маълумотлар бўйича ҳеч қандай буюртма топилмади.">Qidirilgan ma'lumotlar bo'yicha hech qanday buyurtma topilmadi.</p>
+                    <p class="text-[11px] text-slate-500 leading-relaxed font-light" data-uz="Kiritilgan ma'lumotlar bo'yicha buyurtma topilmadi." data-cy="Киритилган маълумотлар бўйича буюртма топилмади.">Kiritilgan ma'lumotlar bo'yicha buyurtma topilmadi.</p>
                 </div>
             </div>
         </section>
@@ -339,8 +368,8 @@
         <!-- TAB CONTENT: CONTACT -->
         <section id="tab-contact" class="tab-content space-y-5">
             <div class="space-y-1">
-                <h2 class="text-lg text-white font-light" data-uz="Biz bilan bog'lanish" data-cy="Биз bilan боғланиш">Biz bilan bog'lanish</h2>
-                <p class="text-xs text-slate-400 font-light" data-uz="Sizga yordam berishdan har doim mamnunmiz" data-cy="Сизга ёрдам беришdan ҳар доим мамнунмиз">Sizga yordam berishdan har doim mamnunmiz</p>
+                <h2 class="text-lg text-white/90 font-light" data-uz="Bog'lanish" data-cy="Боғланиш">Bog'lanish</h2>
+                <p class="text-xs text-slate-500 font-light" data-uz="Ish vaqtida telefon orqali bog'lanishingiz mumkin" data-cy="Иш вақтида телефон орқали боғланишингиз мумкин">Ish vaqtida telefon orqali bog'lanishingiz mumkin</p>
             </div>
 
             <!-- CONTACT BOX -->
@@ -349,17 +378,17 @@
                 <!-- Call Direct: Abdujalil Usta -->
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-300">
+                        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-400">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4.5 h-4.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.802-5.122-4.1-6.924-6.924l1.293-.97a1.125 1.125 0 00.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H3.75A2.25 2.25 0 001.5 4.5v2.25z" />
                             </svg>
                         </div>
                         <div>
                             <span class="text-[9px] text-slate-500 uppercase tracking-widest block" data-uz="Telefon usta" data-cy="Телефон уста">Telefon usta</span>
-                            <span class="text-xs font-light text-white">+998 90 123 00 35</span>
+                            <span class="text-xs font-light text-slate-200">+998 90 123 00 35</span>
                         </div>
                     </div>
-                    <a href="tel:+998901230035" class="bg-white text-black font-medium text-[11px] py-2 px-3.5 rounded-lg hover:opacity-90 active:scale-95 transition-all" data-uz="Qo'ng'iroq" data-cy="Қўнғироқ">
+                    <a href="tel:+998901230035" class="bg-white text-black font-normal text-[11px] py-2 px-3.5 rounded-lg hover:opacity-90 active:scale-95 transition-all" data-uz="Qo'ng'iroq" data-cy="Қўнғироқ">
                         Qo'ng'iroq
                     </a>
                 </div>
@@ -367,14 +396,14 @@
                 <!-- Admin: @yomonboIa -->
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-300">
+                        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-400">
                             <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.41-1.42-.87.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.79-3.32 3.71-1.48 4.48-1.74 4.98-1.75.11 0 .36.03.52.16.14.11.18.26.2.37.02.13.03.39.01.59z"/>
                             </svg>
                         </div>
                         <div>
                             <span class="text-[9px] text-slate-500 uppercase tracking-widest block" data-uz="Admin" data-cy="Админ">Admin</span>
-                            <span class="text-xs font-light text-white">@yomonboIa</span>
+                            <span class="text-xs font-light text-slate-200">@yomonboIa</span>
                         </div>
                     </div>
                     <a href="https://t.me/yomonboIa" target="_blank" class="bg-white/5 text-white border border-white/5 font-light text-[11px] py-2 px-3.5 rounded-lg hover:bg-white/10 active:scale-95 transition-all" data-uz="Xabar" data-cy="Хабар">
@@ -385,14 +414,14 @@
                 <!-- Phone Technician: @mobiloft_uz -->
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-300">
+                        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-400">
                             <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.41-1.42-.87.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.79-3.32 3.71-1.48 4.48-1.74 4.98-1.75.11 0 .36.03.52.16.14.11.18.26.2.37.02.13.03.39.01.59z"/>
                             </svg>
                         </div>
                         <div>
                             <span class="text-[9px] text-slate-500 uppercase tracking-widest block" data-uz="Telefon usta" data-cy="Телефон уста">Telefon usta</span>
-                            <span class="text-xs font-light text-white">@mobiloft_uz</span>
+                            <span class="text-xs font-light text-slate-200">@mobiloft_uz</span>
                         </div>
                     </div>
                     <a href="https://t.me/mobiloft_uz" target="_blank" class="bg-white/5 text-white border border-white/5 font-light text-[11px] py-2 px-3.5 rounded-lg hover:bg-white/10 active:scale-95 transition-all" data-uz="Xabar" data-cy="Хабар">
@@ -404,22 +433,22 @@
             <!-- PREMIUM ADDRESS CARD WITH LINK TO GOOGLE MAPS -->
             <a href="https://maps.app.goo.gl/zHeeawpBzMsnkThd8" target="_blank" class="block silver-glass p-5 rounded-[2rem] border border-white/5 space-y-4 hover:border-white/10 transition-all cursor-pointer">
                 <div class="flex items-center gap-2">
-                    <span class="w-[2px] h-4 bg-white rounded-full"></span>
-                    <h3 class="font-normal text-sm text-white" data-uz="Bizning Manzil" data-cy="Бизнинг Манзил">Bizning Manzil</h3>
+                    <span class="w-[2px] h-4 bg-white/40 rounded-full"></span>
+                    <h3 class="font-normal text-sm text-white" data-uz="Manzilimiz" data-cy="Манзилимиз">Manzilimiz</h3>
                 </div>
 
                 <!-- Custom Vector Map View style -->
-                <div class="relative h-36 rounded-2xl bg-black/50 border border-white/5 overflow-hidden flex items-center justify-center">
+                <div class="relative h-32 rounded-2xl bg-black/40 border border-white/5 overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:16px_16px]"></div>
                     
                     <div class="relative z-10 flex flex-col items-center space-y-2">
                         <div class="relative flex items-center justify-center">
                             <span class="absolute w-8 h-8 rounded-full bg-white/5 animate-ping"></span>
-                            <div class="w-3 h-3 rounded-full bg-white border-2 border-[#040507] flex items-center justify-center shadow-silver-glow"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-white border border-black flex items-center justify-center shadow-silver-glow"></div>
                         </div>
                         <div class="text-center px-4">
-                            <h4 class="font-normal text-xs text-white" data-uz="Abdujalil Ustaxonasi" data-cy="Абдужалил устахонаси">Abdujalil Ustaxonasi</h4>
-                            <p class="text-[10px] text-slate-400 font-light" data-uz="Rahmatillo qishlog'i (Lokatsiya uchun bosing)" data-cy="Раҳматилло қишлоғи (Локация учун босинг)">Rahmatillo qishlog'i (Lokatsiya uchun bosing)</p>
+                            <h4 class="font-normal text-xs text-white" data-uz="Abdujalil ustaxonasi" data-cy="Абдужалил устахонаси">Abdujalil ustaxonasi</h4>
+                            <p class="text-[10px] text-slate-500 font-light" data-uz="Rahmatillo qishlog'i (Lokatsiya uchun bosing)" data-cy="Раҳматилло қишлоғи (Локация учун босинг)">Rahmatillo qishlog'i (Lokatsiya uchun bosing)</p>
                         </div>
                     </div>
                 </div>
@@ -427,8 +456,8 @@
                 <!-- Address description -->
                 <div class="bg-white/[0.01] p-4 rounded-2xl border border-white/5">
                     <div class="text-[9px] text-slate-500 uppercase tracking-widest font-normal" data-uz="Batafsil manzil" data-cy="Батафсил манзил">Batafsil manzil</div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-light mt-1" data-uz="Farg'ona viloyati, Rahmatillo qishlog'i, Abdujalil premium smartfonlar ustaxonasi." data-cy="Фарғона вилояти, Раҳматилло қишлоғи, Абдужалил премиум смартфонlar устахонаси.">
-                        Farg'ona viloyati, Rahmatillo qishlog'i, Abdujalil premium smartfonlar ustaxonasi.
+                    <p class="text-xs text-slate-400 leading-relaxed font-light mt-1" data-uz="Farg'ona viloyati, Rahmatillo qishlog'i, Abdujalil smartfonlar ustaxonasi." data-cy="Фарғона вилояти, Раҳматилло қишлоғи, Абдужалил смартфонлар устахонаси.">
+                        Farg'ona viloyati, Rahmatillo qishlog'i, Abdujalil smartfonlar ustaxonasi.
                     </p>
                 </div>
             </a>
@@ -438,43 +467,43 @@
         <section id="tab-admin-panel" class="tab-content space-y-5">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-lg text-white font-light" data-uz="Admin Boshqaruvi" data-cy="Админ Бошқаруви">Admin Boshqaruvi</h2>
-                    <p class="text-xs text-slate-400 font-light" data-uz="Buyurtmalarni qo'shish va holatlarini boshqarish" data-cy="Буюртмаларни қўшиш ва ҳолатларини бошқариш">Buyurtmalarni qo'shish va holatlarini boshqarish</p>
+                    <h2 class="text-lg text-white/90 font-light" data-uz="Boshqaruv" data-cy="Бошқарув">Boshqaruv</h2>
+                    <p class="text-xs text-slate-500 font-light" data-uz="Buyurtmalarni qo'shish va yangilash" data-cy="Буюртмаларни қўшиш ва янгилаш">Buyurtmalarni qo'shish va yangilash</p>
                 </div>
             </div>
 
             <!-- ADD ORDER CARD -->
             <div class="silver-glass p-5 rounded-[2rem] border border-white/5 space-y-4">
-                <h3 class="font-normal text-xs text-white border-b border-white/5 pb-2" data-uz="Yangi buyurtma qo'shish" data-cy="Янги буюртма қўшиш">Yangi buyurtma qo'shish</h3>
+                <h3 class="font-normal text-xs text-white border-b border-white/5 pb-2" data-uz="Yangi buyurtma" data-cy="Янги буюртма">Yangi buyurtma</h3>
                 
                 <form id="admin-add-form" onsubmit="adminCreateOrder(event)" class="space-y-3">
                     <div class="grid grid-cols-2 gap-3">
                         <div class="space-y-1">
-                            <label class="text-[10px] font-light text-slate-400 uppercase tracking-wider block" data-uz="Buyurtma ID" data-cy="Буюртма ИД">Buyurtma ID</label>
+                            <label class="text-[10px] font-light text-slate-500 uppercase tracking-wider block" data-uz="Buyurtma ID" data-cy="Буюртма ИД">Buyurtma ID</label>
                             <input type="text" id="admin-order-id" required placeholder="Masalan: 1003" 
                                    class="w-full bg-[#050608] border border-white/5 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/20 transition-all font-light">
                         </div>
                         <div class="space-y-1">
-                            <label class="text-[10px] font-light text-slate-400 uppercase tracking-wider block" data-uz="Telefon" data-cy="Телефон">Telefon</label>
+                            <label class="text-[10px] font-light text-slate-500 uppercase tracking-wider block" data-uz="Telefon" data-cy="Телефон">Telefon</label>
                             <input type="text" id="admin-order-phone" required placeholder="901230035" 
                                    class="w-full bg-[#050608] border border-white/5 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/20 transition-all font-light">
                         </div>
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[10px] font-light text-slate-400 uppercase tracking-wider block" data-uz="Mijoz Ismi" data-cy="Мижоз Исми">Mijoz Ismi</label>
+                        <label class="text-[10px] font-light text-slate-500 uppercase tracking-wider block" data-uz="Mijoz ismi" data-cy="Мижоз исми">Mijoz ismi</label>
                         <input type="text" id="admin-order-owner" required placeholder="Sardorbek" 
                                class="w-full bg-[#050608] border border-white/5 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/20 transition-all font-light">
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[10px] font-light text-slate-400 uppercase tracking-wider block" data-uz="Qurilma modeli" data-cy="Қурилма модели">Qurilma modeli</label>
+                        <label class="text-[10px] font-light text-slate-500 uppercase tracking-wider block" data-uz="Qurilma modeli" data-cy="Қурилма модели">Qurilma modeli</label>
                         <input type="text" id="admin-order-device" required placeholder="iPhone 15 Pro Max" 
                                class="w-full bg-[#050608] border border-white/5 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/20 transition-all font-light">
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[10px] font-light text-slate-400 uppercase tracking-wider block" data-uz="Boshlang'ich holat" data-cy="Бошланг'ич ҳолат">Boshlang'ich holat</label>
+                        <label class="text-[10px] font-light text-slate-500 uppercase tracking-wider block" data-uz="Holati" data-cy="Ҳолати">Holati</label>
                         <select id="admin-order-status" class="w-full bg-[#050608] border border-white/5 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-white/20 transition-all font-light">
                             <option value="1" data-uz="Qabul qilindi" data-cy="Қабул қилинди">Qabul qilindi</option>
                             <option value="2" data-uz="Tashxis qo'yilmoqda" data-cy="Тахшис қўйилмоқда">Tashxis qo'yilmoqda</option>
@@ -483,8 +512,8 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="w-full bg-white text-black font-medium text-xs py-2.5 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all" data-uz="Mijoz Buyurtmasini Saqlash" data-cy="Мижоз Буюртмасини Сақлаш">
-                        Mijoz Buyurtmasini Saqlash
+                    <button type="submit" class="w-full bg-white text-black font-normal text-xs py-2.5 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all" data-uz="Saqlash" data-cy="Сақлаш">
+                        Saqlash
                     </button>
                 </form>
             </div>
@@ -492,12 +521,12 @@
             <!-- ALL ORDERS MANAGEMENT LIST -->
             <div class="silver-glass p-5 rounded-[2rem] border border-white/5 space-y-4">
                 <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                    <h3 class="font-normal text-xs text-white" data-uz="Tizimdagi buyurtmalar" data-cy="Тизимдаги буюртмалар">Tizimdagi buyurtmalar</h3>
+                    <h3 class="font-normal text-xs text-white" data-uz="Mavjud buyurtmalar" data-cy="Мавжуд буюртмалар">Mavjud buyurtmalar</h3>
                     <span id="admin-total-orders-badge" class="text-[10px] text-slate-400 bg-white/5 px-2 py-0.5 rounded-full font-light">0</span>
                 </div>
 
                 <div id="admin-orders-list-container" class="space-y-3 max-h-80 overflow-y-auto pr-1">
-                    <!-- Dynamic Orders go here -->
+                    <!-- Dynamic Orders -->
                 </div>
             </div>
         </section>
@@ -505,46 +534,77 @@
     </main>
 
     <!-- SECURE ADMIN PASSCODE MODAL (Sahobiddin12) -->
-    <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/85 backdrop-blur-md">
+    <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/90 backdrop-blur-md">
         <div class="w-80 silver-glass rounded-[2rem] border border-white/10 p-6 space-y-5 text-center">
-            <h3 class="font-normal text-sm text-white" data-uz="Admin Kirish" data-cy="Админ Кириш">Admin Kirish</h3>
+            <h3 class="font-normal text-sm text-white" data-uz="Admin kirish" data-cy="Админ кириш">Admin kirish</h3>
             
-            <input type="password" id="admin-passcode-input" placeholder="Parol" class="w-full text-center bg-black/60 border border-white/10 rounded-xl py-3 text-white focus:outline-none focus:border-white/20 font-light tracking-widest text-sm">
+            <input type="password" id="admin-passcode-input" placeholder="Parol" class="w-full text-center bg-black/60 border border-white/10 rounded-xl py-3 text-white focus:outline-none focus:border-white/25 font-light tracking-widest text-sm">
             
             <div class="flex gap-2 pt-1">
-                <button onclick="closeAdminModal()" class="w-1/2 bg-white/5 text-slate-300 font-light text-xs py-2.5 rounded-xl hover:bg-white/10" data-uz="Bekor qilish" data-cy="Бекор қилиш">Bekor qilish</button>
-                <button onclick="verifyAdminPasscode()" class="w-1/2 bg-white text-black font-medium text-xs py-2.5 rounded-xl hover:opacity-90" data-uz="Kirish" data-cy="Кириш">Kirish</button>
+                <button onclick="closeAdminModal()" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2.5 rounded-xl hover:bg-white/10" data-uz="Bekor qilish" data-cy="Бекор қилиш">Bekor qilish</button>
+                <button onclick="verifyAdminPasscode()" class="w-1/2 bg-white text-black font-normal text-xs py-2.5 rounded-xl hover:opacity-90" data-uz="Kirish" data-cy="Кириш">Kirish</button>
             </div>
         </div>
     </div>
 
-    <!-- BOTTOM PREMIUM NAVIGATION BAR -->
-    <nav class="fixed bottom-3 left-3 right-3 z-40 bg-[#07080a]/80 backdrop-blur-3xl border border-white/5 py-3 px-6 max-w-md mx-auto rounded-[2rem] shadow-ios-inner">
-        <div class="flex justify-around items-center">
+    <!-- IOS GLASS CONFIRMATION MODAL (Replaces default confirm() popup) -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/80 backdrop-blur-sm">
+        <div class="w-72 silver-glass rounded-[1.8rem] border border-white/10 p-5 space-y-4 text-center">
+            <h4 class="font-normal text-xs text-slate-400 uppercase tracking-wider" data-uz="Tasdiqlash" data-cy="Тасдиқлаш">Tasdiqlash</h4>
+            <p id="confirm-modal-text" class="text-xs font-light text-slate-200 leading-relaxed"></p>
+            <div class="flex gap-2 pt-2">
+                <button id="confirm-cancel-btn" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2.5 rounded-xl hover:bg-white/10" data-uz="Yo'q" data-cy="Йўқ">Yo'q</button>
+                <button id="confirm-ok-btn" class="w-1/2 bg-white text-black font-normal text-xs py-2.5 rounded-xl hover:opacity-90" data-uz="Ha, o'chirish" data-cy="Ҳа, ўчириш">Ha, o'chirish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM FLOATING CAPSULE NAVIGATION BAR (EXACT DESIGN MATCH WITH image_3d4cdb.png) -->
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-[#07080a]/40 backdrop-blur-[35px] border border-white/10 py-2.5 px-3 w-[90%] max-w-[340px] rounded-[2rem] shadow-nav-shadow">
+        <div class="flex justify-between items-center relative">
             
             <!-- Nav Item: Home -->
-            <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center gap-1 text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4.5 h-4.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                </svg>
-                <span class="text-[9px] font-light tracking-wide" data-uz="Bosh sahifa" data-cy="Бош саҳифа">Bosh sahifa</span>
+            <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex-1 py-2.5 flex items-center justify-center transition-all duration-300 nav-capsule-active">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full">
+                    <!-- Home Icon (Solid in Active state) -->
+                    <svg id="icon-home-solid" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3l8 6v12h-5v-6h-6v6h-5v-12l8-6z" />
+                    </svg>
+                    <!-- Home Icon (Outline in Inactive state - Hidden initially as home starts active) -->
+                    <svg id="icon-home-outline" class="w-5 h-5 text-slate-500 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                </div>
             </button>
 
             <!-- Nav Item: Contact -->
-            <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn flex flex-col items-center gap-1 text-slate-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4.5 h-4.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                <span class="text-[9px] font-light tracking-wide" data-uz="Kontakt & Manzil" data-cy="Контакт & Манзил">Kontakt & Manzil</span>
+            <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn flex-1 py-2.5 flex items-center justify-center transition-all duration-300">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full">
+                    <!-- Contact Icon (Solid) -->
+                    <svg id="icon-contact-solid" class="w-5 h-5 text-white hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <!-- Contact Icon (Outline) -->
+                    <svg id="icon-contact-outline" class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                </div>
             </button>
 
             <!-- Nav Item: Admin panel (Only unlocked when logged in) -->
-            <button onclick="switchTab('admin-panel')" id="nav-admin-panel" class="hidden nav-btn flex flex-col items-center gap-1 text-slate-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4.5 h-4.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                </svg>
-                <span class="text-[9px] font-light tracking-wide" data-uz="Admin" data-cy="Админ">Admin</span>
+            <button onclick="switchTab('admin-panel')" id="nav-admin-panel" class="hidden nav-btn flex-1 py-2.5 flex items-center justify-center transition-all duration-300">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full">
+                    <!-- Admin Sliders Icon (Solid) -->
+                    <svg id="icon-admin-solid" class="w-5 h-5 text-white hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 13.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-8.5-7.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm4.5 15a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                        <path fill-rule="evenodd" d="M3.75 6a.75.75 0 01.75-.75h2.3a2.996 2.996 0 015.4 0h7.05a.75.75 0 010 1.5H12.2a2.996 2.996 0 01-5.4 0H4.5A.75.75 0 013.75 6zm0 7.5a.75.75 0 01.75-.75h10.8a2.996 2.996 0 015.4 0h1.8a.75.75 0 010 1.5H20.7a2.996 2.996 0 01-5.4 0H4.5a.75.75 0 01-.75-.75zm0 7.5a.75.75 0 01.75-.75h9.3a2.996 2.996 0 015.4 0h1.05a.75.75 0 010 1.5H19.2a2.996 2.996 0 01-5.4 0H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
+                    </svg>
+                    <!-- Admin Sliders Icon (Outline) -->
+                    <svg id="icon-admin-outline" class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                    </svg>
+                </div>
             </button>
 
         </div>
@@ -555,7 +615,7 @@
         let currentLanguage = 'uz'; // 'uz' for Latin, 'cy' for Cyrillic
         let isAdminActive = false;
 
-        // Clean initial structure database state
+        // Clean initial database state
         const fallbackOrders = [
             {
                 id: '1001',
@@ -604,7 +664,7 @@
             }
         }
 
-        // Tab Controller
+        // Tab Controller with iOS 26 Capsule styling logic
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
@@ -614,34 +674,63 @@
                 activeContent.classList.add('active');
             }
 
+            // Reset navigation button pill designs
             const navButtons = document.querySelectorAll('.nav-btn');
             navButtons.forEach(btn => {
-                btn.classList.remove('text-white');
-                btn.classList.add('text-slate-500');
+                btn.classList.remove('nav-capsule-active');
             });
 
             const activeNav = document.getElementById(`nav-${tabId}`);
             if (activeNav) {
-                activeNav.classList.remove('text-slate-500');
-                activeNav.classList.add('text-white');
+                activeNav.classList.add('nav-capsule-active');
             }
 
+            // Sync icon fills (solid vs outline)
+            toggleIconStates(tabId);
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleIconStates(activeTabId) {
+            // Home icons
+            if (activeTabId === 'home') {
+                document.getElementById('icon-home-solid').classList.remove('hidden');
+                document.getElementById('icon-home-outline').classList.add('hidden');
+            } else {
+                document.getElementById('icon-home-solid').classList.add('hidden');
+                document.getElementById('icon-home-outline').classList.remove('hidden');
+            }
+
+            // Contact icons
+            if (activeTabId === 'contact') {
+                document.getElementById('icon-contact-solid').classList.remove('hidden');
+                document.getElementById('icon-contact-outline').classList.add('hidden');
+            } else {
+                document.getElementById('icon-contact-solid').classList.add('hidden');
+                document.getElementById('icon-contact-outline').classList.remove('hidden');
+            }
+
+            // Admin icons
+            if (activeTabId === 'admin-panel') {
+                document.getElementById('icon-admin-solid').classList.remove('hidden');
+                document.getElementById('icon-admin-outline').classList.add('hidden');
+            } else {
+                document.getElementById('icon-admin-solid').classList.add('hidden');
+                document.getElementById('icon-admin-outline').classList.remove('hidden');
+            }
         }
 
         // Phone Normalization Helper
         function normalizePhone(phoneStr) {
             if (!phoneStr) return '';
-            // Remove all non-numeric characters
             let digits = phoneStr.replace(/\D/g, '');
-            // Strip leading 998 country code if present to standardize match
             if (digits.startsWith('998') && digits.length > 9) {
                 digits = digits.substring(3);
             }
             return digits;
         }
 
-        // Real-time Order Tracker with smart search logic
+        // Fuzzy Order Tracker
         function searchOrder() {
             const searchValue = document.getElementById('tracking-id').value.trim().toLowerCase();
             const resultPanel = document.getElementById('tracker-result');
@@ -654,8 +743,6 @@
             }
 
             const storedOrders = JSON.parse(localStorage.getItem('mobiloft_orders')) || [];
-            
-            // Clean up query parameters for precise matching
             const searchIdNoHash = searchValue.replace('#', '');
             const normalizedQueryPhone = normalizePhone(searchValue);
 
@@ -664,15 +751,12 @@
                 const orderNameStr = String(order.owner).toLowerCase();
                 const normalizedOrderPhone = normalizePhone(order.phone);
 
-                // 1. Direct ID matching
                 if (orderIdStr === searchValue || orderIdStr === searchIdNoHash) {
                     return true;
                 }
-                // 2. Name fuzzy match
                 if (orderNameStr.includes(searchValue)) {
                     return true;
                 }
-                // 3. Flexible Phone match
                 if (normalizedQueryPhone && normalizedOrderPhone.includes(normalizedQueryPhone)) {
                     return true;
                 }
@@ -695,7 +779,7 @@
             }
         }
 
-        // Status Timeline Builder
+        // Status Timeline Updater
         function updateStatusTimeline(statusLevel) {
             for (let i = 1; i <= 4; i++) {
                 const bullet = document.getElementById(`bullet-${i}`);
@@ -704,7 +788,7 @@
                 const desc = document.getElementById(`desc-${i}`);
                 const line = document.getElementById(`line-${i}`);
 
-                // Reset timeline components
+                // Reset
                 bullet.className = "w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 z-10 transition-all duration-300";
                 inner.className = "w-1.5 h-1.5 rounded-full bg-transparent";
                 title.className = "text-xs text-slate-500 font-light";
@@ -732,12 +816,12 @@
                 }
 
                 if (line && i < statusLevel) {
-                    line.className = "absolute left-[9px] top-5 bottom-[-20px] w-[1px] bg-white/20";
+                    line.className = "absolute left-[9px] top-5 bottom-[-20px] w-[1px] bg-white/25";
                 }
             }
         }
 
-        // Admin Access Control (Sahobiddin12)
+        // Admin Access controls
         function requestAdminAccess() {
             document.getElementById('admin-modal').classList.remove('hidden');
             document.getElementById('admin-passcode-input').focus();
@@ -753,12 +837,10 @@
             if (code === 'Sahobiddin12') {
                 isAdminActive = true;
                 
-                // Show hidden UI components
                 document.getElementById('admin-badge').classList.remove('hidden');
                 document.getElementById('admin-promo-section').classList.remove('hidden');
                 document.getElementById('nav-admin-panel').classList.remove('hidden');
                 
-                // Prefill new auto ID generator
                 updateNextOrderSuggestions();
                 renderAdminOrders();
 
@@ -774,13 +856,13 @@
             const currentTitle = document.getElementById('promo-title-display').getAttribute('data-uz');
             const currentDesc = document.getElementById('promo-desc-display').getAttribute('data-uz');
             
-            const newTitle = prompt("Yangi Aksiya Sarlahasi (Lotin):", currentTitle);
+            const newTitle = prompt("Yangi Sarlaha (Lotin):", currentTitle);
             if (newTitle === null) return;
-            const newTitleCy = prompt("Yangi Aksiya Sarlahasi (Кирилл):", newTitle);
+            const newTitleCy = prompt("Yangi Sarlaha (Кирилл):", newTitle);
             
-            const newDesc = prompt("Yangi Aksiya Tavsifi (Lotin):", currentDesc);
+            const newDesc = prompt("Yangi Tavsif (Lotin):", currentDesc);
             if (newDesc === null) return;
-            const newDescCy = prompt("Yangi Aksiya Tavsifi (Кирилл):", newDesc);
+            const newDescCy = prompt("Yangi Tavsif (Кирилл):", newDesc);
 
             document.getElementById('promo-title-display').setAttribute('data-uz', newTitle);
             document.getElementById('promo-title-display').setAttribute('data-cy', newTitleCy);
@@ -788,10 +870,10 @@
             document.getElementById('promo-desc-display').setAttribute('data-cy', newDescCy);
 
             applyTranslations();
-            showToast("✅ Reklama yangilandi!", "✅ Рекlama yangilandi!");
+            showToast("✅ Reklama yangilandi!", "✅ Реклама янгиланди!");
         }
 
-        // Dynamic Suggestion for Customizable ID
+        // Suggest next order ID
         function updateNextOrderSuggestions() {
             const stored = JSON.parse(localStorage.getItem('mobiloft_orders')) || [];
             let maxId = 1002;
@@ -804,7 +886,7 @@
             document.getElementById('admin-order-id').value = maxId + 1;
         }
 
-        // Render Live Order List for Admins with edit and delete capabilities
+        // Render live order list
         function renderAdminOrders() {
             const container = document.getElementById('admin-orders-list-container');
             const totalBadge = document.getElementById('admin-total-orders-badge');
@@ -819,7 +901,7 @@
             }
 
             stored.reverse().forEach((order, index) => {
-                const rawIndex = stored.length - 1 - index; // Correct array index because of reverse
+                const rawIndex = stored.length - 1 - index;
                 
                 const card = document.createElement('div');
                 card.className = "p-3.5 rounded-xl bg-white/[0.01] border border-white/5 space-y-3";
@@ -827,12 +909,12 @@
                 card.innerHTML = `
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-light text-white font-mono bg-white/5 px-2.5 py-0.5 rounded-md border border-white/5">#${order.id}</span>
-                        <button onclick="adminDeleteOrder(${rawIndex})" class="text-[10px] text-red-400 hover:text-red-300 font-light transition-all px-2 py-0.5 rounded bg-red-500/10">O'chirish</button>
+                        <button onclick="confirmOrderDeletion(${rawIndex})" class="text-[10px] text-red-400 hover:text-red-300 font-light transition-all px-2 py-0.5 rounded bg-red-500/5">O'chirish</button>
                     </div>
                     
                     <div class="space-y-1 text-xs font-light text-slate-300">
-                        <div><strong class="font-normal text-slate-400">Model:</strong> ${order.device}</div>
-                        <div><strong class="font-normal text-slate-400">Mijoz:</strong> ${order.owner} (${order.phone})</div>
+                        <div><strong class="font-normal text-slate-500">Model:</strong> ${order.device}</div>
+                        <div><strong class="font-normal text-slate-500">Mijoz:</strong> ${order.owner} (${order.phone})</div>
                     </div>
 
                     <div class="flex items-center gap-2 pt-1 border-t border-white/5">
@@ -849,7 +931,30 @@
             });
         }
 
-        // Admin Action: Create order
+        // Custom iOS-style Confirmation Modal Trigger
+        function confirmOrderDeletion(index) {
+            const stored = JSON.parse(localStorage.getItem('mobiloft_orders')) || [];
+            const order = stored[index];
+            const modal = document.getElementById('confirm-modal');
+            const modalText = document.getElementById('confirm-modal-text');
+            
+            modalText.innerText = (currentLanguage === 'uz')
+                ? `Haqiqatdan ham #${order.id} buyurtmani tizimdan o'chirmoqchimisiz?`
+                : `Ҳақиқатдан ҳам #${order.id} буюртмани тизимдан ўчирмоқчимисиз?`;
+                
+            modal.classList.remove('hidden');
+
+            document.getElementById('confirm-ok-btn').onclick = function() {
+                adminDeleteOrder(index);
+                modal.classList.add('hidden');
+            };
+
+            document.getElementById('confirm-cancel-btn').onclick = function() {
+                modal.classList.add('hidden');
+            };
+        }
+
+        // Create Order Action
         function adminCreateOrder(event) {
             event.preventDefault();
 
@@ -862,9 +967,8 @@
             if (!customId || !clientName || !clientPhone || !deviceModel) return;
 
             const stored = JSON.parse(localStorage.getItem('mobiloft_orders')) || [];
-            
-            // Check for ID collision
             const collision = stored.find(o => String(o.id).toLowerCase() === customId.toLowerCase());
+            
             if (collision) {
                 showToast("❌ Ushbu ID ostida buyurtma mavjud!", "❌ Ушбу ИД остида буюртма мавжуд!");
                 return;
@@ -881,7 +985,6 @@
             stored.push(newOrder);
             localStorage.setItem('mobiloft_orders', JSON.stringify(stored));
 
-            // Reset inputs
             document.getElementById('admin-order-owner').value = '';
             document.getElementById('admin-order-phone').value = '';
             document.getElementById('admin-order-device').value = '';
@@ -889,22 +992,18 @@
             updateNextOrderSuggestions();
             renderAdminOrders();
 
-            showToast("✅ Yangi buyurtma yaratildi!", "✅ Янги буюртма яратилди!");
+            showToast("✅ Buyurtma qo'shildi!", "✅ Буюртма қўшилди!");
         }
 
-        // Admin Action: Update status
         function adminUpdateStatus(index, newStatus) {
             const stored = JSON.parse(localStorage.getItem('mobiloft_orders')) || [];
             stored[index].status = parseInt(newStatus);
             localStorage.setItem('mobiloft_orders', JSON.stringify(stored));
             renderAdminOrders();
-            showToast("🔄 Holat muvaffaqiyatli o'zgardi!", "🔄 Ҳолат муваффақиятли ўзгарди!");
+            showToast("🔄 Holat yangilandi!", "🔄 Ҳолат янгиланди!");
         }
 
-        // Admin Action: Delete order
         function adminDeleteOrder(index) {
-            if (!confirm("Haqiqatdan ham ushbu buyurtmani o'chirishni xohlaysizmi?")) return;
-            
             const stored = JSON.parse(localStorage.getItem('mobiloft_orders')) || [];
             stored.splice(index, 1);
             localStorage.setItem('mobiloft_orders', JSON.stringify(stored));
@@ -912,17 +1011,16 @@
             showToast("🗑 Buyurtma o'chirildi!", "🗑 Буюртма ўчирилди!");
         }
 
-        // Customized Elegant Toast
         function showToast(uzMsg, cyMsg) {
             const activeMsg = (currentLanguage === 'uz') ? uzMsg : cyMsg;
             const toast = document.createElement('div');
-            toast.className = "fixed top-5 left-1/2 -translate-x-1/2 z-50 silver-glass border border-white/10 p-3.5 rounded-2xl shadow-silver-glow text-center text-xs font-light text-white max-w-[280px] animate-[iosSlideIn_0.3s_ease-out]";
+            toast.className = "fixed top-6 left-1/2 -translate-x-1/2 z-50 silver-glass border border-white/10 p-3.5 rounded-2xl shadow-silver-glow text-center text-xs font-light text-white max-w-[280px] animate-[iosSlideIn_0.3s_ease-out]";
             toast.innerHTML = activeMsg;
             document.body.appendChild(toast);
             
             setTimeout(() => {
                 toast.remove();
-            }, 3500);
+            }, 3000);
         }
 
         window.onload = function() {
