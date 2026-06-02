@@ -1,725 +1,946 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="uz" class="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
-<meta name="theme-color" content="#000000" />
-<title>MOBILOFT — Premium Repair Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MOBILOFT - Premium Service</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        asphalt: {
+                            950: '#06070a',
+                            900: '#0c0d14',
+                            800: '#141622',
+                            700: '#1e2030',
+                            600: '#2c2f44',
+                        },
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA7C11',
+                        },
+                        cyberred: {
+                            DEFAULT: '#FF3B30',
+                            light: '#FF6B6B',
+                            dark: '#C70039',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-gold': '0 0 15px rgba(212, 175, 55, 0.15)',
+                        'neon-red': '0 0 15px rgba(255, 59, 48, 0.25)',
+                        'ios-glass': 'inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 32px rgba(0, 0, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            background-color: #06070a;
+            color: #f3f4f6;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
 
-<style>
-  :root{
-    --bg-0:#000000;
-    --bg-1:#0a0a0a;
-    --bg-2:#111113;
-    --bg-3:#16161a;
-    --silver-100:#f5f5f7;
-    --silver-200:#d2d2d7;
-    --silver-300:#a1a1a6;
-    --silver-400:#86868b;
-    --silver-500:#6e6e73;
-    --accent:#C0C0C0;
-    --tint-blue:rgba(180,200,255,0.08);
-    --tint-purple:rgba(200,180,255,0.08);
-  }
+        /* Glassmorphism styling representing iOS 26 interface */
+        .ios-glass {
+            background: rgba(20, 22, 34, 0.65);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
 
-  *{ -webkit-tap-highlight-color: transparent; }
-  html, body {
-    background:#000;
-    color: var(--silver-100);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overscroll-behavior: none;
-    letter-spacing: -0.01em;
-  }
-  body{
-    background:
-      radial-gradient(1200px 800px at 80% -10%, rgba(192,192,192,0.06), transparent 60%),
-      radial-gradient(900px 700px at -10% 20%, rgba(140,160,200,0.05), transparent 60%),
-      radial-gradient(700px 700px at 50% 110%, rgba(200,180,255,0.04), transparent 60%),
-      #000;
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
+        .ios-glass-accent {
+            background: rgba(255, 59, 48, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 59, 48, 0.15);
+        }
 
-  /* ==== GLASS ==== */
-  .glass{
-    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.08);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    backdrop-filter: blur(28px) saturate(180%);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.06) inset,
-      0 -1px 0 rgba(255,255,255,0.03) inset,
-      0 30px 60px -20px rgba(0,0,0,0.6),
-      0 12px 24px -8px rgba(0,0,0,0.4);
-  }
-  .glass-soft{
-    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
-    border: 1px solid rgba(255,255,255,0.07);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-  }
-  .glass-strong{
-    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-    border: 1px solid rgba(255,255,255,0.10);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
-    backdrop-filter: blur(40px) saturate(200%);
-  }
+        .ios-glass-gold {
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
 
-  /* ==== SILVER BORDER GRADIENT ==== */
-  .silver-border{
-    position: relative;
-  }
-  .silver-border::before{
-    content:"";
-    position:absolute; inset:0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02) 40%, rgba(192,192,192,0.12) 70%, rgba(255,255,255,0.04));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-  }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(12, 13, 20, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 99px;
+        }
 
-  /* ==== METALLIC TEXT ==== */
-  .text-silver{
-    background: linear-gradient(180deg, #ffffff 0%, #d6d6dc 50%, #a8a8ae 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .text-silver-dim{
-    background: linear-gradient(180deg, #c8c8cc 0%, #8a8a8e 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+        /* Pulsing background ambient glows */
+        .ambient-glow-1 {
+            filter: blur(140px);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            animation: floatGlow 8s ease-in-out infinite alternate;
+        }
 
-  /* ==== BUTTONS ==== */
-  .btn-primary{
-    position: relative;
-    background: linear-gradient(180deg, #f5f5f7 0%, #d2d2d7 100%);
-    color: #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.5);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.7) inset,
-      0 -1px 0 rgba(0,0,0,0.06) inset,
-      0 10px 24px -8px rgba(192,192,192,0.35),
-      0 4px 10px rgba(0,0,0,0.4);
-    transition: transform 0.2s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s, filter 0.2s;
-  }
-  .btn-primary:hover{ filter: brightness(1.05); }
-  .btn-primary:active{ transform: scale(0.98); }
+        .ambient-glow-2 {
+            filter: blur(120px);
+            background: radial-gradient(circle, rgba(255, 59, 48, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            animation: floatGlowReverse 10s ease-in-out infinite alternate;
+        }
 
-  .btn-ghost{
-    background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.10);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    transition: transform 0.2s, background 0.2s, border-color 0.2s;
-  }
-  .btn-ghost:hover{ background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)); border-color: rgba(255,255,255,0.18); }
-  .btn-ghost:active{ transform: scale(0.98); }
+        @keyframes floatGlow {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(15%, 15%) scale(1.2); }
+        }
 
-  .btn-danger{
-    background: linear-gradient(180deg, rgba(255,80,80,0.10), rgba(255,80,80,0.04));
-    border: 1px solid rgba(255,80,80,0.18);
-    color: #ffb4b4;
-    transition: all 0.2s;
-  }
-  .btn-danger:hover{ background: linear-gradient(180deg, rgba(255,80,80,0.16), rgba(255,80,80,0.06)); }
+        @keyframes floatGlowReverse {
+            0% { transform: translate(10%, 15%) scale(1.1); }
+            100% { transform: translate(-10%, -10%) scale(0.9); }
+        }
 
-  /* ==== INPUTS ==== */
-  .input-field{
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #f5f5f7;
-    transition: all 0.25s;
-  }
-  .input-field:focus{
-    outline: none;
-    border-color: rgba(192,192,192,0.4);
-    background: rgba(255,255,255,0.06);
-    box-shadow: 0 0 0 4px rgba(192,192,192,0.06);
-  }
-  .input-field::placeholder{ color: #6e6e73; }
+        /* Nav Transition */
+        .tab-content {
+            display: none;
+            animation: fadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-  /* ==== STATUS BADGES ==== */
-  .badge{
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    padding: 0.4rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(255,255,255,0.04);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    letter-spacing: 0.01em;
-  }
-  .badge-dot{
-    width: 6px; height: 6px; border-radius: 999px; flex-shrink: 0;
-    box-shadow: 0 0 10px currentColor;
-  }
-  .badge-blue{ color:#9bc4ff; border-color:rgba(155,196,255,0.20); background:rgba(155,196,255,0.06); }
-  .badge-amber{ color:#ffd28a; border-color:rgba(255,210,138,0.20); background:rgba(255,210,138,0.06); }
-  .badge-purple{ color:#c8b4ff; border-color:rgba(200,180,255,0.20); background:rgba(200,180,255,0.06); }
-  .badge-cyan{ color:#9be5ff; border-color:rgba(155,229,255,0.20); background:rgba(155,229,255,0.06); }
-  .badge-orange{ color:#ffb088; border-color:rgba(255,176,136,0.20); background:rgba(255,176,136,0.06); }
-  .badge-green{ color:#8affb4; border-color:rgba(138,255,180,0.20); background:rgba(138,255,180,0.06); }
-  .badge-silver{ color:#d2d2d7; border-color:rgba(210,210,215,0.20); background:rgba(210,210,215,0.06); }
-  .badge-red{ color:#ff9aa2; border-color:rgba(255,154,162,0.20); background:rgba(255,154,162,0.06); }
+        .tab-content.active {
+            display: block;
+        }
 
-  /* ==== SCROLLBAR ==== */
-  ::-webkit-scrollbar{ width:0; height:0; }
-  .nice-scroll::-webkit-scrollbar{ width: 4px; height: 4px; }
-  .nice-scroll::-webkit-scrollbar-track{ background: transparent; }
-  .nice-scroll::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.10); border-radius: 999px; }
-
-  /* ==== ANIMATIONS ==== */
-  @keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
-  @keyframes fadeInScale { from{opacity:0; transform:scale(0.96);} to{opacity:1; transform:scale(1);} }
-  @keyframes shimmer { 0%{background-position: -200% 0;} 100%{background-position: 200% 0;} }
-  @keyframes float { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
-  @keyframes pulse-ring {
-    0%{ box-shadow: 0 0 0 0 rgba(192,192,192,0.4); }
-    70%{ box-shadow: 0 0 0 10px rgba(192,192,192,0); }
-    100%{ box-shadow: 0 0 0 0 rgba(192,192,192,0); }
-  }
-  .anim-fade{ animation: fadeIn 0.5s cubic-bezier(.2,.8,.2,1) both; }
-  .anim-scale{ animation: fadeInScale 0.5s cubic-bezier(.2,.8,.2,1) both; }
-  .anim-shimmer{
-    background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.04) 100%);
-    background-size: 200% 100%;
-    animation: shimmer 2s linear infinite;
-  }
-
-  /* ==== LOGO / TITANIUM ==== */
-  .titanium{
-    background: conic-gradient(from 220deg at 50% 50%, #f5f5f7 0deg, #b8b8be 90deg, #6e6e73 180deg, #b8b8be 270deg, #f5f5f7 360deg);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  /* ==== NAV BAR (iOS-like) ==== */
-  .tabbar{
-    background: linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(0,0,0,0.95) 100%);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    backdrop-filter: blur(30px) saturate(180%);
-  }
-  .tab-item{ transition: all 0.2s; }
-  .tab-item.active .tab-icon{
-    background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
-    border-color: rgba(255,255,255,0.18);
-    color: #fff;
-  }
-  .tab-icon{
-    width: 50px; height: 32px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius: 10px;
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--silver-400);
-  }
-
-  /* ==== MODAL ==== */
-  .modal-backdrop{
-    position: fixed; inset: 0; z-index: 100;
-    background: rgba(0,0,0,0.6);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    display:flex; align-items:flex-end; justify-content:center;
-    padding: 0;
-  }
-  .modal-sheet{
-    width: 100%; max-width: 480px;
-    max-height: 90vh;
-    overflow: hidden;
-    border-radius: 28px 28px 0 0;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
-  }
-  .modal-sheet.open{ transform: translateY(0); }
-
-  /* ==== TOAST ==== */
-  .toast{
-    position: fixed; left: 50%; bottom: 100px;
-    transform: translateX(-50%) translateY(20px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(.2,.8,.2,1);
-    z-index: 200;
-    pointer-events: none;
-  }
-  .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
-
-  /* ==== LOADER ==== */
-  .loader{
-    width: 22px; height: 22px;
-    border: 2px solid rgba(255,255,255,0.15);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
-  @keyframes spin { to{ transform: rotate(360deg);} }
-
-  /* ==== PROGRESS ==== */
-  .timeline-dot{
-    width: 28px; height: 28px;
-    border-radius: 999px;
-    display:flex; align-items:center; justify-content:center;
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(255,255,255,0.03);
-    color: var(--silver-400);
-    font-size: 0.7rem;
-    flex-shrink: 0;
-  }
-  .timeline-dot.active{
-    background: linear-gradient(180deg, #f5f5f7, #c8c8cc);
-    color: #000;
-    border-color: rgba(255,255,255,0.4);
-    box-shadow: 0 0 16px rgba(192,192,192,0.3);
-  }
-  .timeline-line{
-    width: 2px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02));
-    flex: 1;
-    min-height: 24px;
-  }
-  .timeline-line.active{
-    background: linear-gradient(180deg, rgba(192,192,192,0.6), rgba(192,192,192,0.2));
-  }
-
-  /* ==== BANNER GRADIENT ==== */
-  .promo-bg{
-    background:
-      radial-gradient(600px 200px at 80% 0%, rgba(192,192,192,0.20), transparent 60%),
-      radial-gradient(400px 200px at 0% 100%, rgba(155,196,255,0.12), transparent 60%),
-      linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  }
-
-  /* ==== iOS 18 ORB ==== */
-  .orb{
-    position: relative;
-    width: 180px; height: 180px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 50%),
-      radial-gradient(circle at 70% 70%, rgba(192,192,192,0.10), transparent 60%),
-      linear-gradient(180deg, rgba(40,40,50,0.9), rgba(10,10,15,0.95));
-    border: 1px solid rgba(255,255,255,0.10);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.04),
-      0 30px 60px -10px rgba(0,0,0,0.8),
-      inset 0 1px 0 rgba(255,255,255,0.10);
-    animation: float 4s ease-in-out infinite;
-  }
-  .orb::after{
-    content:"";
-    position:absolute; inset: 10px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.18), transparent 40%);
-  }
-
-  /* ==== HIDE/SHOW ==== */
-  .view{ display:none; }
-  .view.active{ display:block; }
-
-  /* ==== TABLET/DESKTOP ==== */
-  @media (min-width: 768px){
-    .modal-sheet{ max-width: 520px; border-radius: 28px; margin-bottom: 5vh; max-height: 85vh; }
-    .modal-backdrop{ align-items:center; }
-  }
-
-  /* ==== SAFE AREA ==== */
-  .safe-top{ padding-top: env(safe-area-inset-top, 0); }
-  .safe-bottom{ padding-bottom: env(safe-area-inset-bottom, 0); }
-
-  /* Selection */
-  ::selection{ background: rgba(192,192,192,0.3); color:#fff; }
-</style>
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="min-h-screen relative flex flex-col justify-between pb-24">
 
-<!-- ========== LOADING ========== -->
-<div id="boot" class="fixed inset-0 z-[300] flex items-center justify-center bg-black">
-  <div class="text-center">
-    <div class="orb mx-auto mb-6" style="width:90px;height:90px;"></div>
-    <div class="text-silver text-2xl font-semibold tracking-tight">MOBILOFT</div>
-    <div class="text-zinc-500 text-xs mt-1 tracking-widest uppercase">Premium Repair Tracker</div>
-  </div>
-</div>
+    <!-- Ambient Ambient Light Elements -->
+    <div class="fixed top-0 left-0 w-80 h-80 ambient-glow-1 pointer-events-none z-0"></div>
+    <div class="fixed bottom-20 right-0 w-80 h-80 ambient-glow-2 pointer-events-none z-0"></div>
 
-<!-- ========== APP ROOT ========== -->
-<div id="app" class="relative min-h-screen max-w-md mx-auto safe-top safe-bottom" style="padding-bottom: 100px;">
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-md mx-auto px-4 pt-5 z-10 flex-grow">
 
-  <!-- ====== VIEW: HOME (CUSTOMER) ====== -->
-  <section id="view-home" class="view active px-4 pt-6">
-    <!-- Status bar mock (Telegram handles this but we keep visual consistency) -->
-    <div class="flex items-center justify-between text-[11px] text-zinc-500 mb-3 px-1 font-medium tracking-wide">
-      <span id="status-time">9:41</span>
-      <span class="flex items-center gap-1">
-        <span id="user-tag" class="hidden"></span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 12l5-5M2 12l5 5"/></svg>
-        <span>5G</span>
-        <svg width="16" height="14" viewBox="0 0 24 18" fill="currentColor"><path d="M2 16h2v2H2zM6 12h2v6H6zM10 8h2v10h-2zM14 4h2v14h-2zM18 0h2v18h-2z"/></svg>
-      </span>
-    </div>
+        <!-- HEADER -->
+        <header class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <!-- Premium Animated Circular Logo -->
+                <div class="relative w-12 h-12 rounded-2xl flex items-center justify-center overflow-hidden ios-glass border border-gold/30 shadow-neon-gold">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-gold via-transparent to-cyberred opacity-25 animate-pulse"></div>
+                    <span class="font-outfit font-extrabold text-xl text-transparent bg-clip-text bg-gradient-to-r from-gold to-white">ML</span>
+                </div>
+                <div>
+                    <h1 class="font-outfit font-extrabold text-xl tracking-wide text-white flex items-center gap-1.5">
+                        MOBILOFT
+                        <span class="text-[9px] font-semibold bg-cyberred/20 text-cyberred border border-cyberred/30 px-1.5 py-0.5 rounded-full uppercase tracking-widest">v26.0</span>
+                    </h1>
+                    <p class="text-xs text-gray-400 font-medium">Premium Ustaxona</p>
+                </div>
+            </div>
+            
+            <!-- Quick Action: Contact button -->
+            <a href="tel:+998901230035" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-gold border border-gold/20">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0l6-6M3 5.25h1.875a2.25 2.25 0 012.25 2.25v13.5a2.25 2.25 0 01-2.25 2.25H3a2.25 2.25 0 01-2.25-2.25V7.5A2.25 2.25 0 013 5.25z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21.75h19.5" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 7.5h.008v.008H10.5V7.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM10.5 11.25h.008v.008H10.5v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-3 3.75h.008v.008H7.5v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm3 0h.008v.008H10.5v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm3 0h.008v.008H13.5v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-6 3.75h.008v.008H7.5V18.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm3 0h.008v.008H10.5V18.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+            </a>
+        </header>
 
-    <!-- Hero -->
-    <div class="glass silver-border rounded-[28px] p-6 mb-5 anim-fade overflow-hidden relative">
-      <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full" style="background: radial-gradient(circle, rgba(192,192,192,0.18), transparent 70%);"></div>
-      <div class="relative z-10">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-8 h-8 rounded-xl glass-soft flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM11 18h2"/></svg>
-          </div>
-          <span class="text-[10px] tracking-[0.2em] uppercase text-zinc-500 font-medium">Premium Service</span>
+        <!-- TAB CONTENT: HOME -->
+        <section id="tab-home" class="tab-content active space-y-6">
+            
+            <!-- MAIN PREMIUM iOS 26 BANNER -->
+            <div class="relative rounded-[2.5rem] p-6 overflow-hidden ios-glass border border-gold/20 shadow-neon-gold flex flex-col justify-between min-h-[220px]">
+                <!-- Interactive glass panel mesh -->
+                <div class="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-cyberred/10 z-0"></div>
+                <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-gold rounded-full filter blur-[50px] opacity-20 pointer-events-none"></div>
+                <div class="absolute -left-10 -top-10 w-36 h-36 bg-cyberred rounded-full filter blur-[40px] opacity-15 pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-cyberred animate-ping"></span>
+                        <span class="text-xs font-bold tracking-widest text-cyberred-light uppercase font-outfit">ABDUJALIL USTAXONASI</span>
+                    </div>
+                    <h2 class="font-outfit font-black text-2xl md:text-3xl tracking-tight leading-tight text-white">
+                        Smartfonlar uchun<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-100 to-cyberred-light">Elite Diagnostika</span>
+                    </h2>
+                    <p class="text-xs text-gray-300 mt-2 max-w-[85%] font-normal">
+                        Rahmatillo qishlog'idagi eng mukammal va ishonchli premium ta'mirlash markazi.
+                    </p>
+                </div>
+
+                <!-- Live stats inside Banner -->
+                <div class="relative z-10 grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/5 text-center">
+                    <div>
+                        <div class="font-outfit font-bold text-lg text-gold">4.9</div>
+                        <div class="text-[9px] text-gray-400 uppercase tracking-wider">Reyting</div>
+                    </div>
+                    <div class="border-x border-white/5">
+                        <div class="font-outfit font-bold text-lg text-white">3.5k+</div>
+                        <div class="text-[9px] text-gray-400 uppercase tracking-wider">Tuzatildi</div>
+                    </div>
+                    <div>
+                        <div class="font-outfit font-bold text-lg text-cyberred-light">15 daq</div>
+                        <div class="text-[9px] text-gray-400 uppercase tracking-wider">Tezkor Diagnostika</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE UTILITIES QUICK GRID -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="switchTab('services')" class="ios-glass p-4 rounded-3xl text-left hover:scale-[1.02] active:scale-[0.98] transition-all border border-white/5 flex flex-col justify-between h-28 group">
+                    <div class="w-10 h-10 rounded-2xl bg-gold/10 flex items-center justify-center text-gold group-hover:bg-gold/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.67 2.67 0 1113.5 17.25l-5.83-5.83m5.83 5.83a2.67 2.67 0 11-3.75-3.75l5.83-5.83m0 0l-5.83-5.83m5.83 5.83L17.25 9m-5.83 5.83a2.67 2.67 0 11-3.75-3.75l-5.83-5.83m0 0l5.83-5.83m-5.83 5.83L3 9" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-outfit font-bold text-sm text-white">Xizmatlar</h3>
+                        <p class="text-[10px] text-gray-400">Narxlarni tekshirish</p>
+                    </div>
+                </button>
+
+                <button onclick="switchTab('tracker')" class="ios-glass p-4 rounded-3xl text-left hover:scale-[1.02] active:scale-[0.98] transition-all border border-white/5 flex flex-col justify-between h-28 group">
+                    <div class="w-10 h-10 rounded-2xl bg-cyberred/10 flex items-center justify-center text-cyberred-light group-hover:bg-cyberred/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.637z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-outfit font-bold text-sm text-white">Buyurtmani Kuzatish</h3>
+                        <p class="text-[10px] text-gray-400">Hozirgi holatini bilish</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- DYNAMIC PROMOTION / THE SIGNATURE MOBILOFT LAYOUT -->
+            <div class="ios-glass p-5 rounded-[2rem] border border-white/5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-outfit font-bold text-base text-white flex items-center gap-2">
+                        <span class="w-1.5 h-6 bg-gold rounded-full"></span>
+                        Maxsus Aksiyalar
+                    </h3>
+                    <span class="text-[10px] font-semibold text-gold bg-gold/10 px-2 py-0.5 rounded-full">Bugun</span>
+                </div>
+                
+                <!-- Promo Item: Glassmorphic aesthetic design representation -->
+                <div class="relative p-4 rounded-2xl bg-asphalt-900 border border-white/5 overflow-hidden flex items-center justify-between gap-3">
+                    <div class="space-y-1 z-10">
+                        <div class="text-[10px] font-bold text-cyberred uppercase tracking-wider">BEPUL TA'XIS</div>
+                        <h4 class="font-outfit font-bold text-sm text-white">Dasturiy Muammolar</h4>
+                        <p class="text-[11px] text-gray-400">Har qanday telefon dasturiy ta'minotini bepul tekshiramiz!</p>
+                    </div>
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-cyberred/20 to-gold/20 flex items-center justify-center border border-white/10 shrink-0 z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-gold animate-bounce">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                        </svg>
+                    </div>
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-gold/5 rounded-full filter blur-xl"></div>
+                </div>
+            </div>
+
+            <!-- CUSTOMER TESTIMONIALS iOS CAROUSEL -->
+            <div class="space-y-3">
+                <h3 class="font-outfit font-bold text-sm text-gray-300 px-1">Mijozlarimiz fikri</h3>
+                <div class="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
+                    <div class="ios-glass p-4 rounded-2xl min-w-[280px] snap-center border border-white/5 flex-shrink-0 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-white">Sardorbek K.</span>
+                            <div class="flex text-gold">
+                                <span class="text-xs">★★★★★</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 italic">"Abdujalil aka iPhone 13 Pro ekranini silliq qilib, super tez tuzatib berdilar. Rahmatillo qishlog'ida yagona zo'r usta!"</p>
+                    </div>
+                    <div class="ios-glass p-4 rounded-2xl min-w-[280px] snap-center border border-white/5 flex-shrink-0 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-white">Elyor J.</span>
+                            <div class="flex text-gold">
+                                <span class="text-xs">★★★★★</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 italic">"Pult va zaryadniklarni ham mana shu yerda tuzattiraman, narxlar judayam hamyonbop ekan."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT: SERVICES -->
+        <section id="tab-services" class="tab-content space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="font-outfit font-extrabold text-2xl text-white">Xizmatlarimiz</h2>
+                    <p class="text-xs text-gray-400">Eng so'nggi texnologiyalar yordamida kafolatlangan ta'mirlash</p>
+                </div>
+                <span class="text-xs font-bold text-gold ios-glass px-3 py-1.5 rounded-full border border-gold/20 shadow-neon-gold">8+ Xizmat</span>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex gap-2 overflow-x-auto pb-1">
+                <button onclick="filterServices('all')" class="service-tab-btn active bg-gold text-asphalt-950 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide transition-all whitespace-nowrap">Barchasi</button>
+                <button onclick="filterServices('display')" class="service-tab-btn ios-glass text-gray-300 px-4 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap">Ekran & Shisha</button>
+                <button onclick="filterServices('battery')" class="service-tab-btn ios-glass text-gray-300 px-4 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap">Batareya</button>
+                <button onclick="filterServices('hardware')" class="service-tab-btn ios-glass text-gray-300 px-4 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap">Plata / Tizim</button>
+            </div>
+
+            <!-- Dynamic Services Cards Grid -->
+            <div id="services-grid" class="space-y-4">
+                <!-- Service Item 1 -->
+                <div class="service-card ios-glass p-5 rounded-3xl border border-white/5 flex flex-col justify-between hover:border-gold/30 transition-all gap-4" data-category="display">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold text-gold uppercase tracking-wider bg-gold/10 px-2 py-0.5 rounded-full">Kafolat: 6 oy</span>
+                            <h3 class="font-outfit font-bold text-base text-white mt-1">Ekran va Sensor Almashtirish</h3>
+                            <p class="text-xs text-gray-400">Asl nusxadagi (Original/AMOLED) ekranlarni professional o'rnatish.</p>
+                        </div>
+                        <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                        <div>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider block">Boshlang'ich narx</span>
+                            <span class="font-outfit font-extrabold text-lg text-white">120,000 UZS</span>
+                        </div>
+                        <button onclick="openBookingModal('Ekran va Sensor Almashtirish')" class="bg-gradient-to-r from-gold to-yellow-600 text-asphalt-950 font-bold text-xs py-2.5 px-5 rounded-2xl shadow-neon-gold hover:opacity-90 active:scale-95 transition-all">
+                            Buyurtma berish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service Item 2 -->
+                <div class="service-card ios-glass p-5 rounded-3xl border border-white/5 flex flex-col justify-between hover:border-gold/30 transition-all gap-4" data-category="battery">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold text-green-400 uppercase tracking-wider bg-green-400/10 px-2 py-0.5 rounded-full">Kafolat: 3 oy</span>
+                            <h3 class="font-outfit font-bold text-base text-white mt-1">Batareya (Akumulyator) Almashtirish</h3>
+                            <p class="text-xs text-gray-400">Telefoningiz quvvatini uzoq muddat ushlaydigan sertifikatlangan yangi akkumulyatorlar.</p>
+                        </div>
+                        <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-green-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                        <div>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider block">Boshlang'ich narx</span>
+                            <span class="font-outfit font-extrabold text-lg text-white">80,000 UZS</span>
+                        </div>
+                        <button onclick="openBookingModal('Batareya Almashtirish')" class="bg-gradient-to-r from-gold to-yellow-600 text-asphalt-950 font-bold text-xs py-2.5 px-5 rounded-2xl shadow-neon-gold hover:opacity-90 active:scale-95 transition-all">
+                            Buyurtma berish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service Item 3 -->
+                <div class="service-card ios-glass p-5 rounded-3xl border border-white/5 flex flex-col justify-between hover:border-gold/30 transition-all gap-4" data-category="hardware">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold text-cyberred uppercase tracking-wider bg-cyberred/10 px-2 py-0.5 rounded-full">Murakkab Ta'mir</span>
+                            <h3 class="font-outfit font-bold text-base text-white mt-1">Ona plata (Processor / Flash-card) Ta'mirlash</h3>
+                            <p class="text-xs text-gray-400">Mikroskop ostida professional leymak, qisqa tutashuvlarni bartaraf etish.</p>
+                        </div>
+                        <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-cyberred-light">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.827m11.379-8.16l1.15-.827M8.14 21.27l.707-1.03m10.153-7.472l.707-1.03M12 22.5V21m0-18V1.5m0 19.5H3.75A2.25 2.25 0 011.5 18V6A2.25 2.25 0 013.75 3.75H12m0 18h8.25a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0020.25 3.75H12" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                        <div>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider block">Boshlang'ich narx</span>
+                            <span class="font-outfit font-extrabold text-lg text-white">150,000 UZS</span>
+                        </div>
+                        <button onclick="openBookingModal('Ona plata Ta\'mirlash')" class="bg-gradient-to-r from-gold to-yellow-600 text-asphalt-950 font-bold text-xs py-2.5 px-5 rounded-2xl shadow-neon-gold hover:opacity-90 active:scale-95 transition-all">
+                            Buyurtma berish
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT: TRACKER -->
+        <section id="tab-tracker" class="tab-content space-y-6">
+            <div class="space-y-1">
+                <h2 class="font-outfit font-extrabold text-2xl text-white">Buyurtmani Kuzatish</h2>
+                <p class="text-xs text-gray-400">Telefoningiz hozir qaysi jarayonda ekanligini tezda bilib oling</p>
+            </div>
+
+            <!-- Search Panel -->
+            <div class="ios-glass p-5 rounded-3xl border border-white/5 space-y-4">
+                <div class="space-y-1.5">
+                    <label for="tracking-id" class="text-xs font-bold text-gray-300">Telefon raqam yoki Buyurtma ID kodini kiriting:</label>
+                    <div class="relative">
+                        <input type="text" id="tracking-id" placeholder="Masalan: +998901230035 yoki #1001" 
+                               class="w-full bg-asphalt-950/80 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold/50 transition-all font-outfit">
+                        <button onclick="searchOrder()" class="absolute right-2 top-2 bottom-2 bg-gold text-asphalt-950 font-bold text-xs px-4 rounded-xl shadow-neon-gold hover:opacity-90 active:scale-95 transition-all">
+                            Qidirish
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracker Results Dashboard (Hidden initially, shown after search) -->
+            <div id="tracker-result" class="hidden space-y-5">
+                <div class="ios-glass p-5 rounded-3xl border border-white/5 space-y-4 relative overflow-hidden">
+                    <!-- Glass shine -->
+                    <div class="absolute -right-6 -top-6 w-16 h-16 bg-gold/10 rounded-full filter blur-xl"></div>
+                    
+                    <div class="flex justify-between items-center pb-3 border-b border-white/5">
+                        <div>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest block">Qurilma / Model</span>
+                            <span id="tracked-device" class="font-outfit font-bold text-base text-white">-</span>
+                        </div>
+                        <span id="tracked-id-label" class="text-xs font-bold text-gold bg-gold/10 px-2.5 py-1 rounded-full border border-gold/10">-</span>
+                    </div>
+
+                    <!-- Process Progress Indicators -->
+                    <div class="space-y-6 pt-2">
+                        <!-- Step 1 -->
+                        <div class="flex gap-4 relative" id="step-1">
+                            <!-- Line spacer -->
+                            <div class="absolute left-[11px] top-6 bottom-[-24px] w-0.5 bg-white/10" id="line-1"></div>
+                            
+                            <div class="w-6 h-6 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-1">
+                                <span class="w-2 h-2 rounded-full bg-transparent" id="inner-1"></span>
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="text-xs font-bold text-gray-400" id="title-1">Qabul qilindi</h4>
+                                <p class="text-[10px] text-gray-500" id="desc-1">Qurilma ustaxonaga olib kelindi va ro'yxatga olindi</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex gap-4 relative" id="step-2">
+                            <!-- Line spacer -->
+                            <div class="absolute left-[11px] top-6 bottom-[-24px] w-0.5 bg-white/10" id="line-2"></div>
+                            
+                            <div class="w-6 h-6 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-2">
+                                <span class="w-2 h-2 rounded-full bg-transparent" id="inner-2"></span>
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="text-xs font-bold text-gray-400" id="title-2">Tashxis qo'yilmoqda</h4>
+                                <p class="text-[10px] text-gray-500" id="desc-2">Muammo aniqlanmoqda va narx kelishilmoqda</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex gap-4 relative" id="step-3">
+                            <!-- Line spacer -->
+                            <div class="absolute left-[11px] top-6 bottom-[-24px] w-0.5 bg-white/10" id="line-3"></div>
+                            
+                            <div class="w-6 h-6 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-3">
+                                <span class="w-2 h-2 rounded-full bg-transparent" id="inner-3"></span>
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="text-xs font-bold text-gray-400" id="title-3">Ta'mirlanmoqda</h4>
+                                <p class="text-[10px] text-gray-500" id="desc-3">Usta professional tarzda tuzatmoqda</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flex gap-4" id="step-4">
+                            <div class="w-6 h-6 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center shrink-0 z-10 transition-all duration-500" id="bullet-4">
+                                <span class="w-2 h-2 rounded-full bg-transparent" id="inner-4"></span>
+                            </div>
+                            <div class="space-y-0.5">
+                                <h4 class="text-xs font-bold text-gray-400" id="title-4">Tayyor!</h4>
+                                <p class="text-[10px] text-gray-500" id="desc-4">Qurilma mukammal holatda, topshirishga tayyor</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client detail banner -->
+                    <div class="bg-asphalt-950/60 p-4 rounded-2xl border border-white/5 space-y-2 mt-4">
+                        <div class="flex justify-between text-[11px]">
+                            <span class="text-gray-400">Egasi:</span>
+                            <span id="tracked-owner" class="text-white font-semibold">-</span>
+                        </div>
+                        <div class="flex justify-between text-[11px]">
+                            <span class="text-gray-400">Telefon:</span>
+                            <span id="tracked-phone" class="text-white font-semibold">-</span>
+                        </div>
+                        <div class="flex justify-between text-[11px]">
+                            <span class="text-gray-400">Narxi:</span>
+                            <span id="tracked-price" class="text-gold font-bold">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty info card -->
+            <div id="tracker-not-found" class="ios-glass p-6 rounded-3xl text-center border border-white/5 space-y-3">
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-gray-400 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="font-outfit font-bold text-sm text-white">Buyurtmalar topilmadi</h3>
+                    <p class="text-xs text-gray-400">Yuqorida faol telefon raqamingiz yoki buyurtma berilgan vaqtda berilgan maxsus ID kodni yozing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT: CONTACT -->
+        <section id="tab-contact" class="tab-content space-y-6">
+            <div class="space-y-1">
+                <h2 class="font-outfit font-extrabold text-2xl text-white">Biz bilan bog'lanish</h2>
+                <p class="text-xs text-gray-400">Har qanday savol yoki taklif bo'yicha biz bilan aloqaga chiqing</p>
+            </div>
+
+            <!-- PREMIUM MASTER DETAIL BOX -->
+            <div class="ios-glass p-5 rounded-[2rem] border border-white/5 space-y-5">
+                
+                <!-- Contact Card 1: Telephone -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-asphalt-900 border border-white/5 hover:border-gold/30 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gold/15 flex items-center justify-center text-gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.802-5.122-4.1-6.924-6.924l1.293-.97a1.125 1.125 0 00.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H3.75A2.25 2.25 0 001.5 4.5v2.25z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-gray-500 uppercase tracking-widest block">Asosiy Telefon</span>
+                            <span class="font-outfit font-extrabold text-sm text-white">+998 90 123 00 35</span>
+                        </div>
+                    </div>
+                    <a href="tel:+998901230035" class="bg-gold text-asphalt-950 font-bold text-xs py-2 px-4 rounded-xl shadow-neon-gold hover:opacity-90 active:scale-95 transition-all">
+                        Qo'ng'iroq
+                    </a>
+                </div>
+
+                <!-- Contact Card 2: Admin @yomonboIa -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-asphalt-900 border border-white/5 hover:border-cyberred/30 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyberred/15 flex items-center justify-center text-cyberred-light">
+                            <!-- Telegram Custom SVG Icon -->
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 .587c-6.3 0-11.4 5.1-11.4 11.4 0 5.04 3.285 9.315 7.845 10.83.15.03.3-.045.3-.21v-1.92c-3.18.69-3.84-1.53-3.84-1.53-.525-1.335-1.275-1.695-1.275-1.695-1.035-.705.075-.69.075-.69 1.14.075 1.74 1.17 1.74 1.17 1.02 1.74 2.67 1.245 3.33.945.105-.735.39-1.245.72-1.53-2.535-.285-5.205-1.275-5.205-5.655 0-1.245.435-2.265 1.155-3.06-.12-.285-.51-1.455.105-3.015 0 0 .96-.3 3.135 1.17.915-.255 1.89-.375 2.865-.375.975 0 1.95.12 2.865.375 2.175-1.47 3.135-1.17 3.135-1.17.615 1.56.225 2.73.105 3.015.72.795 1.155 1.815 1.155 3.06 0 4.395-2.685 5.355-5.25 5.64.405.345.78 1.035.78 2.085v3.09c0 .165.15.24.3.21 4.56-1.515 7.845-5.79 7.845-10.83 0-6.3-5.1-11.4-11.4-11.4z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-gray-500 uppercase tracking-widest block">Loyiha Rahbari</span>
+                            <span class="font-outfit font-bold text-sm text-white">@yomonboIa</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/yomonboIa" target="_blank" class="bg-white/5 text-gray-300 border border-white/10 font-bold text-xs py-2 px-4 rounded-xl hover:bg-white/10 active:scale-95 transition-all">
+                        Bog'lanish
+                    </a>
+                </div>
+
+                <!-- Contact Card 3: Admin @mobiloft_uz -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-asphalt-900 border border-white/5 hover:border-gold/30 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gold/15 flex items-center justify-center text-gold">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.41-1.42-.87.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.79-3.32 3.71-1.48 4.48-1.74 4.98-1.75.11 0 .36.03.52.16.14.11.18.26.2.37.02.13.03.39.01.59z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-gray-500 uppercase tracking-widest block">Rasmiy Kanal</span>
+                            <span class="font-outfit font-bold text-sm text-white">@mobiloft_uz</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/mobiloft_uz" target="_blank" class="bg-white/5 text-gray-300 border border-white/10 font-bold text-xs py-2 px-4 rounded-xl hover:bg-white/10 active:scale-95 transition-all">
+                        A'zo bo'lish
+                    </a>
+                </div>
+            </div>
+
+            <!-- PREMIUM CUSTOM MAP BOX -->
+            <div class="ios-glass p-5 rounded-[2rem] border border-white/5 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-6 bg-cyberred rounded-full"></span>
+                    <h3 class="font-outfit font-bold text-base text-white">Bizning Manzil</h3>
+                </div>
+
+                <!-- Custom Aesthetic Styled Vector Map representation -->
+                <div class="relative h-44 rounded-2xl bg-asphalt-950 border border-white/5 overflow-hidden flex items-center justify-center">
+                    <!-- Tech grid background -->
+                    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+                    
+                    <!-- Dynamic Glowing pulse on workshop location -->
+                    <div class="relative z-10 flex flex-col items-center space-y-2">
+                        <div class="relative flex items-center justify-center">
+                            <span class="absolute w-10 h-10 rounded-full bg-cyberred/20 animate-ping"></span>
+                            <span class="absolute w-6 h-6 rounded-full bg-cyberred/40 animate-pulse"></span>
+                            <div class="w-4 h-4 rounded-full bg-cyberred border-2 border-white flex items-center justify-center shadow-neon-red"></div>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="font-outfit font-extrabold text-sm text-white">Abdujalil Ustaxonasi</h4>
+                            <p class="text-[10px] text-gray-400">Rahmatillo qishlog'i</p>
+                        </div>
+                    </div>
+
+                    <!-- Ambient map design elements -->
+                    <div class="absolute bottom-2 left-2 text-[9px] text-gray-600 uppercase tracking-widest font-mono">Location Map v2.6</div>
+                </div>
+
+                <!-- Descriptive Address Card -->
+                <div class="bg-asphalt-900/60 p-4 rounded-2xl border border-white/5 space-y-1">
+                    <div class="text-[9px] text-gray-500 uppercase tracking-widest font-semibold">Batafsil manzil</div>
+                    <p class="text-xs text-gray-300 leading-relaxed font-medium">
+                        Farg'ona viloyati, Rahmatillo qishlog'i, markaziy ko'cha, Abdujalil aka premium smartfonlar ustaxonasi.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- iOS STYLE BOOKING DIALOG (MODAL) -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-end justify-center hidden bg-black/60 backdrop-blur-sm transition-all duration-300">
+        <div class="w-full max-w-md ios-glass rounded-t-[2.5rem] border-t border-white/15 p-6 space-y-5 animate-[fadeSlideIn_0.3s_ease-out]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="font-outfit font-extrabold text-lg text-white">Xizmatga Buyurtma</h3>
+                    <p class="text-[11px] text-gray-400">Ustaga zudlik bilan xabar yetkazish</p>
+                </div>
+                <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Pre-selected Service Label -->
+            <div class="bg-gold/10 border border-gold/20 p-3 rounded-2xl flex items-center justify-between">
+                <span class="text-xs font-semibold text-gold-light">Tanlangan xizmat:</span>
+                <span id="selected-service-title" class="text-xs font-bold text-white">Ekran Almashtirish</span>
+            </div>
+
+            <!-- Booking Form -->
+            <form id="booking-form" onsubmit="submitRepairOrder(event)" class="space-y-4">
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Ismingiz</label>
+                    <input type="text" id="client-name" required placeholder="Masalan: Sardorbek" 
+                           class="w-full bg-asphalt-950 border border-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold/30 transition-all font-sans">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Telefon raqamingiz</label>
+                    <input type="tel" id="client-phone" required placeholder="Masalan: +998901230035" 
+                           class="w-full bg-asphalt-950 border border-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold/30 transition-all font-sans">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Qurilmangiz modeli</label>
+                    <input type="text" id="device-model" required placeholder="Masalan: iPhone 13 Pro" 
+                           class="w-full bg-asphalt-950 border border-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold/30 transition-all font-sans">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Muammo bayoni</label>
+                    <textarea id="issue-description" rows="2" placeholder="Masalan: Ekrani singan, sensor ishlamayapti..." 
+                              class="w-full bg-asphalt-950 border border-white/5 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold/30 transition-all font-sans"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-gold to-yellow-600 text-asphalt-950 font-bold text-sm py-3.5 rounded-2xl shadow-neon-gold hover:opacity-95 active:scale-[0.99] transition-all">
+                    Tasdiqlash va Yuborish
+                </button>
+            </form>
         </div>
-        <h1 class="text-4xl font-bold tracking-tighter text-silver leading-none">MOBILOFT</h1>
-        <p class="text-zinc-300 mt-2 text-sm font-medium">Telefoningiz holatini tekshiring</p>
-        <p class="text-zinc-500 text-xs mt-1.5 leading-relaxed">Buyurtma raqamingiz orqali ta'mirlash holatini kuzating.</p>
-      </div>
     </div>
 
-    <!-- Promo Banner (dynamic) -->
-    <div id="promo-container" class="hidden mb-5 anim-fade"></div>
+    <!-- BOTTOM PREMIUM NAVIGATION BAR -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 bg-asphalt-950/80 backdrop-blur-xl border-t border-white/5 py-3 px-6 max-w-md mx-auto">
+        <div class="flex justify-between items-center">
+            
+            <!-- Nav Item: Home -->
+            <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center gap-1 text-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <span class="text-[10px] font-bold tracking-wide">Bosh sahifa</span>
+            </button>
 
-    <!-- Search Card -->
-    <div class="glass silver-border rounded-[28px] p-5 mb-5 anim-fade" style="animation-delay: 0.05s;">
-      <div class="flex items-center gap-2 mb-3">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-zinc-500 font-medium">Buyurtma holati</span>
-      </div>
-      <div class="relative mb-3">
-        <input id="search-input" type="text" inputmode="text" autocapitalize="characters"
-          class="input-field w-full rounded-2xl px-4 py-4 text-[15px] font-medium tracking-wider"
-          placeholder="MLF-2045" />
-        <button id="search-clear" class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 p-1 hidden" onclick="clearSearch()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-        </button>
-      </div>
-      <button id="search-btn" class="btn-primary w-full rounded-2xl py-4 font-semibold text-[15px] tracking-tight flex items-center justify-center gap-2" onclick="searchOrder()">
-        <span>Tekshirish</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-      <p class="text-zinc-600 text-[11px] text-center mt-3">Masalan: MLF-2045</p>
-    </div>
+            <!-- Nav Item: Services -->
+            <button onclick="switchTab('services')" id="nav-services" class="nav-btn flex flex-col items-center gap-1 text-gray-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.67 2.67 0 1113.5 17.25l-5.83-5.83m5.83 5.83a2.67 2.67 0 11-3.75-3.75l5.83-5.83m0 0l-5.83-5.83m5.83 5.83L17.25 9m-5.83 5.83a2.67 2.67 0 11-3.75-3.75l-5.83-5.83m0 0l5.83-5.83m-5.83 5.83L3 9" />
+                </svg>
+                <span class="text-[10px] font-bold tracking-wide">Xizmatlar</span>
+            </button>
 
-    <!-- Search Result -->
-    <div id="search-result" class="hidden mb-5"></div>
+            <!-- Nav Item: Order Tracker -->
+            <button onclick="switchTab('tracker')" id="nav-tracker" class="nav-btn flex flex-col items-center gap-1 text-gray-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.637z" />
+                </svg>
+                <span class="text-[10px] font-bold tracking-wide">Kuzatish</span>
+            </button>
 
-    <!-- Contact Section -->
-    <div class="mb-2 anim-fade" style="animation-delay: 0.1s;">
-      <div class="flex items-center gap-2 mb-3 px-1">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-zinc-500 font-medium">Aloqa</span>
-      </div>
-      <div class="space-y-2.5">
-        <button onclick="contactAdmin()" class="btn-ghost w-full rounded-2xl p-4 flex items-center gap-3 text-left">
-          <div class="w-10 h-10 rounded-xl glass-soft flex items-center justify-center flex-shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-[15px] font-medium text-zinc-100">Adminga yozish</div>
-            <div class="text-[11px] text-zinc-500 mt-0.5">Telegram orqali bog'lanish</div>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-zinc-500"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
+            <!-- Nav Item: Contact -->
+            <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn flex flex-col items-center gap-1 text-gray-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                <span class="text-[10px] font-bold tracking-wide">Kontakt</span>
+            </button>
 
-        <button onclick="openLocation()" class="btn-ghost w-full rounded-2xl p-4 flex items-center gap-3 text-left">
-          <div class="w-10 h-10 rounded-xl glass-soft flex items-center justify-center flex-shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-[15px] font-medium text-zinc-100">Manzil</div>
-            <div class="text-[11px] text-zinc-500 mt-0.5" id="address-text">Toshkent, Chilonzor</div>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-zinc-500"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-
-        <button onclick="callAdmin()" class="btn-ghost w-full rounded-2xl p-4 flex items-center gap-3 text-left">
-          <div class="w-10 h-10 rounded-xl glass-soft flex items-center justify-center flex-shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-[15px] font-medium text-zinc-100">Qo'ng'iroq qilish</div>
-            <div class="text-[11px] text-zinc-500 mt-0.5" id="phone-text">+998 90 123 45 67</div>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-zinc-500"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Footer info -->
-    <div class="text-center text-[10px] text-zinc-600 mt-8 mb-2 tracking-widest uppercase">
-      <span class="opacity-60">Crafted with</span>
-      <span class="text-zinc-400 mx-1">·</span>
-      <span>MOBILOFT © 2026</span>
-    </div>
-  </section>
-
-  <!-- ====== VIEW: ADMIN (DASHBOARD) ====== -->
-  <section id="view-admin" class="view px-4 pt-6">
-    <div class="flex items-center justify-between mb-5">
-      <div>
-        <div class="text-[10px] tracking-[0.2em] uppercase text-zinc-500 font-medium">Boshqaruv paneli</div>
-        <h2 class="text-2xl font-bold text-silver tracking-tight">Admin Panel</h2>
-      </div>
-      <button onclick="logoutAdmin()" class="btn-ghost rounded-xl px-3 py-2 text-xs flex items-center gap-1.5">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-        Chiqish
-      </button>
-    </div>
-
-    <!-- Admin Tabs -->
-    <div class="flex gap-2 mb-5 overflow-x-auto nice-scroll pb-1">
-      <button data-admin-tab="dashboard" class="admin-tab active shrink-0 px-4 py-2 rounded-xl text-sm font-medium glass-soft">Dashboard</button>
-      <button data-admin-tab="orders" class="admin-tab shrink-0 px-4 py-2 rounded-xl text-sm font-medium glass-soft">Buyurtmalar</button>
-      <button data-admin-tab="banners" class="admin-tab shrink-0 px-4 py-2 rounded-xl text-sm font-medium glass-soft">Bannerlar</button>
-      <button data-admin-tab="settings" class="admin-tab shrink-0 px-4 py-2 rounded-xl text-sm font-medium glass-soft">Sozlamalar</button>
-    </div>
-
-    <!-- Admin sub: dashboard -->
-    <div data-admin-pane="dashboard" class="admin-pane">
-      <div id="stats-grid" class="grid grid-cols-2 gap-3 mb-5"></div>
-
-      <div class="glass silver-border rounded-[24px] p-4 mb-4">
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="text-sm font-semibold text-silver">So'nggi buyurtmalar</h3>
-          <button data-admin-tab="orders" class="text-xs text-zinc-400">Barchasi →</button>
         </div>
-        <div id="recent-orders" class="space-y-2"></div>
-      </div>
+    </nav>
 
-      <div class="glass silver-border rounded-[24px] p-4">
-        <h3 class="text-sm font-semibold text-silver mb-3">Tezkor amallar</h3>
-        <div class="grid grid-cols-2 gap-2.5">
-          <button onclick="openNewOrder()" class="btn-ghost rounded-2xl p-3.5 flex flex-col items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M12 5v14M5 12h14"/></svg>
-            <span class="text-xs">Yangi buyurtma</span>
-          </button>
-          <button onclick="switchAdminTab('banners')" class="btn-ghost rounded-2xl p-3.5 flex flex-col items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-            <span class="text-xs">Banner qo'shish</span>
-          </button>
-          <button onclick="switchAdminTab('orders')" class="btn-ghost rounded-2xl p-3.5 flex flex-col items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            <span class="text-xs">Qidirish</span>
-          </button>
-          <button onclick="runCleanup()" class="btn-ghost rounded-2xl p-3.5 flex flex-col items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-silver-200"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-            <span class="text-xs">Tozalash</span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <!-- LOGIC SCRIPTS -->
+    <script>
+        // Default Mock Databases for repair tracking to simulate real action perfectly
+        const mockOrders = [
+            {
+                id: '#1001',
+                phone: '+998901230035',
+                owner: 'Sardorbek K.',
+                device: 'iPhone 13 Pro',
+                status: 3, // Status: 1 (Received), 2 (Diagnosing), 3 (Repairing), 4 (Ready)
+                price: '150,000 UZS'
+            },
+            {
+                id: '#1002',
+                phone: '+998993214567',
+                owner: 'Diyorbek M.',
+                device: 'Samsung Galaxy S22 Ultra',
+                status: 4,
+                price: '120,000 UZS'
+            }
+        ];
 
-    <!-- Admin sub: orders -->
-    <div data-admin-pane="orders" class="admin-pane hidden">
-      <div class="flex items-center gap-2 mb-3">
-        <div class="relative flex-1">
-          <input id="admin-search" type="text" class="input-field w-full rounded-2xl px-4 py-3 text-sm" placeholder="ID, ism yoki telefon..." />
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </div>
-        <button onclick="openNewOrder()" class="btn-primary rounded-2xl px-4 py-3 text-sm font-semibold flex items-center gap-1.5 shrink-0">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-          Yangi
-        </button>
-      </div>
+        // Ensure database state is saved locally
+        if (!localStorage.getItem('mobiloft_orders')) {
+            localStorage.setItem('mobiloft_orders', JSON.stringify(mockOrders));
+        }
 
-      <div class="flex gap-2 mb-4 overflow-x-auto nice-scroll pb-1">
-        <button data-status-filter="all" class="status-filter active shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">Barchasi</button>
-        <button data-status-filter="qabul" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">📥 Qabul</button>
-        <button data-status-filter="navbat" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">⏳ Navbat</button>
-        <button data-status-filter="korib" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">🔍 Ko'rib</button>
-        <button data-status-filter="zapchas" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">🚚 Zapchas</button>
-        <button data-status-filter="tamil" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">🔧 Ta'mir</button>
-        <button data-status-filter="tekshir" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">✅ Tekshir</button>
-        <button data-status-filter="tayyor" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">🎉 Tayyor</button>
-        <button data-status-filter="topshirildi" class="status-filter shrink-0 px-3 py-1.5 rounded-xl text-xs glass-soft">📦 Topshirildi</button>
-      </div>
+        // Get local orders helper
+        function getOrders() {
+            return JSON.parse(localStorage.getItem('mobiloft_orders'));
+        }
 
-      <div id="orders-list" class="space-y-2.5"></div>
-    </div>
+        // Save order helper
+        function saveOrder(order) {
+            const currentOrders = getOrders();
+            currentOrders.push(order);
+            localStorage.setItem('mobiloft_orders', JSON.stringify(currentOrders));
+        }
 
-    <!-- Admin sub: banners -->
-    <div data-admin-pane="banners" class="admin-pane hidden">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-sm font-semibold text-silver">Faol bannerlar</h3>
-        <button onclick="openBannerForm()" class="btn-primary rounded-xl px-3 py-2 text-xs font-semibold flex items-center gap-1">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-          Qo'shish
-        </button>
-      </div>
-      <div id="banners-list" class="space-y-2.5"></div>
-    </div>
+        // Tab switching controller
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
 
-    <!-- Admin sub: settings -->
-    <div data-admin-pane="settings" class="admin-pane hidden">
-      <div class="glass silver-border rounded-[24px] p-4 mb-3">
-        <h3 class="text-sm font-semibold text-silver mb-3">Tozalash sozlamalari</h3>
-        <label class="text-[11px] text-zinc-500 uppercase tracking-wider">Eski buyurtmalar saqlash muddati (kun)</label>
-        <input id="cleanup-days" type="number" min="1" max="365" class="input-field w-full rounded-2xl px-4 py-3 text-sm mt-2" placeholder="30" />
-        <p class="text-[11px] text-zinc-500 mt-2">Ushbu muddatdan oshgan va topshirilgan buyurtmalar avtomatik tozalanadi.</p>
-        <button onclick="saveSettings()" class="btn-primary w-full rounded-2xl py-3 mt-3 text-sm font-semibold">Saqlash</button>
-      </div>
+            // Show selected tab content
+            const activeContent = document.getElementById(`tab-${tabId}`);
+            if (activeContent) {
+                activeContent.classList.add('active');
+            }
 
-      <div class="glass silver-border rounded-[24px] p-4 mb-3">
-        <h3 class="text-sm font-semibold text-silver mb-3">Aloqa ma'lumotlari</h3>
-        <label class="text-[11px] text-zinc-500 uppercase tracking-wider">Telefon raqami</label>
-        <input id="settings-phone" type="text" class="input-field w-full rounded-2xl px-4 py-3 text-sm mt-2 mb-3" placeholder="+998 90 123 45 67" />
-        <label class="text-[11px] text-zinc-500 uppercase tracking-wider">Manzil</label>
-        <input id="settings-address" type="text" class="input-field w-full rounded-2xl px-4 py-3 text-sm mt-2 mb-3" placeholder="Toshkent, Chilonzor" />
-        <label class="text-[11px] text-zinc-500 uppercase tracking-wider">Telegram admin username</label>
-        <input id="settings-telegram" type="text" class="input-field w-full rounded-2xl px-4 py-3 text-sm mt-2 mb-3" placeholder="mobiloft_admin" />
-        <button onclick="saveSettings()" class="btn-primary w-full rounded-2xl py-3 text-sm font-semibold">Saqlash</button>
-      </div>
+            // Update navigation icons state
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-gold');
+                btn.classList.add('text-gray-500');
+            });
 
-      <div class="glass silver-border rounded-[24px] p-4 mb-3">
-        <h3 class="text-sm font-semibold text-silver mb-3">Xavfli zona</h3>
-        <button onclick="runCleanup()" class="btn-danger w-full rounded-2xl py-3 text-sm font-semibold flex items-center justify-center gap-2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-          Eski ma'lumotlarni tozalash
-        </button>
-        <p class="text-[11px] text-zinc-500 mt-2">Belgilangan muddatdan oshgan buyurtmalar o'chiriladi.</p>
-      </div>
-    </div>
-  </section>
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.remove('text-gray-500');
+                activeNav.classList.add('text-gold');
+            }
 
-  <!-- ====== BOTTOM TAB BAR ====== -->
-  <div id="tabbar" class="tabbar fixed bottom-0 left-0 right-0 z-50 safe-bottom">
-    <div class="max-w-md mx-auto flex items-center justify-around py-2 px-2">
-      <button data-tab="home" class="tab-item active flex flex-col items-center gap-1 flex-1 py-1" onclick="switchTab('home')">
-        <div class="tab-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-        </div>
-        <span class="text-[10px] text-zinc-400 font-medium">Bosh sahifa</span>
-      </button>
-      <button data-tab="admin" class="tab-item flex flex-col items-center gap-1 flex-1 py-1 hidden" onclick="switchTab('admin')">
-        <div class="tab-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
-        </div>
-        <span class="text-[10px] text-zinc-400 font-medium">Admin</span>
-      </button>
-    </div>
-  </div>
-</div>
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-<!-- ========== MODAL: NEW/EDIT ORDER ========== -->
-<div id="modal-order" class="modal-backdrop hidden" onclick="if(event.target===this) closeModal('modal-order')">
-  <div class="modal-sheet glass-strong silver-border pb-8">
-    <div class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-white/5">
-      <h3 id="order-modal-title" class="text-base font-semibold text-silver">Yangi buyurtma</h3>
-      <button onclick="closeModal('modal-order')" class="text-zinc-500 p-1">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="p-5 space-y-3 overflow-y-auto nice-scroll" style="max-height: 70vh;">
-      <input type="hidden" id="order-id" />
+        // Services category filter
+        function filterServices(category) {
+            // Update filter button UI
+            const filterButtons = document.querySelectorAll('.service-tab-btn');
+            filterButtons.forEach(btn => {
+                btn.className = "service-tab-btn ios-glass text-gray-300 px-4 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap";
+            });
 
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Mijoz ismi</label>
-        <input id="o-name" type="text" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1" placeholder="Ali Valiyev" />
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Telefon raqami</label>
-        <input id="o-phone" type="text" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1" placeholder="+998 90 123 45 67" />
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Telefon modeli</label>
-        <input id="o-model" type="text" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1" placeholder="iPhone 13 Pro Max" />
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Muammo tavsifi</label>
-        <textarea id="o-issue" rows="2" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1 resize-none" placeholder="Ekran singan, almashtirish kerak"></textarea>
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Holati</label>
-        <select id="o-status" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1">
-          <option value="qabul">📥 Telefon qabul qilindi</option>
-          <option value="navbat">⏳ Navbatda turibdi</option>
-          <option value="korib">🔍 Ko'rib chiqilmoqda</option>
-          <option value="zapchas">🚚 Zapchas kelishi kutilyapti</option>
-          <option value="tamil" selected>🔧 Ta'mirlanmoqda</option>
-          <option value="tekshir">✅ Tekshirilmoqda</option>
-          <option value="tayyor">🎉 Tayyor bo'ldi</option>
-          <option value="topshirildi">📦 Egasiga topshirildi</option>
-        </select>
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Izoh</label>
-        <textarea id="o-note" rows="2" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1 resize-none" placeholder="Qo'shimcha ma'lumot..."></textarea>
-      </div>
+            event.target.className = "service-tab-btn bg-gold text-asphalt-950 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide transition-all whitespace-nowrap shadow-neon-gold";
 
-      <div id="order-id-display" class="hidden glass-soft rounded-xl p-3 text-center">
-        <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Buyurtma ID</div>
-        <div id="order-id-text" class="text-lg font-bold text-silver tracking-wider mt-0.5"></div>
-      </div>
-    </div>
-    <div class="px-5 pt-3 flex gap-2.5">
-      <button id="order-delete-btn" onclick="deleteOrder()" class="btn-danger rounded-2xl px-4 py-3 text-sm font-semibold hidden">O'chirish</button>
-      <button onclick="saveOrder()" class="btn-primary flex-1 rounded-2xl py-3 text-sm font-semibold">Saqlash</button>
-    </div>
-  </div>
-</div>
+            // Filter actual cards
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
 
-<!-- ========== MODAL: BANNER ========== -->
-<div id="modal-banner" class="modal-backdrop hidden" onclick="if(event.target===this) closeModal('modal-banner')">
-  <div class="modal-sheet glass-strong silver-border pb-8">
-    <div class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-white/5">
-      <h3 id="banner-modal-title" class="text-base font-semibold text-silver">Yangi banner</h3>
-      <button onclick="closeModal('modal-banner')" class="text-zinc-500 p-1">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="p-5 space-y-3 overflow-y-auto nice-scroll" style="max-height: 70vh;">
-      <input type="hidden" id="banner-id" />
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Sarlavha</label>
-        <input id="b-title" type="text" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1" placeholder="📢 Ekran almashtirish xizmatiga chegirma" />
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Tugma matni</label>
-        <input id="b-cta" type="text" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1" placeholder="Batafsil" />
-      </div>
-      <div>
-        <label class="text-[10px] text-zinc-500 uppercase tracking-wider">Havola (ixtiyoriy)</label>
-        <input id="b-link" type="text" class="input-field w-full rounded-xl px-3 py-2.5 text-sm mt-1" placeholder="https://..." />
-      </div>
-      <label class="flex items-center gap-2 cursor-pointer pt-1">
-        <input id="b-enabled" type="checkbox" class="w-4 h-4 rounded accent-zinc-300" checked />
-        <span class="text-sm text-zinc-200">Faollashtirish</span>
-      </label>
-    </div>
-    <div class="px-5 pt-3 flex gap-2.5">
-      <button id="banner-delete-btn" onclick="deleteBanner()" class="btn-danger rounded-2xl px-4 py-3 text-sm font-semibold hidden">O'chirish</button>
-      <button onclick="saveBanner()" class="btn-primary flex-1 rounded-2xl py-3 text-sm font-semibold">Saqlash</button>
-    </div>
-  </div>
-</div>
+        // Order Tracker functionality
+        function searchOrder() {
+            const searchValue = document.getElementById('tracking-id').value.trim();
+            if (!searchValue) return;
 
-<!-- ========== TOAST ========== -->
-<div id="toast" class="toast">
-  <div class="glass-strong silver-border rounded-2xl px-4 py-3 text-sm text-zinc-100 flex items-center gap-2">
-    <span id="toast-icon"></span>
-    <span id="toast-text"></span>
-  </div>
-</div>
+            const orders = getOrders();
+            // Match by phone number or ID code
+            const foundOrder = orders.find(order => 
+                order.id.toLowerCase() === searchValue.toLowerCase() || 
+                order.phone.replace(/\s+/g, '') === searchValue.replace(/\s+/g, '')
+            );
 
-<!-- ========== LOADING OVERLAY ========== -->
-<div id="overlay" class="fixed inset-0 z-[250] bg-black/60 -webkit-backdrop-blur-md backdrop-blur-md hidden flex items-center justify-center">
-  <div class="glass-strong silver-border rounded-2xl p-5 flex flex-col items-center gap-3">
-    <div class="loader"></div>
-    <div id="overlay-text" class="text-sm text-zinc-200">Yuklanmoqda...</div>
-  </div>
-</div>
+            const resultPanel = document.getElementById('tracker-result');
+            const notFoundPanel = document.getElementById('tracker-not-found');
 
-<script src="./app.js"></script>
+            if (foundOrder) {
+                resultPanel.classList.remove('hidden');
+                notFoundPanel.classList.add('hidden');
+
+                // Update detail labels
+                document.getElementById('tracked-device').innerText = foundOrder.device;
+                document.getElementById('tracked-id-label').innerText = foundOrder.id;
+                document.getElementById('tracked-owner').innerText = foundOrder.owner;
+                document.getElementById('tracked-phone').innerText = foundOrder.phone;
+                document.getElementById('tracked-price').innerText = foundOrder.price;
+
+                // Update visual status timeline steps
+                updateStatusTimeline(foundOrder.status);
+            } else {
+                resultPanel.classList.add('hidden');
+                notFoundPanel.classList.remove('hidden');
+            }
+        }
+
+        // Timeline visualization builder helper
+        function updateStatusTimeline(statusLevel) {
+            // Reset all first
+            for (let i = 1; i <= 4; i++) {
+                const bullet = document.getElementById(`bullet-${i}`);
+                const inner = document.getElementById(`inner-${i}`);
+                const title = document.getElementById(`title-${i}`);
+                const desc = document.getElementById(`desc-${i}`);
+                const line = document.getElementById(`line-${i}`);
+
+                // Basic Gray Default
+                bullet.className = "w-6 h-6 rounded-full bg-white/5 border-2 border-white/20 flex items-center justify-center shrink-0 z-10 transition-all duration-500";
+                inner.className = "w-2 h-2 rounded-full bg-transparent";
+                title.className = "text-xs font-bold text-gray-500";
+                desc.className = "text-[10px] text-gray-600";
+                if (line) line.className = "absolute left-[11px] top-6 bottom-[-24px] w-0.5 bg-white/10";
+            }
+
+            // Apply Active state up to statusLevel
+            for (let i = 1; i <= statusLevel; i++) {
+                const bullet = document.getElementById(`bullet-${i}`);
+                const inner = document.getElementById(`inner-${i}`);
+                const title = document.getElementById(`title-${i}`);
+                const desc = document.getElementById(`desc-${i}`);
+                const line = document.getElementById(`line-${i}`);
+
+                if (i === statusLevel) {
+                    // Pulsing Glow on Current Active step
+                    bullet.className = "w-6 h-6 rounded-full bg-gold/20 border-2 border-gold flex items-center justify-center shrink-0 z-10 transition-all duration-500 shadow-neon-gold scale-110";
+                    inner.className = "w-2.5 h-2.5 rounded-full bg-gold animate-pulse";
+                    title.className = "text-xs font-extrabold text-gold";
+                    desc.className = "text-[10px] text-gray-200 font-medium";
+                } else {
+                    // Completed Steps
+                    bullet.className = "w-6 h-6 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center shrink-0 z-10 transition-all duration-500";
+                    inner.className = "w-2 h-2 rounded-full bg-green-500";
+                    title.className = "text-xs font-semibold text-green-400";
+                    desc.className = "text-[10px] text-gray-400";
+                }
+
+                if (line && i < statusLevel) {
+                    line.className = "absolute left-[11px] top-6 bottom-[-24px] w-0.5 bg-green-500/40";
+                }
+            }
+        }
+
+        // Modal Action handlers
+        function openBookingModal(serviceName) {
+            document.getElementById('selected-service-title').innerText = serviceName;
+            const modal = document.getElementById('booking-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.getElementById('booking-form').reset();
+        }
+
+        // Submit Booking Order simulation
+        function submitRepairOrder(event) {
+            event.preventDefault();
+
+            const clientName = document.getElementById('client-name').value;
+            const clientPhone = document.getElementById('client-phone').value;
+            const deviceModel = document.getElementById('device-model').value;
+            const issueDesc = document.getElementById('issue-description').value;
+            const serviceName = document.getElementById('selected-service-title').innerText;
+
+            // Generate temporary secure ID code
+            const newId = `#ML${Math.floor(1000 + Math.random() * 9000)}`;
+
+            const newOrder = {
+                id: newId,
+                phone: clientPhone,
+                owner: clientName,
+                device: `${deviceModel} (${serviceName})`,
+                status: 1, // Received
+                price: 'Kelishiladi (Tashxisdan so\'ng)'
+            };
+
+            // Save to localStorage
+            saveOrder(newOrder);
+
+            // Close modal
+            closeBookingModal();
+
+            // Redirect to tracker tab and search instantly
+            switchTab('tracker');
+            document.getElementById('tracking-id').value = newId;
+            searchOrder();
+
+            // Native browser alert-less visually rich custom toast inside document if needed
+            const toast = document.createElement('div');
+            toast.className = "fixed top-5 left-1/2 -translate-x-1/2 z-50 ios-glass border border-gold/40 p-4 rounded-2xl shadow-neon-gold text-center text-xs font-semibold text-white max-w-xs animate-[fadeSlideIn_0.25s_ease-out]";
+            toast.innerHTML = `🌟 Buyurtma muvaffaqiyatli topshirildi!<br><span class="text-gold">Kuzatuv ID kodi: ${newId}</span>`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
