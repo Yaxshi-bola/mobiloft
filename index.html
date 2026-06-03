@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>MOBILOFT — Ultra-Premium VisionOS Experience</title>
 
-    <!-- Tailwind CSS with custom theme configs -->
+    <!-- Tailwind CSS with customized layout configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,17 +14,17 @@
                 extend: {
                     colors: {
                         glass: {
-                            light: 'rgba(255, 255, 255, 0.04)',
-                            medium: 'rgba(255, 255, 255, 0.08)',
-                            heavy: 'rgba(10, 10, 12, 0.45)',
-                            border: 'rgba(255, 255, 255, 0.12)'
+                            light: 'rgba(255, 255, 255, 0.03)',
+                            medium: 'rgba(255, 255, 255, 0.06)',
+                            heavy: 'rgba(8, 8, 12, 0.65)',
+                            border: 'rgba(255, 255, 255, 0.08)'
                         },
                         titanium: {
                             50: '#f5f5f7',
                             100: '#e8e8ed',
                             200: '#d2d2d7',
                             400: '#86868b',
-                            700: '#3a3a3c',
+                            700: '#2c2c2e',
                             800: '#1c1c1e',
                             900: '#0a0a0c',
                             pure: '#000000'
@@ -38,9 +38,6 @@
         }
     </script>
 
-    <!-- Supabase Client for unified live database structures -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
         body {
             background-color: #030305;
@@ -51,62 +48,62 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Ambient spatial fluid lighting layers */
+        /* Ambient spatial lighting background glows */
         .ambient-reflection {
             position: fixed;
-            width: 70vw;
-            height: 50vh;
+            width: 80vw;
+            height: 60vh;
             border-radius: 50%;
             pointer-events: none;
             z-index: 0;
-            filter: blur(130px);
-            opacity: 0.18;
+            filter: blur(150px);
+            opacity: 0.15;
             transition: all 1s ease-in-out;
         }
         .glow-left {
-            top: -10%;
-            left: -15%;
+            top: -15%;
+            left: -20%;
             background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0) 70%);
-            animation: floatLeft 25s infinite alternate ease-in-out;
+            animation: floatLeft 28s infinite alternate ease-in-out;
         }
         .glow-right {
-            bottom: -10%;
-            right: -15%;
+            bottom: -15%;
+            right: -20%;
             background: radial-gradient(circle, #86868b 0%, rgba(0,0,0,0) 70%);
-            animation: floatRight 30s infinite alternate ease-in-out;
+            animation: floatRight 34s infinite alternate ease-in-out;
         }
 
         @keyframes floatLeft {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(8%, 12%) scale(1.15); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
         }
         @keyframes floatRight {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-8%, -12%) scale(1.2); }
+            100% { transform: translate(-10%, -15%) scale(1.15); }
         }
 
-        /* 2026 Apple VisionOS Frosted Glassmorphism Sheets */
+        /* Frosted Glassmorphic Sheets in Apple VisionOS style */
         .glass-panel {
-            background: rgba(18, 18, 22, 0.55);
-            backdrop-filter: blur(40px) saturate(210%);
-            -webkit-backdrop-filter: blur(40px) saturate(210%);
+            background: rgba(18, 18, 24, 0.55);
+            backdrop-filter: blur(50px) saturate(220%);
+            -webkit-backdrop-filter: blur(50px) saturate(220%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.08),
-                0 20px 50px -12px rgba(0, 0, 0, 0.7);
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.06),
+                0 25px 60px -15px rgba(0, 0, 0, 0.85);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            background: rgba(22, 22, 28, 0.6);
+            border-color: rgba(255, 255, 255, 0.14);
+            background: rgba(22, 22, 30, 0.6);
         }
 
-        /* Premium interactive visionOS glass buttons */
+        /* Glass interactive buttons */
         .glass-interactive-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-interactive-btn:hover {
@@ -119,32 +116,32 @@
             transform: translateY(1px);
         }
 
-        /* Custom navigation capsule bar matching active visual states */
+        /* Bottom Floating Capsule Navigation Bar */
         .navigation-capsule {
-            background: rgba(14, 14, 18, 0.65);
-            backdrop-filter: blur(35px) saturate(190%);
-            -webkit-backdrop-filter: blur(35px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: rgba(12, 12, 16, 0.65);
+            backdrop-filter: blur(45px) saturate(190%);
+            -webkit-backdrop-filter: blur(45px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 
-                0 20px 40px -10px rgba(0, 0, 0, 0.85),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+                0 30px 60px -15px rgba(0, 0, 0, 0.9),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
         }
 
-        /* Dynamic matching high-contrast tracking highlighting */
+        /* Highlight matching search keywords */
         mark {
-            background: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.22);
             color: #ffffff;
             border-radius: 4px;
-            padding: 0 3px;
+            padding: 0 4px;
             font-weight: 600;
         }
 
-        /* Smooth View Transitions */
+        /* Smooth View slide animations */
         .app-view {
             display: none;
             opacity: 0;
-            transform: translateY(8px) scale(0.995);
-            animation: viewFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(10px) scale(0.99);
+            animation: viewFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .app-view.active {
             display: block;
@@ -157,47 +154,65 @@
             }
         }
 
-        /* Custom sleek mobile-first scrollbar */
-        ::-webkit-scrollbar {
-            width: 4px;
+        @keyframes searchGlowPulse {
+            0% {
+                box-shadow: 0 0 12px rgba(255, 255, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 24px rgba(255, 255, 255, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.35);
+            }
+            100% {
+                box-shadow: 0 0 12px rgba(255, 255, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
         }
-        ::-webkit-scrollbar-track {
-            background: transparent;
+        .glowing-search-panel {
+            animation: searchGlowPulse 4s infinite ease-in-out;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 99px;
+        .glowing-search-panel:focus-within {
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            transform: scale(1.008);
         }
 
-        /* Smooth glass skeleton Loading shimmer */
-        .shimmer-mask {
-            background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0.01) 25%,
-                rgba(255, 255, 255, 0.06) 50%,
-                rgba(255, 255, 255, 0.01) 75%
-            );
-            background-size: 200% 100%;
-            animation: shimmerSwipe 2s infinite linear;
+        /* Subtle Shimmer Sweeps */
+        .shimmer-sweep {
+            position: relative;
+            overflow: hidden;
         }
-        @keyframes shimmerSwipe {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        .shimmer-sweep::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            transform: skewX(-20deg);
+            animation: activeShimmer 4s infinite ease-in-out;
+        }
+        @keyframes activeShimmer {
+            0% { left: -150%; }
+            35% { left: 150%; }
+            100% { left: 150%; }
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- Ambient glowing spatial backdrops -->
+    <!-- Ambient background reflections -->
     <div class="ambient-reflection glow-left"></div>
     <div class="ambient-reflection glow-right"></div>
 
-    <!-- SECURE FAIL-SAFE BOOT CURTAIN (Will close automatically under any condition) -->
+    <!-- FAIL-SAFE BOOT CURTAIN -->
     <div id="boot-curtain" class="fixed inset-0 bg-[#030305] z-50 flex flex-col items-center justify-center transition-opacity duration-500">
         <div class="relative flex flex-col items-center space-y-6">
             <div class="absolute w-36 h-36 bg-white/5 rounded-full filter blur-xl animate-pulse"></div>
             <!-- Glass Logo Ring -->
-            <div class="w-16 h-16 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative z-10 animate-pulse">
+            <div class="w-16 h-16 rounded-full bg-white/[0.02] border border-white/10 flex items-center justify-center shadow-2xl relative z-10 animate-pulse">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f5f5f7" stroke-width="1.2">
                     <rect x="5" y="2" width="14" height="20" rx="3" />
                     <line x1="12" y1="18" x2="12" y2="18.01" stroke-linecap="round" stroke-width="2"/>
@@ -210,11 +225,11 @@
         </div>
     </div>
 
-    <!-- TOP NOTIFICATION BANNER (VisionOS Glass Toast Style) -->
+    <!-- GLOBAL TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm pointer-events-none transform transition-all duration-500 translate-y-[-100px] opacity-0">
         <div class="glass-panel px-4 py-3.5 rounded-[22px] flex items-center gap-3 shadow-2xl">
             <div id="toast-icon-box" class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                <!-- Injected dynamically -->
+                <!-- Loaded dynamically -->
             </div>
             <div class="flex-1 min-w-0">
                 <p id="toast-message" class="text-xs font-light text-slate-100 leading-tight"></p>
@@ -226,10 +241,11 @@
     <div class="w-full max-w-lg mx-auto px-4 pt-6 pb-32 z-10 flex-grow relative">
 
         <!-- LANGUAGE SELECTOR & STATUS PANEL -->
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-2 bg-white/[0.02] border border-white/5 py-1 px-3 rounded-full">
                 <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-ping"></span>
                 <span class="text-[10px] text-zinc-400 font-light tracking-wider" id="status-text">Online</span>
+                <span id="admin-badge" class="hidden text-[8px] bg-white/10 border border-white/10 text-white/75 px-1.5 py-0.2 rounded font-light uppercase tracking-wider ml-1">Admin</span>
             </div>
             <button onclick="toggleLang()" class="glass-interactive-btn px-3 py-1 rounded-full text-[10px] font-medium text-titanium-200 uppercase tracking-widest">
                 <span id="lang-btn">Lotin</span>
@@ -237,92 +253,137 @@
         </div>
 
         <!-- HERO BRANDING SECTION -->
-        <header class="flex flex-col items-center justify-center text-center mb-8 relative">
+        <header class="flex flex-col items-center justify-center text-center mb-6 relative">
             <div class="absolute top-1/2 -translate-y-1/2 w-48 h-48 bg-white/[0.02] rounded-full filter blur-3xl pointer-events-none"></div>
 
-            <!-- Floating high-gloss premium brand logo with backup source -->
-            <div class="w-24 h-24 rounded-[32px] overflow-hidden bg-white/[0.02] border border-white/10 shadow-2xl mb-4 relative flex items-center justify-center p-1 group cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95" onclick="triggerPasscodeGate()">
+            <!-- Floating brand logo with fallback -->
+            <div class="w-20 h-20 rounded-[28px] overflow-hidden bg-white/[0.02] border border-white/10 shadow-2xl mb-3 relative flex items-center justify-center p-1 group cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95" onclick="triggerPasscodeGate()">
                 <img id="brand-logo" src="https://github.com/Yaxshi-bola/rasmlar/blob/main/Generated%20Image%20May%2024,%202026%20-%205_39PM.jpg?raw=true" 
                      alt="MOBILOFT Logo" 
-                     class="w-full h-full object-cover rounded-[28px]"
+                     class="w-full h-full object-cover rounded-[24px]"
                      onerror="this.src='https://placehold.co/150/11141a/ffffff?text=MOBILOFT'">
                 <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none"></div>
             </div>
 
             <div class="space-y-1">
-                <h1 class="text-2xl font-light tracking-[0.25em] text-white uppercase">MOBILOFT</h1>
-                <p class="text-xs text-titanium-400 font-light tracking-wide max-w-xs mx-auto" id="hero-subtitle">
+                <h1 class="text-xl font-light tracking-[0.25em] text-white uppercase">MOBILOFT</h1>
+                <p class="text-[11px] text-titanium-400 font-light tracking-wide max-w-xs mx-auto" id="hero-subtitle">
                     Farg'ona viloyati, Rahmatillo qishlog'idagi smartfonlarni ta'mirlash markazi.
                 </p>
             </div>
         </header>
 
-        <!-- VIEW: HOME (SEARCH / LIVE REPAIR CRM TRACKER) -->
-        <div id="view-home" class="app-view active space-y-6">
+        <!-- VIEW: HOME -->
+        <div id="view-home" class="app-view active space-y-5">
 
             <!-- INTRO INFORMATION SHEET -->
-            <div class="glass-panel rounded-[30px] p-6 relative overflow-hidden">
-                <div class="absolute right-[-10%] top-[-10%] w-36 h-36 bg-white/[0.01] rounded-full filter blur-xl"></div>
-                <div class="relative z-10 space-y-2">
+            <div class="glass-panel rounded-[26px] p-5 relative overflow-hidden">
+                <div class="absolute right-[-10%] top-[-10%] w-32 h-32 bg-white/[0.01] rounded-full filter blur-xl"></div>
+                <div class="relative z-10 space-y-1.5">
                     <span class="text-[9px] text-titanium-400 tracking-widest uppercase font-semibold block" id="intro-small">Abdujalil Ustaxonasi</span>
-                    <h2 class="text-base font-light text-white" id="intro-title">Mijozlarimizga xizmat ko'rsatish tizimi</h2>
-                    <p class="text-xs text-titanium-400 font-light leading-relaxed" id="intro-body">
+                    <h2 class="text-sm font-normal text-white" id="intro-title">Mijozlarimizga xizmat ko'rsatish tizimi</h2>
+                    <p class="text-[11px] text-titanium-400 font-light leading-relaxed" id="intro-body">
                         Qurilmangizni topshirgan bo'lsangiz, uning hozirgi ta'mirlash holatini real vaqt rejimida ushbu interaktiv platforma orqali kuzatib boring.
                     </p>
                 </div>
             </div>
 
-            <!-- PROMO DISPLAY BANNER (Real-time dynamic system message) -->
-            <div id="promo-banner" class="hidden glass-panel rounded-[24px] p-4 relative overflow-hidden border-white/10">
-                <div class="flex items-start gap-3 relative z-10">
-                    <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/5">
-                        <span class="text-xs">📢</span>
-                    </div>
-                    <div class="space-y-0.5">
-                        <span class="text-[8px] text-zinc-400 font-semibold tracking-widest uppercase" id="promo-label">MAXSUS TAKLIF</span>
-                        <h4 id="promo-title" class="text-xs font-semibold text-slate-100">-</h4>
-                        <p id="promo-text" class="text-[10px] text-titanium-400 font-light leading-normal">-</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SMART SEARCH CRM CONTROLS -->
+            <!-- GLOWING INTERACTIVE HOME SEARCH PANEL (PLACED DIRECTLY ABOVE PROMO) -->
             <div class="space-y-2">
-                <label class="text-[10px] text-titanium-400 font-semibold tracking-widest uppercase px-1" id="search-label">
-                    Qidiruv tizimi
+                <label class="text-[9px] text-titanium-400 font-semibold tracking-widest uppercase px-1" id="search-label-home">
+                    Tezkor qidiruv tizimi
                 </label>
-
-                <div class="glass-panel rounded-[24px] p-1.5 relative">
+                <div class="glowing-search-panel glass-panel rounded-[24px] p-1.5 relative shimmer-sweep">
                     <div class="flex items-center gap-2">
                         <div class="pl-2.5 text-slate-400">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                             </svg>
                         </div>
-                        <input type="text" id="search-input" oninput="handleSmartCRMQuery(this.value)" 
-                               placeholder="Ism, telefon, order ID, telefon modeli..." 
+                        <input type="text" id="home-search-input" oninput="handleHomeQuery(this.value)" 
+                               placeholder="Ism, telefon, order ID, model..." 
                                class="w-full bg-transparent border-0 text-xs text-white placeholder-zinc-500 focus:ring-0 focus:outline-none font-light py-2">
-                        <button onclick="resetSearchField()" id="clear-search-btn" class="hidden text-zinc-500 hover:text-white p-1">
+                        <button onclick="clearHomeSearch()" id="home-clear-search-btn" class="hidden text-zinc-500 hover:text-white p-1">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                             </svg>
                         </button>
                     </div>
-
-                    <!-- Interactive dynamic search suggestions list -->
-                    <div id="search-suggestions-box" class="hidden mt-2 pt-2 border-t border-white/5 space-y-1.5 max-h-56 overflow-y-auto">
-                        <!-- Loaded dynamically via JavaScript -->
-                    </div>
+                </div>
+                
+                <!-- Instant search results suggestion box -->
+                <div id="home-search-suggestions" class="hidden mt-2 space-y-2">
+                    <!-- Loaded dynamically -->
                 </div>
             </div>
 
-            <!-- SEARCH RESULTS PROGRESS TIMELINE SHEET -->
-            <div id="timeline-box" class="hidden app-view">
-                <div class="glass-panel rounded-[28px] p-6 relative overflow-hidden">
-                    <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+            <!-- PROMO DISPLAY BANNER -->
+            <div id="promo-banner-container" class="space-y-3">
+                <!-- Loaded dynamically -->
+            </div>
+
+            <!-- MAP & ADDRESS CONTAINER WITH CORRECT GEOTAGS -->
+            <div class="glass-panel rounded-[26px] p-5 space-y-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-[2px] h-3.5 bg-white/40 rounded-full"></span>
+                    <h3 class="text-xs font-semibold text-slate-200" id="address-title">Manzilimiz</h3>
+                </div>
+                <!-- Simulated digital navigation map layout pointing to custom coordinates URL -->
+                <a href="https://maps.app.goo.gl/HpX1YBYpezjFmL4f9" target="_blank" class="h-28 rounded-2xl bg-[#090b0e] border border-white/5 relative overflow-hidden flex items-center justify-center block group hover:border-white/20 transition-all">
+                    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:14px_14px]"></div>
+                    <div class="absolute w-20 h-20 bg-white/5 rounded-full filter blur-xl group-hover:scale-110 transition-all"></div>
+                    <div class="relative z-10 text-center p-2">
+                        <p class="text-xs font-semibold text-white">Rahmatillo qishlog'i</p>
+                        <p class="text-[9px] text-zinc-400 font-light" id="address-subtitle">Abdujalil smartfonlar ustaxonasi (Xaritada ochish)</p>
+                    </div>
+                </a>
+                <div class="bg-white/[0.01] p-3 rounded-xl border border-white/5">
+                    <p class="text-[10px] text-titanium-400 font-light leading-relaxed" id="address-full">
+                        Farg'ona viloyati, O'zbekiston. Biz dushanbadan shanbagacha soat 9:00 dan 18:00 gacha ochiqmiz.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- VIEW: SEARCH (DEDICATED PANEL) -->
+        <div id="view-search" class="app-view space-y-5">
+            <div class="space-y-1">
+                <h2 class="text-lg font-light text-white" id="search-tab-title">CRM Qidiruv Tizimi</h2>
+                <p class="text-xs text-titanium-400 font-light" id="search-tab-subtitle">Buyurtmalar real vaqt holati va ta'mirlash tarixi</p>
+            </div>
+
+            <!-- SEARCH CONTROL UNIT -->
+            <div class="glass-panel rounded-[24px] p-2 relative">
+                <div class="flex items-center gap-2">
+                    <div class="pl-2 text-slate-400">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="dedicated-search-input" oninput="handleDedicatedSearch(this.value)" 
+                           placeholder="Ism, telefon, order kodi, qurilma modeli..." 
+                           class="w-full bg-transparent border-0 text-xs text-white placeholder-zinc-500 focus:outline-none focus:ring-0 font-light py-2">
+                    <button onclick="clearDedicatedSearch()" id="dedicated-clear-btn" class="hidden text-zinc-500 hover:text-white p-1">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- DETAILED VIEW SUGGESTION SHEETS -->
+            <div id="dedicated-search-suggestions" class="space-y-3">
+                <!-- suggestions loaded dynamically -->
+            </div>
+
+            <!-- DETAILED REPAIR PROCESS TIMELINE SHEET -->
+            <div id="timeline-box" class="hidden">
+                <div class="glass-panel rounded-[28px] p-5 relative overflow-hidden">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-3">
                         <div>
                             <span class="text-[9px] text-titanium-400 uppercase tracking-widest" id="order-id-label">Buyurtma kodi</span>
-                            <h3 id="result-order-id" class="text-base font-light text-white tracking-wider">-</h3>
+                            <h3 id="result-order-id" class="text-sm font-semibold text-white tracking-wider">-</h3>
                         </div>
                         <div class="text-right">
                             <span class="text-[9px] text-titanium-400 uppercase tracking-widest" id="order-device-label">Qurilma</span>
@@ -335,13 +396,13 @@
                         <!-- Step elements loaded dynamically -->
                     </div>
 
-                    <!-- User client reference panel -->
-                    <div class="mt-5 pt-3.5 border-t border-white/5 flex flex-col gap-1.5 bg-white/[0.01] p-3 rounded-2xl">
-                        <div class="flex items-center justify-between text-xs font-light">
+                    <!-- Client Detail Info Sheet -->
+                    <div class="mt-5 pt-3 border-t border-white/5 flex flex-col gap-1 bg-white/[0.01] p-3 rounded-2xl">
+                        <div class="flex items-center justify-between text-[11px] font-light">
                             <span class="text-zinc-500" id="owner-title">Mijoz:</span>
                             <span id="result-owner-name" class="text-slate-200">-</span>
                         </div>
-                        <div class="flex items-center justify-between text-xs font-light">
+                        <div class="flex items-center justify-between text-[11px] font-light">
                             <span class="text-zinc-500" id="phone-title">Telefon:</span>
                             <span id="result-owner-phone" class="text-slate-200">-</span>
                         </div>
@@ -363,33 +424,10 @@
                     </p>
                 </div>
             </div>
-
-            <!-- PREMIUM ADDRESS DETAILS CONTAINER -->
-            <div class="glass-panel rounded-[26px] p-5 space-y-3">
-                <div class="flex items-center gap-2">
-                    <span class="w-[2px] h-3.5 bg-white/40 rounded-full"></span>
-                    <h3 class="text-xs font-semibold text-slate-200" id="address-title">Manzilimiz</h3>
-                </div>
-                <!-- Simulated digital navigation map layout -->
-                <div class="h-24 rounded-2xl bg-[#090b0e] border border-white/5 relative overflow-hidden flex items-center justify-center">
-                    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:14px_14px]"></div>
-                    <div class="absolute w-20 h-20 bg-white/5 rounded-full filter blur-xl animate-pulse"></div>
-                    <div class="relative z-10 text-center p-2">
-                        <p class="text-xs font-semibold text-white">Rahmatillo qishlog'i</p>
-                        <p class="text-[9px] text-zinc-500 font-light" id="address-subtitle">Abdujalil smartfonlar ustaxonasi</p>
-                    </div>
-                </div>
-                <div class="bg-white/[0.01] p-3 rounded-xl border border-white/5">
-                    <p class="text-[10px] text-titanium-400 font-light leading-relaxed" id="address-full">
-                        Farg'ona viloyati, O'zbekiston. Biz dushanbadan shanbagacha soat 9:00 dan 18:00 gacha ochiqmiz.
-                    </p>
-                </div>
-            </div>
-
         </div>
 
         <!-- VIEW: CONTACT -->
-        <div id="view-contact" class="app-view space-y-6">
+        <div id="view-contact" class="app-view space-y-5">
             <div class="space-y-1">
                 <h2 class="text-lg font-light text-white" id="contact-tab-title">Aloqa va Qo'llab-quvvatlash</h2>
                 <p class="text-xs text-titanium-400 font-light" id="contact-tab-subtitle">Mutaxassislarimiz bilan to'g'ridan-to'g'ri bog'laning</p>
@@ -406,7 +444,7 @@
                         </div>
                         <div>
                             <span class="text-[8px] text-zinc-500 uppercase tracking-widest block" id="contact-owner">Abdujalil Usta</span>
-                            <span class="text-xs font-semibold text-slate-200" id="admin-tel-display">+998 90 123 00 35</span>
+                            <span class="text-xs font-semibold text-slate-200">+998 90 123 00 35</span>
                         </div>
                     </div>
                     <a href="tel:+998901230035" class="glass-interactive-btn px-4 py-1.5 rounded-xl text-xs font-light text-white" id="contact-call-btn">Qo'ng'iroq</a>
@@ -425,30 +463,69 @@
                             <span class="text-xs font-semibold text-slate-200">@mobiloft_uz</span>
                         </div>
                     </div>
-                    <a href="https://t.me/mobiloft_uz" target="_blank" class="glass-interactive-btn px-4 py-1.5 rounded-xl text-xs font-light text-white" id="contact-write-btn">Yozish</a>
+                    <button onclick="openTelegramUser('mobiloft_uz')" class="glass-interactive-btn px-4 py-1.5 rounded-xl text-xs font-light text-white" id="contact-write-btn">Yozish</button>
                 </div>
+
+                <!-- Admin Personal Card -->
+                <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-slate-300">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="16" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-[8px] text-zinc-500 uppercase tracking-widest block">Admin lichkasi</span>
+                            <span class="text-xs font-semibold text-slate-200">@yomonboIa</span>
+                        </div>
+                    </div>
+                    <button onclick="openTelegramUser('yomonboIa')" class="glass-interactive-btn px-4 py-1.5 rounded-xl text-xs font-light text-white">Yozish</button>
+                </div>
+            </div>
+
+            <!-- GEOLOCATION INTERACTIVE CARD COMPONENT -->
+            <div class="glass-panel rounded-[26px] p-5 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-[2px] h-3.5 bg-white/40 rounded-full"></span>
+                    <h3 class="text-xs font-semibold text-slate-200" id="contact-address-title">Ustaxona manzili</h3>
+                </div>
+                <div class="bg-white/[0.01] p-3 rounded-xl border border-white/5">
+                    <p class="text-[11px] text-slate-300 font-light leading-relaxed">
+                        Farg'ona viloyati, Rahmatillo qishlog'i. Abdujalil Smartfonlar Ustaxonasi.
+                    </p>
+                </div>
+                <a href="https://maps.app.goo.gl/HpX1YBYpezjFmL4f9" target="_blank" class="w-full bg-white text-black font-semibold text-xs py-2.5 rounded-xl block text-center hover:opacity-90 active:scale-95 transition-all">
+                    Google xaritada ochish (Abdujalil Ustaxonasi)
+                </a>
             </div>
         </div>
 
-        <!-- VIEW: ADMIN CONTROL PANEL -->
+        <!-- VIEW: VIEW_ADMIN -->
         <div id="view-admin" class="app-view space-y-6">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-lg font-light text-white" id="admin-tab-title">Admin boshqaruv paneli</h2>
-                    <p class="text-xs text-titanium-400 font-light" id="admin-tab-subtitle">Buyurtmalar va sozlamalar boshqaruvi</p>
+                    <p class="text-xs text-titanium-400 font-light" id="admin-tab-subtitle">Buyurtmalar, aksiyalar va tizim boshqaruvi</p>
                 </div>
                 <button onclick="logoutAdminSession()" class="px-3 py-1 bg-red-500/10 border border-red-500/20 text-red-400 rounded-full text-[9px] uppercase font-semibold hover:bg-red-500/20 transition">Chiqish</button>
             </div>
 
             <!-- STATISTICAL CARDS -->
-            <div class="grid grid-cols-2 gap-3">
-                <div class="glass-panel rounded-2xl p-4 space-y-0.5">
+            <div class="grid grid-cols-3 gap-2">
+                <div class="glass-panel rounded-2xl p-3 space-y-0.5">
                     <span class="text-[8px] text-zinc-400 uppercase tracking-widest font-semibold block" id="stats-total">Barcha buyurtmalar</span>
-                    <h4 id="stat-all-count" class="text-xl font-light text-white">0</h4>
+                    <h4 id="stat-all-count" class="text-lg font-light text-white">0</h4>
                 </div>
-                <div class="glass-panel rounded-2xl p-4 space-y-0.5">
+                <div class="glass-panel rounded-2xl p-3 space-y-0.5">
                     <span class="text-[8px] text-zinc-400 uppercase tracking-widest font-semibold block" id="stats-active">Jarayondagilar</span>
-                    <h4 id="stat-active-count" class="text-xl font-light text-white">0</h4>
+                    <h4 id="stat-active-count" class="text-lg font-light text-white">0</h4>
+                </div>
+                <div class="glass-panel rounded-2xl p-3 space-y-0.5">
+                    <span class="text-[8px] text-zinc-400 uppercase tracking-widest font-semibold block">Aksiyalar</span>
+                    <h4 id="stat-promo-count" class="text-lg font-light text-white">0</h4>
                 </div>
             </div>
 
@@ -489,7 +566,7 @@
 
                     <div class="space-y-1">
                         <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-status-label">Xizmat bosqichi *</label>
-                        <select id="order-status" class="w-full bg-[#050608]/95 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/15 font-light">
+                        <select id="order-status" class="w-full bg-[#050608]/95 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/15 font-light text-zinc-300">
                             <option value="1">1. Qabul qilindi</option>
                             <option value="2">2. Tashxis qilinmoqda</option>
                             <option value="3">3. Ehtiyot qism kutilmoqda</option>
@@ -499,33 +576,62 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="w-full bg-white text-black font-semibold text-xs py-2 rounded-xl hover:opacity-90 active:scale-95 transition-all" id="form-save-btn">
+                    <button type="submit" class="w-full bg-white text-black font-semibold text-xs py-2.5 rounded-xl hover:opacity-90 active:scale-95 transition-all" id="form-save-btn">
                         Ma'lumotni Saqlash
                     </button>
                 </form>
             </div>
 
-            <!-- REALTIME SYSTEM BANNER SETTINGS -->
+            <!-- PROMO (AKSIYA) MANAGEMENT SECTION -->
             <div class="glass-panel rounded-[28px] p-5 space-y-4">
-                <div class="border-b border-white/5 pb-2">
-                    <h3 class="text-xs font-semibold text-slate-200" id="promo-settings-title">Banner xabari sozlamalari</h3>
+                <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                    <h3 class="text-xs font-semibold text-slate-200" id="promo-form-title">Yangi Aksiya qo'shish</h3>
+                    <button onclick="resetPromoFormFields()" class="text-[10px] text-zinc-500 hover:text-white" id="promo-form-clear">Tozalash</button>
                 </div>
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <label class="text-[10px] text-titanium-400 uppercase tracking-wider font-semibold" id="toggle-banner-label">Banner holati</label>
-                        <button onclick="toggleGlobalBannerStatus()" id="banner-toggle-btn" class="px-3 py-1 rounded-full text-[10px] uppercase font-semibold border transition-all"></button>
-                    </div>
+
+                <form id="promo-form" onsubmit="handlePromoFormSaving(event)" class="space-y-3">
+                    <input type="hidden" id="promo-edit-mode-key">
+
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="promo-title-label">Sarlavha (Uz/Cy)</label>
-                        <input type="text" id="settings-promo-title" class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/10 font-light">
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Sarlavha (Lotin) *</label>
+                        <input type="text" id="promo-title-uz" required placeholder="Masalan: Ekran almashtirishga 15% chegirma!" 
+                               class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
+
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="promo-desc-label">Tavsif (Uz/Cy)</label>
-                        <textarea id="settings-promo-text" rows="2" class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/10 font-light resize-none"></textarea>
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Sarlavha (Kirill) *</label>
+                        <input type="text" id="promo-title-cy" required placeholder="Масалан: Экран алмаштиришга 15% чегирма!" 
+                               class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
-                    <button onclick="saveGlobalPromoSettings()" class="w-full bg-white/5 hover:bg-white/10 border border-white/5 text-white font-semibold text-xs py-2 rounded-xl transition" id="save-settings-btn">
-                        Tizim Bannerini Yangilash
+
+                    <div class="space-y-1">
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Batafsil ma'lumot (Lotin) *</label>
+                        <textarea id="promo-desc-uz" required rows="2" placeholder="Xizmat dushanbadan shanbagacha amal qiladi." 
+                                  class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light resize-none"></textarea>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Batafsil ma'lumot (Kirill) *</label>
+                        <textarea id="promo-desc-cy" required rows="2" placeholder="Хизмат душанбадан шанбагача амал қилади." 
+                                  class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light resize-none"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between py-1.5 px-1 bg-white/[0.01] rounded-xl border border-white/5">
+                        <label class="text-[10px] text-zinc-400 uppercase font-semibold">Holati (Faol / Nofaol)</label>
+                        <input type="checkbox" id="promo-enabled" class="w-4 h-4 rounded border-zinc-700 bg-zinc-900 text-white focus:ring-0">
+                    </div>
+
+                    <button type="submit" class="w-full bg-white text-black font-semibold text-xs py-2.5 rounded-xl hover:opacity-90 active:scale-95 transition-all" id="promo-save-btn">
+                        Aksiyani Saqlash
                     </button>
+                </form>
+            </div>
+
+            <!-- PROMOS DIRECTORY -->
+            <div class="glass-panel rounded-[28px] p-5 space-y-3">
+                <h3 class="text-xs font-semibold text-slate-200 border-b border-white/5 pb-2">Barcha mavjud aksiyalar</h3>
+                <div id="promos-directory-list" class="space-y-3 max-h-60 overflow-y-auto pr-1">
+                    <!-- Loaded dynamically -->
                 </div>
             </div>
 
@@ -537,11 +643,11 @@
                 </div>
 
                 <div id="crm-orders-directory" class="space-y-3 max-h-[350px] overflow-y-auto pr-1">
-                    <!-- Dynamic Elements -->
+                    <!-- Loaded dynamically -->
                 </div>
             </div>
 
-            <!-- BULK DATABASE SANITIZATION ENGINE -->
+            <!-- DATABASE SANITIZATION -->
             <div class="glass-panel rounded-[24px] p-4 flex items-center justify-between border-white/10">
                 <div class="space-y-0.5">
                     <h4 class="text-xs font-semibold text-slate-200" id="cleanup-title">Tayyor va eski buyurtmalar</h4>
@@ -569,36 +675,45 @@
             <input type="password" id="passcode-field" placeholder="Parolni kiriting..." class="w-full text-center bg-black/50 border border-white/10 rounded-2xl py-3 text-white focus:outline-none focus:border-white/20 font-light tracking-widest text-sm">
             
             <div class="flex gap-2 pt-1">
-                <button onclick="hidePasscodeGate()" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2 rounded-xl" id="passcode-cancel-btn">Bekor qilish</button>
+                <button onclick="hidePasscodeGate()" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2" id="passcode-cancel-btn">Bekor qilish</button>
                 <button onclick="authenticatePasscodeValue()" class="w-1/2 bg-white text-black font-semibold text-xs py-2 rounded-xl" id="passcode-enter-btn">Kirish</button>
             </div>
         </div>
     </div>
 
-    <!-- NATIVE SYSTEM SPECIFIC DECISION OVERLAYS (Guaranteed alert fallback replacements) -->
-    <div id="confirm-dialog" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/80 backdrop-blur-md">
+    <!-- NATIVE SYSTEM DECISION OVERLAYS -->
+    <div id="confirm-dialog" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/85 backdrop-blur-md">
         <div class="w-72 glass-panel rounded-[24px] p-5 space-y-4 text-center">
             <h4 class="font-semibold text-xs text-slate-400 uppercase tracking-widest" id="confirm-title-header">Tasdiqlash</h4>
             <p id="confirm-description" class="text-xs font-light text-slate-200 leading-relaxed"></p>
             <div class="flex gap-2 pt-1">
-                <button id="confirm-cancel-btn" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2 rounded-xl" id="confirm-btn-no">Yo'q</button>
-                <button id="confirm-ok-btn" class="w-1/2 bg-white text-black font-semibold text-xs py-2 rounded-xl" id="confirm-btn-yes">Ha</button>
+                <button id="confirm-cancel-btn" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2 rounded-xl">Yo'q</button>
+                <button id="confirm-ok-btn" class="w-1/2 bg-white text-black font-semibold text-xs py-2 rounded-xl">Ha</button>
             </div>
         </div>
     </div>
 
-    <!-- FLOATING SPATIAL NAVIGATION CAPSULE BAR (Match VisionOS active indicators) -->
+    <!-- FLOATING SPATIAL NAVIGATION CAPSULE BAR (4 TABS) -->
     <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-sm rounded-[35px] py-1.5 px-3 navigation-capsule">
         <div class="flex justify-between items-center relative">
             
-            <!-- Navigation Slide Indicators -->
-            <div id="nav-indicator" class="absolute h-10 w-20 rounded-[22px] bg-white/[0.08] border border-white/5 shadow-inner transition-all duration-300 pointer-events-none"></div>
+            <!-- Navigation Indicator element -->
+            <div id="nav-indicator" class="absolute h-10 w-16 rounded-[22px] bg-white/[0.08] border border-white/5 shadow-inner transition-all duration-300 pointer-events-none"></div>
 
             <!-- Tab: Home -->
             <button onclick="swapActiveTab('home')" id="tab-btn-home" class="flex-1 py-2 flex flex-col items-center justify-center z-10 transition-opacity">
                 <div class="flex items-center justify-center w-9 h-9">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-white">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </div>
+            </button>
+
+            <!-- Tab: Dedicated Search -->
+            <button onclick="swapActiveTab('search')" id="tab-btn-search" class="flex-1 py-2 flex flex-col items-center justify-center z-10 opacity-50 transition-opacity">
+                <div class="flex items-center justify-center w-9 h-9">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-white">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                     </svg>
                 </div>
             </button>
@@ -625,7 +740,7 @@
     </nav>
 
     <script>
-        // Dictionary definitions mapping bilingual structures
+        // Dictionary definitions mapping bilingual structures (NO MORE UNDEFINED KEYS!)
         const DICT = {
             uz: {
                 online: "Online",
@@ -634,9 +749,8 @@
                 introSmall: "Abdujalil Ustaxonasi",
                 introTitle: "Mijozlarimizga xizmat ko'rsatish tizimi",
                 introBody: "Qurilmangizni topshirgan bo'lsangiz, uning hozirgi ta'mirlash holatini real vaqt rejimida ushbu interaktiv platforma orqali kuzatib boring.",
-                promoLabel: "MAXSUS TAKLIF",
-                searchLabel: "Qidiruv tizimi",
-                searchPlaceholder: "Ism, telefon, order ID, telefon modeli...",
+                searchLabelHome: "Tezkor qidiruv tizimi",
+                searchPlaceholder: "Ism, telefon, order kodi, qurilma modeli...",
                 orderIdLabel: "Buyurtma kodi",
                 orderDeviceLabel: "Qurilma",
                 ownerTitle: "Mijoz:",
@@ -644,8 +758,8 @@
                 notFoundTitle: "Hech narsa topilmadi",
                 notFoundBody: "Kiritilgan kalit so'z bo'yicha hech qanday buyurtma topilmadi. Qidiruvni boshqa shaklda takrorlang.",
                 addressTitle: "Manzilimiz",
-                addressSubtitle: "Abdujalil smartfonlar ustaxonasi",
-                addressFull: "Farg'ona viloyati, O'zbekiston. Biz dushanbadan shanbagacha soat 9:00 dan 18:00 gacha ochiqmiz.",
+                addressSubtitle: "Abdujalil smartfonlar ustaxonasi (Xaritada ochish)",
+                addressFull: "Farg'ona viloyati, Rahmatillo qishlog'i, O'zbekiston. Biz dushanbadan shanbagacha soat 9:00 dan 18:00 gacha ochiqmiz.",
                 contactTabTitle: "Aloqa va Qo'llab-quvvatlash",
                 contactTabSubtitle: "Mutaxassislarimiz bilan to'g'ridan-to'g'ri bog'laning",
                 contactOwner: "Abdujalil Usta",
@@ -653,7 +767,7 @@
                 contactCallBtn: "Qo'ng'iroq",
                 contactWriteBtn: "Yozish",
                 adminTabTitle: "Admin boshqaruv paneli",
-                adminTabSubtitle: "Buyurtmalar va sozlamalar boshqaruvi",
+                adminTabSubtitle: "Buyurtmalar, aksiyalar va tizim sozlamalari",
                 statsTotal: "Barcha buyurtmalar",
                 statsActive: "Jarayondagilar",
                 formTitle: "Yangi buyurtma kiritish",
@@ -664,14 +778,7 @@
                 formDeviceLabel: "Qurilma modeli *",
                 formStatusLabel: "Xizmat bosqichi *",
                 formSaveBtn: "Ma'lumotni Saqlash",
-                promoSettingsTitle: "Banner xabari sozlamalari",
-                toggleBannerLabel: "Banner holati",
-                toggleBannerOn: "Yoniq",
-                toggleBannerOff: "O'chiq",
-                promoTitleLabel: "Sarlavha (Uz/Cy)",
-                promoDescLabel: "Tavsif (Uz/Cy)",
-                saveSettingsBtn: "Tizim Bannerini Yangilash",
-                crmTitle: "Barcha mavjud buyurtmalar",
+                formSaveBtnEdit: "Yangilash",
                 cleanupTitle: "Tayyor va eski buyurtmalar",
                 cleanupBody: "Faqat 30 kundan oshgan \"Tayyor\" bo'lganlarini o'chirish.",
                 cleanupBtn: "Sintaks-Tozalash",
@@ -681,8 +788,7 @@
                 passcodeCancelBtn: "Bekor qilish",
                 passcodeEnterBtn: "Kirish",
                 confirmTitleHeader: "Tasdiqlash",
-                confirmBtnNo: "Yo'q",
-                confirmBtnYes: "Ha"
+                promoLabel: "Aksiya va Yangiliklar"
             },
             cy: {
                 online: "Онлайн",
@@ -691,9 +797,8 @@
                 introSmall: "Абдужалил Устахонаси",
                 introTitle: "Мижозларимизга хизмат кўрсатиш тизими",
                 introBody: "Қурилмангизни топширган бўлсангиз, унинг ҳозирги таъмирлаш ҳолатини реал вақт режимида ушбу интерактив платформа орқали кузатиб боринг.",
-                promoLabel: "МАХСУС ТАКЛИФ",
-                searchLabel: "Қидирув тизими",
-                searchPlaceholder: "Исм, телефон, ордер ИД, телефон модели...",
+                searchLabelHome: "Тезкор қидирув тизими",
+                searchPlaceholder: "Исм, телефон, ордер коди, қурилма модели...",
                 orderIdLabel: "Буюртма коди",
                 orderDeviceLabel: "Қурилма",
                 ownerTitle: "Мижоз:",
@@ -701,8 +806,8 @@
                 notFoundTitle: "Ҳеч нарса топилмади",
                 notFoundBody: "Киритилган калит сўз бўйича ҳеч қандай буюртма топилмади. Қидирувни бошқа шаклда такрорланг.",
                 addressTitle: "Манзилимиз",
-                addressSubtitle: "Абдужалил смартфонлар устахонаси",
-                addressFull: "Фарғона вилояти, Ўзбекистон. Биз душанбадан шанбагача соат 9:00 дан 18:00 гача очиқмиз.",
+                addressSubtitle: "Абдужалил смартфонлар устахонаси (Харитада очиш)",
+                addressFull: "Фарғона вилояти, Раҳматилло қишлоғи, Ўзбекистон. Биз душанбадан шанбагача соат 9:00 дан 18:00 гача очиқмиз.",
                 contactTabTitle: "Алоқа ва Қўллаб-қувватлаш",
                 contactTabSubtitle: "Мутахассисларимиз билан тўғридан-тўғри боғланинг",
                 contactOwner: "Абдужалил Уста",
@@ -710,7 +815,7 @@
                 contactCallBtn: "Қўнғироқ",
                 contactWriteBtn: "Ёзиш",
                 adminTabTitle: "Админ бошқарув панели",
-                adminTabSubtitle: "Буюртмалар ва созламалар бошқаруви",
+                adminTabSubtitle: "Буюртмалар, акциялар ва тизим созламалари",
                 statsTotal: "Барча буюртмалар",
                 statsActive: "Жараёндагилар",
                 formTitle: "Янги буюртма киритиш",
@@ -721,14 +826,7 @@
                 formDeviceLabel: "Қурилма модели *",
                 formStatusLabel: "Хизмат босқичи *",
                 formSaveBtn: "Маълумотни Соқлаш",
-                promoSettingsTitle: "Баннер хабари созламалари",
-                toggleBannerLabel: "Баннер ҳолати",
-                toggleBannerOn: "Ёниқ",
-                toggleBannerOff: "Ўчиқ",
-                promoTitleLabel: "Сарлавҳа (Uz/Cy)",
-                promoDescLabel: "Тавсиф (Uz/Cy)",
-                saveSettingsBtn: "Тизим Баннерини Янгилаш",
-                crmTitle: "Барча мавжуд буюртмалар",
+                formSaveBtnEdit: "Янгилаш",
                 cleanupTitle: "Тайёр ва эски буюртмалар",
                 cleanupBody: "Фақат 30 кундан ошган \"Тайёр\" бўлганларини ўчириш.",
                 cleanupBtn: "Синтакс-Toзалаш",
@@ -738,8 +836,7 @@
                 passcodeCancelBtn: "Бекор қилиш",
                 passcodeEnterBtn: "Кириш",
                 confirmTitleHeader: "Тасдиқлаш",
-                confirmBtnNo: "Йўқ",
-                confirmBtnYes: "Ҳа"
+                promoLabel: "Акция ва Янгиликлар"
             }
         };
 
@@ -748,36 +845,50 @@
             { id: 1, uz: "Qabul qilindi", cy: "Қабул қилинди", descUz: "Qurilma qabul qilinib hisobga olindi", descCy: "Қурилма қабул қилиниб ҳисобга олинди", icon: "📥" },
             { id: 2, uz: "Tashxis qilinmoqda", cy: "Ташхис қилинмоқда", descUz: "Muhandis nosozlik sabablarini o'rganmoqda", descCy: "Муҳандис носозлик сабабларини ўрганмоқда", icon: "🔍" },
             { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоқда", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
-            { id: 4, uz: "Ta'mirlanmoqda", cy: "Таъмирланмоқда", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмlar va platalar sozlanmoqda", icon: "🔧" },
+            { id: 4, uz: "Ta'mirlanmoqda", cy: "Таъмирланмоqda", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
             { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовдан ўтмоқда", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий ва техник тест жараёни бажарилмоқда", icon: "✅" },
             { id: 6, uz: "Tayyor", cy: "Тайёр", descUz: "Smartfon to'liq sozlandi va topshirishga tayyor", descCy: "Смартфон тўлиқ созланди ва топширишга тайёр", icon: "🎉" }
         ];
 
-        // Global State
+        // Global States
         const state = {
             lang: 'uz',
             currentTab: 'home',
             isAdminMode: false,
             orders: [],
-            banner: {
-                active: true,
-                title: "Dasturiy xizmatlar bepul!",
-                text: "Barcha smartfonlarning operatsion tizimi bilan bog'liq xatoliklarni tekshirib berish bepul amalga oshiriladi."
-            },
+            promos: [],
             telegram: null
         };
 
-        // Seed data values used during local storage backup sequence
+        // Default local sandbox seed data
         const seedOrders = [
             { id: "2045", phone: "+998 90 123 00 35", owner: "Sardorbek K.", device: "iPhone 15 Pro Max", status: 4 },
             { id: "2046", phone: "99 321 45 67", owner: "Diyorbek M.", device: "Samsung Galaxy S24 Ultra", status: 6 },
-            { id: "2047", phone: "+998911002030", owner: "Ali Valiyev", device: "iPhone 13 Pro", status: 1 }
+            { id: "2047", phone: "+998911002030", owner: "Ali Valiyev", device: "iPhone 13 Pro", status: 2 }
         ];
 
-        // Main setup controller wrapped in absolute safe container
+        const seedPromos = [
+            {
+                id: "promo-101",
+                title_uz: "Dasturiy xizmatlar bepul!",
+                title_cy: "Дастурий хизматлар бепул!",
+                desc_uz: "Barcha smartfonlarning operatsion tizimi bilan bog'liq xatoliklarni tekshirib berish bepul amalga oshiriladi.",
+                desc_cy: "Барча смартфонларнинг операцион тизимидаги дастурий хатоликларни текшириш бепул амалга оширилади.",
+                enabled: true
+            },
+            {
+                id: "promo-102",
+                title_uz: "Asl sifatdagi ekranlarimiz yetib keldi",
+                title_cy: "Асл сифатдаги экранларимиз етиб келди",
+                desc_uz: "Barcha iPhone va Samsung telefonlariga original sifat kafolati bilan ekran o'rnatish xizmati.",
+                desc_cy: "Барча iPhone ва Samsung телефонларига оригинал сифат кафолати билан экран ўрнатиш хизмати.",
+                enabled: true
+            }
+        ];
+
         function initApp() {
             try {
-                // Secure TG Platform setup
+                // Secure Telegram Web App detection
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
                         state.telegram = window.Telegram.WebApp;
@@ -785,54 +896,59 @@
                         state.telegram.expand();
                         state.telegram.setHeaderColor('#030305');
                         state.telegram.setBackgroundColor('#030305');
-                    } catch(e) { console.warn("TG initialization alert", e); }
+                    } catch(e) { console.warn("TG initiation issue", e); }
                 }
 
-                // Restore active sandbox databases safely
+                // Database persistent checking
                 if (!localStorage.getItem('mobiloft_db_orders')) {
                     localStorage.setItem('mobiloft_db_orders', JSON.stringify(seedOrders));
                 }
-                if (!localStorage.getItem('mobiloft_db_banner')) {
-                    localStorage.setItem('mobiloft_db_banner', JSON.stringify(state.banner));
+                if (!localStorage.getItem('mobiloft_db_promos')) {
+                    localStorage.setItem('mobiloft_db_promos', JSON.stringify(seedPromos));
                 }
 
                 state.orders = JSON.parse(localStorage.getItem('mobiloft_db_orders')) || [];
-                state.banner = JSON.parse(localStorage.getItem('mobiloft_db_banner')) || state.banner;
+                state.promos = JSON.parse(localStorage.getItem('mobiloft_db_promos')) || [];
 
-                // Sync native layout configurations
                 applyBilingualTranslations();
-                updateSystemPromoDisplay();
+                renderBannersOnHome();
                 updateNavigationPillPosition('home');
 
             } catch (err) {
-                console.error("Critical boot warning occurred:", err);
+                console.error("Critical boot sequence warning:", err);
             } finally {
-                // GUARANTEED BOOT CURTAIN DEACTIVATION (Fail-safe window)
+                // Fail-safe boot curtain dismissal
                 setTimeout(() => {
                     const curtain = document.getElementById('boot-curtain');
                     if (curtain) {
                         curtain.style.opacity = '0';
-                        setTimeout(() => curtain.style.display = 'none', 550);
+                        setTimeout(() => curtain.style.display = 'none', 500);
                     }
                 }, 400);
             }
         }
 
-        // Toggle language selections cleanly
+        // Language toggling controller
         function toggleLang() {
             state.lang = (state.lang === 'uz') ? 'cy' : 'uz';
             const btn = document.getElementById('lang-btn');
             if (btn) btn.innerText = (state.lang === 'uz') ? 'Lotin' : 'Кирилл';
             applyBilingualTranslations();
+            renderBannersOnHome();
             executeHapticImpact('light');
 
-            const searchInput = document.getElementById('search-input');
-            if (searchInput && searchInput.value.trim().length > 0) {
-                handleSmartCRMQuery(searchInput.value);
+            // Refresh live active search fields immediately
+            const homeSearch = document.getElementById('home-search-input');
+            if (homeSearch && homeSearch.value.trim().length > 0) {
+                handleHomeQuery(homeSearch.value);
+            }
+
+            const dedicatedSearch = document.getElementById('dedicated-search-input');
+            if (dedicatedSearch && dedicatedSearch.value.trim().length > 0) {
+                handleDedicatedSearch(dedicatedSearch.value);
             }
         }
 
-        // Apply translations map reliably
         function applyBilingualTranslations() {
             const currentDict = DICT[state.lang];
             if (!currentDict) return;
@@ -853,10 +969,14 @@
             safeSetText('intro-small', currentDict.introSmall);
             safeSetText('intro-title', currentDict.introTitle);
             safeSetText('intro-body', currentDict.introBody);
-            safeSetText('promo-label', currentDict.promoLabel);
             
-            safeSetText('search-label', currentDict.searchLabel);
-            safeSetPlaceholder('search-input', currentDict.searchPlaceholder);
+            safeSetText('search-label-home', currentDict.searchLabelHome);
+            safeSetPlaceholder('home-search-input', currentDict.searchPlaceholder);
+            safeSetPlaceholder('dedicated-search-input', currentDict.searchPlaceholder);
+
+            safeSetText('search-tab-title', currentDict.searchTabTitle);
+            safeSetText('search-tab-subtitle', currentDict.searchTabSubtitle);
+
             safeSetText('order-id-label', currentDict.orderIdLabel);
             safeSetText('order-device-label', currentDict.orderDeviceLabel);
             safeSetText('owner-title', currentDict.ownerTitle);
@@ -884,13 +1004,7 @@
             safeSetText('form-owner-label', currentDict.formOwnerLabel);
             safeSetText('form-device-label', currentDict.formDeviceLabel);
             safeSetText('form-status-label', currentDict.formStatusLabel);
-            
-            safeSetText('promo-settings-title', currentDict.promoSettingsTitle);
-            safeSetText('toggle-banner-label', currentDict.toggleBannerLabel);
-            safeSetText('promo-title-label', currentDict.promoTitleLabel);
-            safeSetText('promo-desc-label', currentDict.promoDescLabel);
-            safeSetText('save-settings-btn', currentDict.saveSettingsBtn);
-            safeSetText('crm-title', currentDict.crmTitle);
+
             safeSetText('cleanup-title', currentDict.cleanupTitle);
             safeSetText('cleanup-body', currentDict.cleanupBody);
             safeSetText('cleanup-btn', currentDict.cleanupBtn);
@@ -900,10 +1014,8 @@
             safeSetText('passcode-cancel-btn', currentDict.passcodeCancelBtn);
             safeSetText('passcode-enter-btn', currentDict.passcodeEnterBtn);
             safeSetText('confirm-title-header', currentDict.confirmTitleHeader);
-            safeSetText('confirm-btn-no', currentDict.confirmBtnNo);
-            safeSetText('confirm-btn-yes', currentDict.confirmBtnYes);
 
-            // Set state dynamic button parameters
+            // Set Order Edit state button parameters
             const editKey = document.getElementById('edit-mode-key') ? document.getElementById('edit-mode-key').value : '';
             const saveBtn = document.getElementById('form-save-btn');
             const formTitle = document.getElementById('form-title');
@@ -911,48 +1023,57 @@
             if (saveBtn && formTitle) {
                 if (editKey) {
                     formTitle.innerText = currentDict.formTitleEdit;
-                    saveBtn.innerText = currentDict.formSaveBtn;
+                    saveBtn.innerText = currentDict.formSaveBtnEdit;
                 } else {
                     formTitle.innerText = currentDict.formTitle;
                     saveBtn.innerText = currentDict.formSaveBtn;
                 }
             }
 
-            // Sync toggle dynamic state attributes
-            const toggleBtn = document.getElementById('banner-toggle-btn');
-            if (toggleBtn) {
-                if (state.banner.active) {
-                    toggleBtn.innerText = currentDict.toggleBannerOn || "Yoniq";
-                    toggleBtn.className = "px-3 py-1 rounded-full text-[10px] uppercase font-semibold border border-green-500/30 bg-green-500/10 text-green-400 hover:bg-green-500/20 transition-all";
+            // Set Promo Edit state button parameters
+            const promoEditKey = document.getElementById('promo-edit-mode-key') ? document.getElementById('promo-edit-mode-key').value : '';
+            const promoSaveBtn = document.getElementById('promo-save-btn');
+            const promoFormTitle = document.getElementById('promo-form-title');
+
+            if (promoSaveBtn && promoFormTitle) {
+                if (promoEditKey) {
+                    promoFormTitle.innerText = "Aksiyani tahrirlash";
+                    promoSaveBtn.innerText = "Aksiyani Yangilash";
                 } else {
-                    toggleBtn.innerText = currentDict.toggleBannerOff || "O'chiq";
-                    toggleBtn.className = "px-3 py-1 rounded-full text-[10px] uppercase font-semibold border border-zinc-500/30 bg-zinc-500/10 text-zinc-400 hover:bg-zinc-500/20 transition-all";
+                    promoFormTitle.innerText = "Yangi Aksiya qo'shish";
+                    promoSaveBtn.innerText = "Aksiyani Saqlash";
                 }
             }
         }
 
-        // Manage active panel switching smoothly
         function swapActiveTab(tabId) {
-            if (tabId === state.currentTab) return;
-
-            // Enforce security credentials lock
             if (tabId === 'admin' && !state.isAdminMode) {
                 triggerPasscodeGate();
                 return;
             }
 
-            const currentView = document.getElementById(`view-${state.currentTab}`);
-            const nextView = document.getElementById(`view-${tabId}`);
-            if (currentView && nextView) {
-                currentView.classList.add('hidden');
-                nextView.classList.remove('hidden');
+            const allViews = ['home', 'search', 'contact', 'admin'];
+            allViews.forEach(viewName => {
+                const viewEl = document.getElementById(`view-${viewName}`);
+                if (viewEl) {
+                    viewEl.classList.add('hidden');
+                    viewEl.classList.remove('active');
+                }
+                const btnEl = document.getElementById(`tab-btn-${viewName}`);
+                if (btnEl) {
+                    btnEl.classList.add('opacity-50');
+                }
+            });
+
+            const targetView = document.getElementById(`view-${tabId}`);
+            if (targetView) {
+                targetView.classList.remove('hidden');
+                targetView.classList.add('active');
             }
 
-            const currentTabBtn = document.getElementById(`tab-btn-${state.currentTab}`);
-            const nextTabBtn = document.getElementById(`tab-btn-${tabId}`);
-            if (currentTabBtn && nextTabBtn) {
-                currentTabBtn.classList.add('opacity-50');
-                nextTabBtn.classList.remove('opacity-50');
+            const targetBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (targetBtn) {
+                targetBtn.classList.remove('opacity-50');
             }
 
             executeHapticImpact('light');
@@ -973,8 +1094,23 @@
                 setTimeout(() => {
                     indicator.style.left = `${btn.offsetLeft}px`;
                     indicator.style.width = `${btn.offsetWidth}px`;
-                }, 60);
+                }, 80);
             }
+        }
+
+        function openTelegramUser(username) {
+            const cleanUser = username.replace('@', '');
+            const url = `https://t.me/${cleanUser}`;
+            if (state.telegram && state.telegram.openTelegramLink) {
+                try {
+                    state.telegram.openTelegramLink(url);
+                } catch(e) {
+                    window.open(url, '_blank');
+                }
+            } else {
+                window.open(url, '_blank');
+            }
+            executeHapticImpact('light');
         }
 
         function executeHapticImpact(level = 'light') {
@@ -985,7 +1121,7 @@
             }
         }
 
-        // Dynamic status alert toast alerts
+        // Premium iOS glass notification toasts
         function triggerStatusToast(message, type = 'info') {
             const wrapper = document.getElementById('toast-container');
             const iconBox = document.getElementById('toast-icon-box');
@@ -1023,7 +1159,7 @@
             }, 3000);
         }
 
-        // Normalized queries helper
+        // Normalizing phone details (ignoring visual spaces/prefixes)
         function normalizeNumberTokens(val) {
             if (!val) return '';
             let rawStr = String(val).toLowerCase().trim();
@@ -1034,7 +1170,7 @@
             return rawStr;
         }
 
-        // Fuzzy match distance algorithm checking typos
+        // Levenshtein distance calculations for typo tolerance
         function computeLevenshteinStep(a, b) {
             const matrix = [];
             for (let i = 0; i <= b.length; i++) matrix[i] = [i];
@@ -1056,26 +1192,8 @@
             return matrix[b.length][a.length];
         }
 
-        // Realtime intelligent search query analyzer
-        function handleSmartCRMQuery(query) {
-            const suggestionBox = document.getElementById('search-suggestions-box');
-            const clearBtn = document.getElementById('clear-search-btn');
-            if (!suggestionBox || !clearBtn) return;
-
-            if (!query || query.trim().length === 0) {
-                suggestionBox.classList.add('hidden');
-                clearBtn.classList.add('hidden');
-                if (document.getElementById('timeline-box')) document.getElementById('timeline-box').classList.add('hidden');
-                if (document.getElementById('no-results-panel')) document.getElementById('no-results-panel').classList.add('hidden');
-                return;
-            }
-
-            clearBtn.classList.remove('hidden');
-
-            const cleanQuery = query.toLowerCase().trim();
-            const normalizedPhoneQuery = normalizeNumberTokens(query);
-
-            const filteredOrders = state.orders.filter(order => {
+        function matchQueryAndFilter(cleanQuery, normalizedPhoneQuery) {
+            return state.orders.filter(order => {
                 const idMatch = String(order.id).toLowerCase().includes(cleanQuery);
                 const ownerMatch = String(order.owner).toLowerCase().includes(cleanQuery);
                 const deviceMatch = String(order.device).toLowerCase().includes(cleanQuery);
@@ -1092,12 +1210,106 @@
                         }
                     });
                 }
-
                 return idMatch || ownerMatch || deviceMatch || phoneMatch || typoDistanceMatched;
             });
+        }
+
+        // Home View Live-typing Search Handler
+        function handleHomeQuery(query) {
+            const suggestionBox = document.getElementById('home-search-suggestions');
+            const clearBtn = document.getElementById('home-clear-search-btn');
+            if (!suggestionBox || !clearBtn) return;
+
+            if (!query || query.trim().length === 0) {
+                suggestionBox.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+                return;
+            }
+
+            clearBtn.classList.remove('hidden');
+
+            const cleanQuery = query.toLowerCase().trim();
+            const normalizedPhoneQuery = normalizeNumberTokens(query);
+
+            const filteredOrders = matchQueryAndFilter(cleanQuery, normalizedPhoneQuery);
 
             if (filteredOrders.length > 0) {
                 suggestionBox.classList.remove('hidden');
+                suggestionBox.innerHTML = filteredOrders.map(order => {
+                    const markedOwner = insertHighlighterMark(order.owner, cleanQuery);
+                    const markedDevice = insertHighlighterMark(order.device, cleanQuery);
+                    const markedId = insertHighlighterMark(`#${order.id}`, cleanQuery);
+
+                    return `
+                        <div onclick="selectOrderFromHome('${order.id}')" class="p-4 rounded-2xl bg-white/[0.02] hover:bg-white/[0.08] border border-white/5 cursor-pointer flex justify-between items-center transition-all">
+                            <div class="space-y-0.5">
+                                <span class="text-[9px] text-zinc-500 font-semibold tracking-wider block">${markedId}</span>
+                                <h4 class="text-xs font-semibold text-slate-100">${markedOwner}</h4>
+                                <p class="text-[10px] text-zinc-400 font-light">${markedDevice}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[9px] bg-white/5 border border-white/5 px-2.5 py-0.5 rounded-full text-slate-300 font-light">
+                                    ${STAGES[order.status - 1][state.lang]}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                suggestionBox.classList.remove('hidden');
+                suggestionBox.innerHTML = `
+                    <div class="glass-panel rounded-2xl p-4 text-center">
+                        <p class="text-[10px] text-zinc-500">${DICT[state.lang].notFoundTitle}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function clearHomeSearch() {
+            const input = document.getElementById('home-search-input');
+            if (input) input.value = '';
+            const suggestionBox = document.getElementById('home-search-suggestions');
+            const clearBtn = document.getElementById('home-clear-search-btn');
+            if (suggestionBox) suggestionBox.classList.add('hidden');
+            if (clearBtn) clearBtn.classList.add('hidden');
+            executeHapticImpact('light');
+        }
+
+        function selectOrderFromHome(orderId) {
+            clearHomeSearch();
+            swapActiveTab('search');
+            document.getElementById('dedicated-search-input').value = orderId;
+            handleDedicatedSearch(orderId);
+            selectTimelineResult(orderId);
+        }
+
+        function handleDedicatedSearch(query) {
+            const suggestionBox = document.getElementById('dedicated-search-suggestions');
+            const clearBtn = document.getElementById('dedicated-clear-btn');
+            const timelineBox = document.getElementById('timeline-box');
+            const noResults = document.getElementById('no-results-panel');
+
+            if (!suggestionBox || !clearBtn) return;
+
+            if (!query || query.trim().length === 0) {
+                suggestionBox.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+                if (timelineBox) timelineBox.classList.add('hidden');
+                if (noResults) noResults.classList.add('hidden');
+                return;
+            }
+
+            clearBtn.classList.remove('hidden');
+
+            const cleanQuery = query.toLowerCase().trim();
+            const normalizedPhoneQuery = normalizeNumberTokens(query);
+
+            const filteredOrders = matchQueryAndFilter(cleanQuery, normalizedPhoneQuery);
+
+            if (filteredOrders.length > 0) {
+                suggestionBox.classList.remove('hidden');
+                if (noResults) noResults.classList.add('hidden');
+
                 suggestionBox.innerHTML = filteredOrders.map(order => {
                     const markedOwner = insertHighlighterMark(order.owner, cleanQuery);
                     const markedDevice = insertHighlighterMark(order.device, cleanQuery);
@@ -1120,9 +1332,26 @@
                 }).join('');
             } else {
                 suggestionBox.classList.add('hidden');
-                if (document.getElementById('timeline-box')) document.getElementById('timeline-box').classList.add('hidden');
-                if (document.getElementById('no-results-panel')) document.getElementById('no-results-panel').classList.remove('hidden');
+                if (timelineBox) timelineBox.classList.add('hidden');
+                if (noResults) noResults.classList.remove('hidden');
             }
+        }
+
+        function clearDedicatedSearch() {
+            const input = document.getElementById('dedicated-search-input');
+            if (input) input.value = '';
+            
+            const suggestionBox = document.getElementById('dedicated-search-suggestions');
+            const clearBtn = document.getElementById('dedicated-clear-btn');
+            const timelineBox = document.getElementById('timeline-box');
+            const noResults = document.getElementById('no-results-panel');
+
+            if (suggestionBox) suggestionBox.classList.add('hidden');
+            if (clearBtn) clearBtn.classList.add('hidden');
+            if (timelineBox) timelineBox.classList.add('hidden');
+            if (noResults) noResults.classList.add('hidden');
+
+            executeHapticImpact('light');
         }
 
         function insertHighlighterMark(str, match) {
@@ -1135,29 +1364,11 @@
             return str;
         }
 
-        function resetSearchField() {
-            const input = document.getElementById('search-input');
-            if (input) input.value = '';
-            
-            const suggestionBox = document.getElementById('search-suggestions-box');
-            const clearBtn = document.getElementById('clear-search-btn');
-            const timelineBox = document.getElementById('timeline-box');
-            const noResults = document.getElementById('no-results-panel');
-
-            if (suggestionBox) suggestionBox.classList.add('hidden');
-            if (clearBtn) clearBtn.classList.add('hidden');
-            if (timelineBox) timelineBox.classList.add('hidden');
-            if (noResults) noResults.classList.add('hidden');
-
-            executeHapticImpact('light');
-        }
-
-        // Map search details onto progress timelines
         function selectTimelineResult(orderId) {
             const order = state.orders.find(o => String(o.id) === String(orderId));
             if (!order) return;
 
-            const suggestionBox = document.getElementById('search-suggestions-box');
+            const suggestionBox = document.getElementById('dedicated-search-suggestions');
             if (suggestionBox) suggestionBox.classList.add('hidden');
 
             const timelineBox = document.getElementById('timeline-box');
@@ -1224,7 +1435,7 @@
             });
         }
 
-        // Locked administration passcode methods
+        // Passcode Lock Security Gates (Sahobiddin12)
         function triggerPasscodeGate() {
             if (state.isAdminMode) {
                 swapActiveTab('admin');
@@ -1253,10 +1464,8 @@
                 const adminBtn = document.getElementById('tab-btn-admin');
                 if (adminBtn) adminBtn.classList.remove('hidden');
 
-                const promoTitle = document.getElementById('settings-promo-title');
-                const promoText = document.getElementById('settings-promo-text');
-                if (promoTitle) promoTitle.value = state.banner.title;
-                if (promoText) promoText.value = state.banner.text;
+                const adminBadge = document.getElementById('admin-badge');
+                if (adminBadge) adminBadge.classList.remove('hidden');
 
                 hidePasscodeGate();
                 applyBilingualTranslations();
@@ -1272,62 +1481,63 @@
             }
         }
 
-        // Render live directories inside administration desk
         function syncMetricsAndDirectory() {
             const totalCount = document.getElementById('stat-all-count');
             const activeCount = document.getElementById('stat-active-count');
+            const promoCount = document.getElementById('stat-promo-count');
             const totalBadge = document.getElementById('crm-total-badge');
             const directory = document.getElementById('crm-orders-directory');
 
-            if (!totalCount || !activeCount || !totalBadge || !directory) return;
+            if (!totalCount || !activeCount || !promoCount || !totalBadge || !directory) return;
 
             const total = state.orders.length;
             const active = state.orders.filter(o => o.status < 6).length;
 
             totalCount.innerText = total;
             activeCount.innerText = active;
+            promoCount.innerText = state.promos.length;
             totalBadge.innerText = total;
 
             directory.innerHTML = '';
 
             if (total === 0) {
                 directory.innerHTML = `<div class="text-center py-6 text-zinc-500 text-xs font-light">Mavjud buyurtmalar yo'q</div>`;
-                return;
+            } else {
+                [...state.orders].reverse().forEach(order => {
+                    const stageMeta = STAGES[order.status - 1];
+                    const stageLabel = stageMeta[state.lang];
+
+                    const card = document.createElement('div');
+                    card.className = "p-4 rounded-2xl bg-white/[0.01] hover:bg-white/[0.04] border border-white/5 space-y-3 transition-all";
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-semibold text-white bg-white/5 border border-white/5 px-2.5 py-0.5 rounded-lg">#${order.id}</span>
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="triggerOrderEditorMode('${order.id}')" class="px-2.5 py-1 text-[9px] uppercase font-semibold text-slate-300 bg-white/5 border border-white/5 rounded-lg hover:bg-white/10">Tahrirlash</button>
+                                <button onclick="requestOrderRemoval('${order.id}')" class="px-2.5 py-1 text-[9px] uppercase font-semibold text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg hover:bg-red-500/20">O'chirish</button>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-1 text-xs font-light font-sans text-zinc-300">
+                            <div><strong class="text-zinc-500 font-normal">Mijoz:</strong> <span class="text-slate-100 font-medium">${order.owner}</span></div>
+                            <div><strong class="text-zinc-500 font-normal">Telefon:</strong> <span class="text-slate-300">${order.phone}</span></div>
+                            <div><strong class="text-zinc-500 font-normal">Qurilma:</strong> <span class="text-slate-300">${order.device}</span></div>
+                        </div>
+
+                        <div class="pt-2 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold">Xizmat holati:</span>
+                            <span class="text-[10px] font-semibold text-slate-200 bg-white/5 border border-white/5 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+                                <span>${stageMeta.icon}</span> ${stageLabel}
+                            </span>
+                        </div>
+                    `;
+                    directory.appendChild(card);
+                });
             }
 
-            [...state.orders].reverse().forEach(order => {
-                const stageMeta = STAGES[order.status - 1];
-                const stageLabel = stageMeta[state.lang];
-
-                const card = document.createElement('div');
-                card.className = "p-4 rounded-2xl bg-white/[0.01] hover:bg-white/[0.04] border border-white/5 space-y-3 transition-all";
-                card.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-semibold text-white bg-white/5 border border-white/5 px-2.5 py-0.5 rounded-lg">#${order.id}</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="triggerOrderEditorMode('${order.id}')" class="px-2.5 py-1 text-[9px] uppercase font-semibold text-slate-300 bg-white/5 border border-white/5 rounded-lg hover:bg-white/10">Tahrirlash</button>
-                            <button onclick="requestOrderRemoval('${order.id}')" class="px-2.5 py-1 text-[9px] uppercase font-semibold text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg hover:bg-red-500/20">O'chirish</button>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-1 text-xs font-light">
-                        <div><strong class="text-zinc-500 font-normal">Mijoz:</strong> <span class="text-slate-100 font-medium">${order.owner}</span></div>
-                        <div><strong class="text-zinc-500 font-normal">Telefon:</strong> <span class="text-slate-300">${order.phone}</span></div>
-                        <div><strong class="text-zinc-500 font-normal">Qurilma:</strong> <span class="text-slate-300">${order.device}</span></div>
-                    </div>
-
-                    <div class="pt-2 border-t border-white/5 flex items-center justify-between">
-                        <span class="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold">Xizmat holati:</span>
-                        <span class="text-[10px] font-semibold text-slate-200 bg-white/5 border border-white/5 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
-                            <span>${stageMeta.icon}</span> ${stageLabel}
-                        </span>
-                    </div>
-                `;
-                directory.appendChild(card);
-            });
+            syncPromosDirectory();
         }
 
-        // Form submissions listener adding or updating records
         function handleOrderFormSaving(event) {
             event.preventDefault();
 
@@ -1408,7 +1618,6 @@
             executeHapticImpact('light');
         }
 
-        // Custom Decisions confirmation overlays (Safely replaces default popup window blockages)
         function requestOrderRemoval(orderId) {
             const order = state.orders.find(o => String(o.id) === String(orderId));
             if (!order) return;
@@ -1437,50 +1646,193 @@
             };
         }
 
-        // Manage systemic promotional banner details
-        function saveGlobalPromoSettings() {
-            const titleInput = document.getElementById('settings-promo-title');
-            const textInput = document.getElementById('settings-promo-text');
-            if (!titleInput || !textInput) return;
+        function renderBannersOnHome() {
+            const container = document.getElementById('promo-banner-container');
+            if (!container) return;
+            container.innerHTML = '';
 
-            const titleVal = titleInput.value.trim();
-            const textVal = textInput.value.trim();
+            const activePromos = state.promos.filter(p => p.enabled);
 
-            if (!titleVal || !textVal) {
-                triggerStatusToast("Sarlavha va Tavsif majburiy hisoblanadi!", "error");
+            if (activePromos.length === 0) {
+                container.innerHTML = '';
                 return;
             }
 
-            state.banner.title = titleVal;
-            state.banner.text = textVal;
+            activePromos.forEach(promo => {
+                const title = state.lang === 'uz' ? promo.title_uz : promo.title_cy;
+                const desc = state.lang === 'uz' ? promo.desc_uz : promo.desc_cy;
 
-            localStorage.setItem('mobiloft_db_banner', JSON.stringify(state.banner));
-            updateSystemPromoDisplay();
-            triggerStatusToast("Aksiya ma'lumotlari yangilandi!", "success");
+                const promoCard = document.createElement('div');
+                promoCard.className = "glass-panel rounded-[24px] p-4 relative overflow-hidden border-white/10 hover:border-white/20 transition-all";
+                promoCard.innerHTML = `
+                    <div class="flex items-start gap-3 relative z-10">
+                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/5">
+                            <span class="text-xs">📢</span>
+                        </div>
+                        <div class="space-y-0.5">
+                            <span class="text-[8px] text-zinc-400 font-semibold tracking-widest uppercase">${DICT[state.lang].promoLabel}</span>
+                            <h4 class="text-xs font-semibold text-slate-100">${title}</h4>
+                            <p class="text-[10px] text-titanium-400 font-light leading-normal">${desc}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(promoCard);
+            });
+        }
+
+        function handlePromoFormSaving(event) {
+            event.preventDefault();
+
+            const titleUz = document.getElementById('promo-title-uz').value.trim();
+            const titleCy = document.getElementById('promo-title-cy').value.trim();
+            const descUz = document.getElementById('promo-desc-uz').value.trim();
+            const descCy = document.getElementById('promo-desc-cy').value.trim();
+            const isEnabled = document.getElementById('promo-enabled').checked;
+
+            if (!titleUz || !titleCy || !descUz || !descCy) {
+                triggerStatusToast("Barcha majburiy maydonlarni to'ldiring!", "error");
+                return;
+            }
+
+            const editKey = document.getElementById('promo-edit-mode-key').value;
+
+            if (editKey) {
+                const idx = state.promos.findIndex(p => String(p.id) === String(editKey));
+                if (idx >= 0) {
+                    state.promos[idx] = {
+                        id: editKey,
+                        title_uz: titleUz,
+                        title_cy: titleCy,
+                        desc_uz: descUz,
+                        desc_cy: descCy,
+                        enabled: isEnabled
+                    };
+                    triggerStatusToast("Aksiya muvaffaqiyatli yangilandi", "success");
+                }
+            } else {
+                const newId = 'promo-' + Date.now();
+                state.promos.push({
+                    id: newId,
+                    title_uz: titleUz,
+                    title_cy: titleCy,
+                    desc_uz: descUz,
+                    desc_cy: descCy,
+                    enabled: isEnabled
+                });
+                triggerStatusToast("Yangi aksiya muvaffaqiyatli qo'shildi", "success");
+            }
+
+            localStorage.setItem('mobiloft_db_promos', JSON.stringify(state.promos));
+            resetPromoFormFields();
+            syncMetricsAndDirectory();
+            renderBannersOnHome();
             executeHapticImpact('success');
         }
 
-        function toggleGlobalBannerStatus() {
-            state.banner.active = !state.banner.active;
-            localStorage.setItem('mobiloft_db_banner', JSON.stringify(state.banner));
-            updateSystemPromoDisplay();
+        function triggerPromoEditorMode(promoId) {
+            const promo = state.promos.find(p => String(p.id) === String(promoId));
+            if (!promo) return;
+
+            document.getElementById('promo-edit-mode-key').value = promo.id;
+            document.getElementById('promo-title-uz').value = promo.title_uz;
+            document.getElementById('promo-title-cy').value = promo.title_cy;
+            document.getElementById('promo-desc-uz').value = promo.desc_uz;
+            document.getElementById('promo-desc-cy').value = promo.desc_cy;
+            document.getElementById('promo-enabled').checked = promo.enabled;
+
+            applyBilingualTranslations();
+            executeHapticImpact('light');
+
+            document.getElementById('promo-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function requestPromoRemoval(promoId) {
+            const dialog = document.getElementById('confirm-dialog');
+            const desc = document.getElementById('confirm-description');
+            if (!dialog || !desc) return;
+
+            desc.innerText = state.lang === 'uz'
+                ? "Haqiqatdan ham ushbu aksiyani o'chirmoqchimisiz?"
+                : "Ҳақиқатдан ҳам ушбу акцияни ўчирмоқчимисиз?";
+
+            dialog.classList.remove('hidden');
+
+            document.getElementById('confirm-ok-btn').onclick = function() {
+                state.promos = state.promos.filter(p => String(p.id) !== String(promoId));
+                localStorage.setItem('mobiloft_db_promos', JSON.stringify(state.promos));
+                syncMetricsAndDirectory();
+                renderBannersOnHome();
+                dialog.classList.add('hidden');
+                triggerStatusToast("Aksiya o'chirildi", "success");
+                executeHapticImpact('heavy');
+            };
+
+            document.getElementById('confirm-cancel-btn').onclick = function() {
+                dialog.classList.add('hidden');
+            };
+        }
+
+        function togglePromoActiveState(promoId) {
+            const idx = state.promos.findIndex(p => String(p.id) === String(promoId));
+            if (idx >= 0) {
+                state.promos[idx].enabled = !state.promos[idx].enabled;
+                localStorage.setItem('mobiloft_db_promos', JSON.stringify(state.promos));
+                syncMetricsAndDirectory();
+                renderBannersOnHome();
+                triggerStatusToast("Aksiya holati o'zgartirildi", "success");
+                executeHapticImpact('light');
+            }
+        }
+
+        function resetPromoFormFields() {
+            document.getElementById('promo-edit-mode-key').value = '';
+            document.getElementById('promo-title-uz').value = '';
+            document.getElementById('promo-title-cy').value = '';
+            document.getElementById('promo-desc-uz').value = '';
+            document.getElementById('promo-desc-cy').value = '';
+            document.getElementById('promo-enabled').checked = false;
+
             applyBilingualTranslations();
             executeHapticImpact('light');
         }
 
-        function updateSystemPromoDisplay() {
-            const banner = document.getElementById('promo-banner');
-            const title = document.getElementById('promo-title');
-            const text = document.getElementById('promo-text');
-            if (!banner || !title || !text) return;
+        function syncPromosDirectory() {
+            const listContainer = document.getElementById('promos-directory-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = '';
 
-            if (state.banner.active) {
-                banner.classList.remove('hidden');
-                title.innerText = state.banner.title;
-                text.innerText = state.banner.text;
-            } else {
-                banner.classList.add('hidden');
+            if (state.promos.length === 0) {
+                listContainer.innerHTML = `<div class="text-center py-4 text-zinc-500 text-xs">Aksiyalar mavjud emas</div>`;
+                return;
             }
+
+            state.promos.forEach(promo => {
+                const title = state.lang === 'uz' ? promo.title_uz : promo.title_cy;
+                const statusBadge = promo.enabled 
+                    ? `<span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded text-[8px] uppercase">Faol</span>`
+                    : `<span class="bg-zinc-500/10 text-zinc-400 border border-zinc-500/20 px-2 py-0.5 rounded text-[8px] uppercase">Nofaol</span>`;
+
+                const promoCard = document.createElement('div');
+                promoCard.className = "p-3.5 rounded-xl bg-white/[0.01] border border-white/5 space-y-2.5";
+                promoCard.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs">📢</span>
+                            <h4 class="text-xs font-semibold text-slate-100 truncate max-w-[150px]">${title}</h4>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="togglePromoActiveState('${promo.id}')" class="px-2 py-0.5 text-[8px] uppercase font-semibold text-zinc-400 bg-white/5 rounded hover:bg-white/10">Holat</button>
+                            <button onclick="triggerPromoEditorMode('${promo.id}')" class="px-2 py-0.5 text-[8px] uppercase font-semibold text-slate-300 bg-white/5 rounded hover:bg-white/10">Edit</button>
+                            <button onclick="requestPromoRemoval('${promo.id}')" class="px-2 py-0.5 text-[8px] uppercase font-semibold text-red-400 bg-red-500/10 rounded hover:bg-red-500/20">Del</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center text-[10px]">
+                        <span class="text-zinc-500 font-light truncate max-w-[200px]">${state.lang === 'uz' ? promo.desc_uz : promo.desc_cy}</span>
+                        ${statusBadge}
+                    </div>
+                `;
+                listContainer.appendChild(promoCard);
+            });
         }
 
         function triggerBulkDbSanitation() {
@@ -1516,13 +1868,16 @@
             state.isAdminMode = false;
             const adminBtn = document.getElementById('tab-btn-admin');
             if (adminBtn) adminBtn.classList.add('hidden');
+
+            const adminBadge = document.getElementById('admin-badge');
+            if (adminBadge) adminBadge.classList.add('hidden');
             
             triggerStatusToast("Admin rejimidan chiqildi", "info");
             executeHapticImpact('light');
             swapActiveTab('home');
         }
 
-        // Initialize application structures safely
+        // DOM listener to trigger fail-safe setup safely
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
