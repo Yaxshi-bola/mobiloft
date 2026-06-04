@@ -268,10 +268,13 @@
     <!-- GLOBAL CONTAINER WRAPPER -->
     <div class="w-full max-w-lg mx-auto px-4 pt-6 pb-32 z-10 flex-grow relative">
 
-        <!-- LANGUAGE SELECTOR & STATUS PANEL -->
+        <!-- LANGUAGE SELECTOR & STATUS PANEL (UPDATED STEADY BREATHING PULSE WITHOUT FLICKERING) -->
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-2 bg-white/[0.02] border border-white/5 py-1 px-3 rounded-full">
-                <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-ping" id="status-ping"></span>
+                <span class="relative flex h-2 w-2 shrink-0">
+                    <span class="absolute inline-flex h-full w-full rounded-full bg-green-400/40 animate-pulse"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+                </span>
                 <span class="text-[10px] text-zinc-400 font-light tracking-wider" id="status-text">Ulanmoqda...</span>
                 <span id="admin-badge" class="hidden text-[8px] bg-white/10 border border-white/10 text-white/75 px-1.5 py-0.2 rounded font-light uppercase tracking-wider ml-1">Admin</span>
             </div>
@@ -295,8 +298,8 @@
 
             <div class="space-y-1">
                 <h1 class="text-xl font-light tracking-[0.25em] text-white uppercase">MOBILOFT</h1>
-                <p class="text-[11px] text-titanium-400 font-light tracking-wide max-w-xs mx-auto" id="hero-subtitle">
-                    Rahmatillo qishlog'idagi telefonlarni ta'mirlash va aksessuarlar do'koni.
+                <p class="text-[11px] text-titanium-400 font-light tracking-wide max-w-xs mx-auto animate-pulse" id="hero-subtitle">
+                    Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'idagi telefon ta'mirlash va aksessuarlar do'koni.
                 </p>
             </div>
         </header>
@@ -308,7 +311,7 @@
             <div class="glass-panel rounded-[26px] p-5 relative overflow-hidden">
                 <div class="absolute right-[-10%] top-[-10%] w-32 h-32 bg-white/[0.01] rounded-full filter blur-xl"></div>
                 <div class="relative z-10 space-y-1.5">
-                    <span class="text-[9px] text-titanium-400 tracking-widest uppercase font-semibold block" id="intro-small">Abdujalil Ustaxonasi</span>
+                    <span class="text-[9px] text-titanium-400 tracking-widest uppercase font-semibold block" id="intro-small">Abdujalil Do'koni</span>
                     <h2 class="text-sm font-normal text-white" id="intro-title">Mijozlarimizga xizmat ko'rsatish tizimi</h2>
                     <p class="text-[11px] text-titanium-400 font-light leading-relaxed" id="intro-body">
                         Qurilmangizni topshirgan bo'lsangiz, uning hozirgi ta'mirlash holatini real vaqt rejimida ushbu interaktiv platforma orqali kuzatib boring.
@@ -357,13 +360,13 @@
                     <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:14px_14px]"></div>
                     <div class="absolute w-20 h-20 bg-white/5 rounded-full filter blur-xl group-hover:scale-110 transition-all"></div>
                     <div class="relative z-10 text-center p-2">
-                        <p class="text-xs font-semibold text-white">Rahmatillo qishlog'i</p>
-                        <p class="text-[9px] text-zinc-400 font-light" id="address-subtitle">Abdujalil smartfonlar ustaxonasi (Xaritada ochish)</p>
+                        <p class="text-xs font-semibold text-white">Uchko'prik tumani, Rahmatillo qishlog'i</p>
+                        <p class="text-[9px] text-zinc-400 font-light" id="address-subtitle">Abdujalil telefon ta'mirlash va aksessuarlar do'koni (Xaritada ochish)</p>
                     </div>
                 </a>
                 <div class="bg-white/[0.01] p-3 rounded-xl border border-white/5">
                     <p class="text-[10px] text-titanium-400 font-light leading-relaxed" id="address-full">
-                        Biz dushanbadan yakshanbagacha soat 08:00 dan 20:00 gacha ochiqmiz.
+                        Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'i, O'zbekiston. Biz dushanbadan shanbagacha soat 08:00 dan 20:00 gacha ochiqmiz.
                     </p>
                 </div>
             </div>
@@ -514,7 +517,7 @@
                 </div>
                 <div class="bg-white/[0.01] p-3 rounded-xl border border-white/5">
                     <p class="text-[11px] text-slate-300 font-light leading-relaxed">
-                        Rahmatillo qishlog'i. Abdujalil Ustaxonasi.
+                        Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'i. Abdujalil telefon ta'mirlash va aksessuarlar do'koni.
                     </p>
                 </div>
                 <a href="https://maps.app.goo.gl/HpX1YBYpezjFmL4f9" target="_blank" class="w-full bg-white text-black font-semibold text-xs py-2.5 rounded-xl block text-center hover:opacity-90 active:scale-95 transition-all">
@@ -802,8 +805,8 @@
             uz: {
                 online: "Online",
                 bootStatus: "Tizim sozlamalari tiklanmoqda...",
-                heroSubtitle: "Rahmatillo qishlog'i, Abdujalil Ustaxonasi.",
-                introSmall: "Abdujalil Ustaxonasi",
+                heroSubtitle: "Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'idagi telefon ta'mirlash va aksessuarlar do'koni.",
+                introSmall: "Abdujalil Do'koni",
                 introTitle: "Mijozlarimizga xizmat ko'rsatish tizimi",
                 introBody: "Qurilmangizni topshirgan bo'lsangiz, uning hozirgi ta'mirlash holatini real vaqt rejimida ushbu interaktiv platforma orqali kuzatib boring.",
                 searchLabelHome: "Tezkor qidiruv tizimi",
@@ -815,8 +818,8 @@
                 notFoundTitle: "Hech narsa topilmadi",
                 notFoundBody: "Kiritilgan kalit so'z bo'yicha hech qanday buyurtma topilmadi. Qidiruvni boshqa shaklda takrorlang.",
                 addressTitle: "Manzilimiz",
-                addressSubtitle: "Abdujalil smartfonlar ustaxonasi (Xaritada ochish)",
-                addressFull: "Farg'ona viloyati, Rahmatillo qishlog'i, O'zbekiston. Biz dushanbadan shanbagacha soat 08:00 dan 20:00 gacha ochiqmiz.",
+                addressSubtitle: "Abdujalil do'koni (Xaritada ochish)",
+                addressFull: "Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'i, O'zbekiston. Biz dushanbadan shanbagacha soat 08:00 dan 20:00 gacha ochiqmiz.",
                 contactTabTitle: "Aloqa va Qo'llab-quvvatlash",
                 contactTabSubtitle: "Mutaxassislarimiz bilan to'g'ridan-to'g'ri bog'laning",
                 contactOwner: "Abdujalil Usta",
@@ -850,8 +853,8 @@
             cy: {
                 online: "Онлайн",
                 bootStatus: "Тизим созламалари тикланмоқда...",
-                heroSubtitle: "Фарғона вилояти, Раҳматилло қишлоғидаги смартфонларни таъмирлаш маркази.",
-                introSmall: "Абдужалил Устахонаси",
+                heroSubtitle: "Фарғона вилояти, Учқўприк тумани, Раҳматилло қишлоғидаги телефон таъмирлаш ва аксессуарлар дўкони.",
+                introSmall: "Абдужалил Дўкони",
                 introTitle: "Мижозларимизга хизмат кўрсатиш тизими",
                 introBody: "Қурилмангизни топширган бўлсангиз, унинг ҳозирги таъмирлаш ҳолатини реал вақт режимида ушбу интерактив платформа орқали кузатиб боринг.",
                 searchLabelHome: "Тезкор қидирув тизими",
@@ -863,8 +866,8 @@
                 notFoundTitle: "Ҳеч нарса топилмади",
                 notFoundBody: "Киритилган калит сўз бўйича ҳеч қандай буюртма топилмади. Қидирувни бошқа шаклда такрорланг.",
                 addressTitle: "Манзилимиз",
-                addressSubtitle: "Абдужалил Смартфонлар устахонаси (Харитада очиш)",
-                addressFull: "Фарғона вилояти, Раҳматилло қишлоғи, Ўзбекистон. Биз душанбадан шанбагача соат 08:00 дан 20:00 гача очиқмиз.",
+                addressSubtitle: "Абдужалил дўкони (Харитада очиш)",
+                addressFull: "Фарғона вилояти, Учқўприк тумани, Раҳматилло қишлоғи, Ўзбекистон. Биз душанбадан шанбагача соат 08:00 дан 20:00 гача очиқмиз.",
                 contactTabTitle: "Алоқа ва Қўллаб-қувватлаш",
                 contactTabSubtitle: "Мутахассисларимизни билан тўғридан-тўғри боғланинг",
                 contactOwner: "Абдужалил Уста",
@@ -901,9 +904,9 @@
         const STAGES = [
             { id: 1, uz: "Qabul qilindi", cy: "Қабул қилинди", descUz: "Qurilma qabul qilinib hisobga olindi", descCy: "Қурилма қабул қилиниб ҳисобга олинди", icon: "📥" },
             { id: 2, uz: "Tashxis qilinmoqda", cy: "Таххис қилинмоқда", descUz: "Muhandis nosozlik sabablarini o'rganmoqda", descCy: "Муҳандис носозлик сабабларини ўрганмоқда", icon: "🔍" },
-            { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоqda", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
-            { id: 4, uz: "Ta'mirlanmoqda", cy: "Ta'mirlanmoqda", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
-            { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовдан ўтмоқда", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий va texnik test jarayoni bajarilmoqda", icon: "✅" },
+            { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоқда", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
+            { id: 4, uz: "Ta'mirlanmoqda", cy: "Таъмирланмоқда", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
+            { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовдан ўтмоқда", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий ва техник тест жараёни бажарилмоқда", icon: "✅" },
             { id: 6, uz: "Tayyor", cy: "Тайёр", descUz: "Smartfon to'liq sozlandi va topshirishga tayyor", descCy: "Смартфон тўлиқ созланdi ва топширишга тайёр", icon: "🎉" }
         ];
 
@@ -927,8 +930,8 @@
                 { lat: "yo'", cyr: "ё" }, { lat: "Yo'", cyr: "Ё" }, { lat: "YO'", cyr: "Ё" },
                 { lat: "o'", cyr: "ў" }, { lat: "O'", cyr: "Ў" },
                 { lat: "g'", cyr: "ғ" }, { lat: "G'", cyr: "Ғ" },
-                { lat: "sh", cyr: "sh" }, { lat: "Sh", cyr: "Ш" }, { lat: "SH", cyr: "Ш" },
-                { lat: "ch", cyr: "ch" }, { lat: "Ch", cyr: "Ч" }, { lat: "CH", cyr: "Ч" },
+                { lat: "sh", cyr: "ш" }, { lat: "Sh", cyr: "Ш" }, { lat: "SH", cyr: "Ш" },
+                { lat: "ch", cyr: "ч" }, { lat: "Ch", cyr: "Ч" }, { lat: "CH", cyr: "Ч" },
                 { lat: "yo", cyr: "ё" }, { lat: "Yo", cyr: "Ё" }, { lat: "YO", cyr: "Ё" },
                 { lat: "yu", cyr: "ю" }, { lat: "Yu", cyr: "Ю" }, { lat: "YU", cyr: "Ю" },
                 { lat: "ya", cyr: "я" }, { lat: "Ya", cyr: "Я" }, { lat: "YA", cyr: "Я" },
