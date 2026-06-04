@@ -397,8 +397,8 @@
                     </div>
                 </div>
 
-                <!-- Bento Block 4: Total Repairs Archive (Dark Bento Glass) -->
-                <div class="glass-panel rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="swapActiveTab('admin')">
+                <!-- Bento Block 4: Total Repairs Archive (Dark Bento Glass - STRICT PASSWORD PROTECTION) -->
+                <div class="glass-panel rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="handleSecureBentoAdminClick()">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2">
@@ -674,13 +674,13 @@
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-owner-label">Mijoz Ismi (Lotin) *</label>
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-owner-label">Mijoz Ismi (Lotin - Kirillga avtomatik o'giriladi) *</label>
                         <input type="text" id="order-owner" required placeholder="Ali Valiyev" 
                                class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-device-label">Qurilma modeli (Lotin) *</label>
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-device-label">Qurilma modeli (Lotin - Kirillga avtomatik o'giriladi) *</label>
                         <input type="text" id="order-device" required placeholder="iPhone 13 Pro Max" 
                                class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
@@ -893,7 +893,7 @@
                 introTitle: "Mijozlarimizga xizmat ko'rsatish tizimi",
                 introBody: "Qurilmangizni topshirgan bo'lsangiz, uning hozirgi ta'mirlash holatini real vaqt rejimida ushbu interaktiv platforma orqali kuzatib boring.",
                 searchLabelHome: "Tezkor qidiruv tizimi",
-                searchPlaceholder: "Ism, telefon, order kodi, qurilma modeli...",
+                searchPlaceholder: "Ism, telefon, order ID, model..." ,
                 orderIdLabel: "Buyurtma kodi",
                 orderDeviceLabel: "Qurilma",
                 ownerTitle: "Mijoz:",
@@ -988,7 +988,7 @@
             { id: 1, uz: "Qabul qilindi", cy: "Қабул қилинди", descUz: "Qurilma qabul qilinib hisobga olindi", descCy: "Қурилма қабул қилиниб ҳисобга олинди", icon: "📥" },
             { id: 2, uz: "Tashxis qilinmoqda", cy: "Таххис қилинмоқда", descUz: "Muhandis nosozlik sabablarini o'rganmoqda", descCy: "Муҳандис носозлик сабабларини ўрганмоқда", icon: "🔍" },
             { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоқда", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
-            { id: 4, uz: "Ta'mirlanmoqda", cy: "Таъмирланмоқда", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
+            { id: 4, uz: "Ta'mirlanmoqda", cy: "Ta'mirlanmoqda", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
             { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовdan o'tmoqda", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий ва техник тест жараёни бажарилмоқда", icon: "✅" },
             { id: 6, uz: "Tayyor", cy: "Тайёр", descUz: "Smartfon to'liq sozlandi va topshirishga tayyor", descCy: "Смартфон тўлиқ созланdi ва топширишга тайёр", icon: "🎉" }
         ];
@@ -1085,6 +1085,26 @@
             }
         }
 
+        // STRICT GATE PROTECTION: Clicking Jami buyurtmalar (Bento Block 4) Challenges with passcode first!
+        function handleSecureBentoAdminClick() {
+            if (!state.isAdminMode) {
+                triggerPasscodeGate();
+            } else {
+                swapActiveTab('admin');
+            }
+        }
+
+        // Dynamic Normalization Mapper to bypass PostgREST Column Caching/Naming mismatch PGRST204
+        function mapOrderIncoming(o) {
+            return {
+                id: String(o.id || o.order_id || ''),
+                phone: String(o.phone || ''),
+                owner: String(o.owner || o.customer_name || 'Mijoz'),
+                device: String(o.device || o.model || 'Qurilma'),
+                status: parseInt(o.status) || 1
+            };
+        }
+
         // Fetch/Sync wrappers that support Supabase REST seamlessly
         async function fetchOrdersFromCloud() {
             try {
@@ -1096,13 +1116,7 @@
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    return data.map(o => ({
-                        id: String(o.id),
-                        phone: o.phone,
-                        owner: o.owner,
-                        device: o.device,
-                        status: parseInt(o.status) || 1
-                    }));
+                    return data.map(mapOrderIncoming);
                 }
             } catch (e) {
                 console.warn("Supabase fetch failed, falling back to local fallback", e);
@@ -1113,14 +1127,23 @@
             return [];
         }
 
-        // Granular Cloud Save using Direct REST calls (highly reliable)
+        // Robust, adaptive Dual-Schema saving handler to completely eliminate Supabase PGRST204 columns mismatch
         async function saveOrderToCloudDirect(order, isEdit) {
             const url = isEdit 
                 ? `${SUPABASE_URL}/rest/v1/orders?id=eq.${order.id}` 
                 : `${SUPABASE_URL}/rest/v1/orders`;
             const method = isEdit ? 'PATCH' : 'POST';
             
-            const response = await fetch(url, {
+            // Primary Attempt: device / owner schema
+            let primaryPayload = {
+                id: String(order.id),
+                phone: String(order.phone),
+                owner: String(order.owner),
+                device: String(order.device),
+                status: parseInt(order.status)
+            };
+
+            let response = await fetch(url, {
                 method: method,
                 headers: {
                     'apikey': SUPABASE_KEY,
@@ -1128,17 +1151,42 @@
                     'Content-Type': 'application/json',
                     'Prefer': 'return=representation'
                 },
-                body: JSON.stringify({
-                    id: String(order.id),
-                    phone: String(order.phone),
-                    owner: String(order.owner),
-                    device: String(order.device),
-                    status: parseInt(order.status)
-                })
+                body: JSON.stringify(primaryPayload)
             });
+
             if (!response.ok) {
                 const errText = await response.text();
-                throw new Error(errText);
+                // Check if Supabase schema cache has PGRST204 or lacks 'device'/'owner' fields
+                if (errText.includes("column") || errText.includes("PGRST204") || response.status === 400) {
+                    console.log("Schema mismatch caught. Retrying with model/customer_name fallback schema...");
+                    
+                    let fallbackPayload = {
+                        id: String(order.id),
+                        order_id: String(order.id),
+                        phone: String(order.phone),
+                        customer_name: String(order.owner),
+                        model: String(order.device),
+                        status: parseInt(order.status)
+                    };
+
+                    let fallbackResponse = await fetch(url, {
+                        method: method,
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`,
+                            'Content-Type': 'application/json',
+                            'Prefer': 'return=representation'
+                        },
+                        body: JSON.stringify(fallbackPayload)
+                    });
+
+                    if (!fallbackResponse.ok) {
+                        const finalErr = await fallbackResponse.text();
+                        throw new Error(finalErr);
+                    }
+                } else {
+                    throw new Error(errText);
+                }
             }
         }
 
@@ -1248,10 +1296,17 @@
             const active = state.orders.filter(o => o.status === 4 || o.status === 5).length;
             const queue = state.orders.filter(o => o.status === 1 || o.status === 2 || o.status === 3).length;
 
-            document.getElementById('stat-all-count').innerText = total;
-            document.getElementById('stat-ready-count').innerText = ready;
-            document.getElementById('stat-active-count').innerText = active;
-            document.getElementById('stat-queue-count').innerText = queue;
+            const allCounts = document.querySelectorAll('#stat-all-count');
+            allCounts.forEach(el => el.innerText = total);
+            
+            const readyCount = document.getElementById('stat-ready-count');
+            if (readyCount) readyCount.innerText = ready;
+
+            const activeCount = document.getElementById('stat-active-count');
+            if (activeCount) activeCount.innerText = active;
+
+            const queueCount = document.getElementById('stat-queue-count');
+            if (queueCount) queueCount.innerText = queue;
         }
 
         // Central floating blue action button click handler
