@@ -84,26 +84,26 @@
 
         /* Frosted Glassmorphic Panels in Apple VisionOS style */
         .glass-panel {
-            background: rgba(10, 10, 15, 0.35);
-            backdrop-filter: blur(60px) saturate(220%);
-            -webkit-backdrop-filter: blur(60px) saturate(220%);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(10, 10, 15, 0.45);
+            backdrop-filter: blur(50px) saturate(210%);
+            -webkit-backdrop-filter: blur(50px) saturate(210%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 
                 inset 0 1px 1px 0 rgba(255, 255, 255, 0.05),
-                0 25px 60px -15px rgba(0, 0, 0, 0.85);
+                0 25px 60px -15px rgba(0, 0, 0, 0.9);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.12);
-            background: rgba(14, 14, 20, 0.42);
+            border-color: rgba(255, 255, 255, 0.14);
+            background: rgba(14, 14, 20, 0.52);
         }
 
         /* Glass interactive buttons */
         .glass-interactive-btn {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-interactive-btn:hover {
@@ -118,13 +118,13 @@
 
         /* Bottom Floating Capsule Navigation Bar - High End Glassmorphism */
         .navigation-capsule {
-            background: rgba(15, 15, 22, 0.72);
-            backdrop-filter: blur(40px) saturate(210%);
-            -webkit-backdrop-filter: blur(40px) saturate(210%);
+            background: rgba(15, 15, 22, 0.78);
+            backdrop-filter: blur(50px) saturate(220%);
+            -webkit-backdrop-filter: blur(50px) saturate(220%);
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 
-                0 25px 55px -10px rgba(0, 0, 0, 0.95),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+                0 30px 65px -10px rgba(0, 0, 0, 0.95),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
         }
 
         /* Highlight matching search keywords */
@@ -161,8 +161,8 @@
                 border-color: rgba(255, 255, 255, 0.05);
             }
             50% {
-                box-shadow: 0 0 22px rgba(255, 255, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 0 22px rgba(255, 255, 255, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.22);
             }
             100% {
                 box-shadow: 0 0 12px rgba(255, 255, 255, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.02);
@@ -201,43 +201,29 @@
             100% { left: 150%; }
         }
 
-        /* 3D Glass Sphere Boot Animation */
-        .boot-sphere {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.5) 100%);
-            box-shadow: 
-                inset 0 10px 20px rgba(255, 255, 255, 0.15),
-                inset 0 -10px 20px rgba(0, 0, 0, 0.6),
-                0 15px 35px rgba(0, 0, 0, 0.8),
-                0 0 45px rgba(255, 255, 255, 0.08);
-            position: relative;
-            overflow: hidden;
-            animation: pulseSphere 3s infinite ease-in-out;
+        /* Creative Apple-Style Logo Boot Animation keyframes */
+        @keyframes bootLogoReveal {
+            0% { transform: scale(0.7) rotate(-5deg); opacity: 0; filter: blur(12px); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
         }
-        .boot-sphere::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: conic-gradient(from 0deg, rgba(255, 69, 58, 0.45), rgba(255, 159, 10, 0.45), rgba(255, 214, 10, 0.45), rgba(48, 209, 88, 0.45), rgba(10, 132, 255, 0.45), rgba(191, 90, 242, 0.45), rgba(255, 69, 58, 0.45));
-            filter: blur(10px);
-            animation: spinRainbow 8s linear infinite;
+        .animate-boot-logo {
+            animation: bootLogoReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .boot-sphere::after {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 20px;
-            width: 25px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            filter: blur(1px);
+
+        @keyframes revealTitle {
+            0% { letter-spacing: 0.08em; opacity: 0; filter: blur(6px); }
+            100% { letter-spacing: 0.28em; opacity: 1; filter: blur(0); }
         }
-        @keyframes pulseSphere {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,255,255,0.05)); }
-            50% { transform: scale(1.04); filter: drop-shadow(0 0 40px rgba(255,255,255,0.15)); }
+        .animate-reveal-title {
+            animation: revealTitle 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes revealWelcome {
+            0% { transform: translateY(12px); opacity: 0; filter: blur(4px); }
+            100% { transform: translateY(0); opacity: 0.85; filter: blur(0); }
+        }
+        .animate-reveal-welcome {
+            animation: revealWelcome 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
     </style>
 </head>
@@ -246,24 +232,25 @@
     <div class="ambient-reflection glow-left"></div>
     <div class="ambient-reflection glow-right"></div>
 
-    <!-- HIGH-END SPATIAL GLASS BOOT SEQUENCE -->
-    <div id="boot-curtain" class="fixed inset-0 bg-[#020204] z-50 flex flex-col items-center justify-center transition-all duration-700">
-        <div class="relative flex flex-col items-center space-y-8">
-            <!-- Glass Volumetric Lens Sphere -->
-            <div class="boot-sphere flex items-center justify-center">
-                <div class="absolute inset-1.5 bg-[#0a0a0f] rounded-full backdrop-blur-xl"></div>
-                <!-- Mini core element -->
-                <div class="w-8 h-8 rounded-full bg-white/5 border border-white/15 shadow-inner z-10 flex items-center justify-center animate-pulse">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5f5f7" stroke-width="1.5">
-                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                        <polyline points="2 17 12 22 22 17"/>
-                        <polyline points="2 12 12 17 22 12"/>
-                    </svg>
-                </div>
+    <!-- HIGH-END SPATIAL GLASS BOOT SEQUENCE (UPDATED INTRO WITH LOGO, LOGO TEXT, AND WELCOME) -->
+    <div id="boot-curtain" class="fixed inset-0 bg-[#020204] z-50 flex flex-col items-center justify-center transition-all duration-1000 ease-out">
+        <div class="relative flex flex-col items-center space-y-7 text-center px-6">
+            <!-- Pulsating Backdrop Ambient Glow -->
+            <div class="absolute w-72 h-72 bg-white/[0.02] rounded-full filter blur-[80px] pointer-events-none -translate-y-8 animate-pulse"></div>
+            
+            <!-- Volumetric Logo Glass Shell -->
+            <div class="w-24 h-24 rounded-[32px] overflow-hidden bg-white/[0.02] border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.06)] p-1.5 relative flex items-center justify-center animate-boot-logo">
+                <img src="https://github.com/Yaxshi-bola/rasmlar/blob/main/Generated%20Image%20May%2024,%202026%20-%205_39PM.jpg?raw=true" 
+                     alt="MOBILOFT" 
+                     class="w-full h-full object-cover rounded-[26px]"
+                     onerror="this.src='https://placehold.co/150/11141a/ffffff?text=MOBILOFT'">
+                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none"></div>
             </div>
-            <div class="text-center space-y-2 z-10">
-                <h2 class="text-sm tracking-[0.4em] font-light text-white uppercase animate-pulse">MOBILOFT</h2>
-                <p class="text-[10px] text-zinc-500 font-light" id="boot-status">Apple VisionOS Spatial System loading...</p>
+
+            <!-- Kinetic Keynote Typography -->
+            <div class="space-y-2 z-10">
+                <h2 class="text-xl tracking-[0.28em] font-light text-white uppercase animate-reveal-title opacity-0" style="animation-delay: 0.4s; animation-fill-mode: forwards;">MOBILOFT</h2>
+                <p class="text-xs text-zinc-400 font-light tracking-wide animate-reveal-welcome opacity-0" style="animation-delay: 1.4s; animation-fill-mode: forwards;" id="boot-welcome-msg">Xush kelibsiz</p>
             </div>
         </div>
     </div>
@@ -601,13 +588,13 @@
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-owner-label">Mijoz Ismi *</label>
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-owner-label">Mijoz Ismi (Lotin) *</label>
                         <input type="text" id="order-owner" required placeholder="Ali Valiyev" 
                                class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-device-label">Qurilma modeli *</label>
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold" id="form-device-label">Qurilma modeli (Lotin) *</label>
                         <input type="text" id="order-device" required placeholder="iPhone 13 Pro Max" 
                                class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
@@ -641,27 +628,27 @@
                     <input type="hidden" id="promo-edit-mode-key">
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Sarlavha (Lotin) *</label>
-                        <input type="text" id="promo-title-uz" required placeholder="Masalan: Ekran almashtirishga 15% chegirma!" 
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Sarlavha (Lotin - Kirillga avtomatik o'giriladi) *</label>
+                        <input type="text" id="promo-title-uz" oninput="autoTranslatePromoFields()" required placeholder="Masalan: Ekran almashtirishga 15% chegirma!" 
                                class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Sarlavha (Kirill) *</label>
-                        <input type="text" id="promo-title-cy" required placeholder="Масалан: Экран алмаштиришга 15% чегирма!" 
-                               class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light">
+                        <label class="text-[8px] text-zinc-500 uppercase tracking-wider block font-semibold">Sarlavha (Avtomatik Kirillcha varianti) *</label>
+                        <input type="text" id="promo-title-cy" readonly placeholder="Avtomatik yaratiladi..." 
+                               class="w-full bg-[#050608]/40 border border-white/5 rounded-xl px-3 py-2 text-xs text-zinc-500 focus:outline-none font-light">
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Batafsil ma'lumot (Lotin) *</label>
-                        <textarea id="promo-desc-uz" required rows="2" placeholder="Xizmat dushanbadan shanbagacha amal qiladi." 
+                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Batafsil ma'lumot (Lotin - Kirillga avtomatik o'giriladi) *</label>
+                        <textarea id="promo-desc-uz" oninput="autoTranslatePromoFields()" required rows="2" placeholder="Xizmat dushanbadan shanbagacha amal qiladi." 
                                   class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light resize-none"></textarea>
                     </div>
 
                     <div class="space-y-1">
-                        <label class="text-[8px] text-zinc-400 uppercase tracking-wider block font-semibold">Batafsil ma'lumot (Kirill) *</label>
-                        <textarea id="promo-desc-cy" required rows="2" placeholder="Хизмат душанбадан шанбагача амал қилади." 
-                                  class="w-full bg-[#050608]/85 border border-white/5 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-white/10 font-light resize-none"></textarea>
+                        <label class="text-[8px] text-zinc-500 uppercase tracking-wider block font-semibold">Batafsil ma'lumot (Avtomatik Kirillcha varianti) *</label>
+                        <textarea id="promo-desc-cy" readonly rows="2" placeholder="Avtomatik yaratiladi..." 
+                                  class="w-full bg-[#050608]/40 border border-white/5 rounded-xl px-3 py-2 text-xs text-zinc-500 focus:outline-none font-light resize-none"></textarea>
                     </div>
 
                     <div class="flex items-center justify-between py-1.5 px-1 bg-white/[0.01] rounded-xl border border-white/5">
@@ -914,9 +901,9 @@
         const STAGES = [
             { id: 1, uz: "Qabul qilindi", cy: "Қабул қилинди", descUz: "Qurilma qabul qilinib hisobga olindi", descCy: "Қурилма қабул қилиниб ҳисобга олинди", icon: "📥" },
             { id: 2, uz: "Tashxis qilinmoqda", cy: "Таххис қилинмоқда", descUz: "Muhandis nosozlik sabablarini o'rganmoqda", descCy: "Муҳандис носозлик сабабларини ўрганмоқда", icon: "🔍" },
-            { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоқда", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
-            { id: 4, uz: "Ta'mirlanmoqda", cy: "Таъмирланмоқда", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
-            { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовдан ўтмоқда", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий ва техник тест жараёни бажарилмоқда", icon: "✅" },
+            { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоqda", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
+            { id: 4, uz: "Ta'mirlanmoqda", cy: "Ta'mirlanmoqda", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
+            { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовдан ўтмоқда", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий va texnik test jarayoni bajarilmoqda", icon: "✅" },
             { id: 6, uz: "Tayyor", cy: "Тайёр", descUz: "Smartfon to'liq sozlandi va topshirishga tayyor", descCy: "Смартфон тўлиқ созланdi ва топширишга тайёр", icon: "🎉" }
         ];
 
@@ -930,6 +917,67 @@
             telegram: null,
             usingSupabase: true
         };
+
+        // Complete Uzbek Latin to Cyrillic Transliterator Utility Function
+        function latinToCyrillic(str) {
+            if (!str) return '';
+            let text = str;
+            
+            const combinations = [
+                { lat: "yo'", cyr: "ё" }, { lat: "Yo'", cyr: "Ё" }, { lat: "YO'", cyr: "Ё" },
+                { lat: "o'", cyr: "ў" }, { lat: "O'", cyr: "Ў" },
+                { lat: "g'", cyr: "ғ" }, { lat: "G'", cyr: "Ғ" },
+                { lat: "sh", cyr: "sh" }, { lat: "Sh", cyr: "Ш" }, { lat: "SH", cyr: "Ш" },
+                { lat: "ch", cyr: "ch" }, { lat: "Ch", cyr: "Ч" }, { lat: "CH", cyr: "Ч" },
+                { lat: "yo", cyr: "ё" }, { lat: "Yo", cyr: "Ё" }, { lat: "YO", cyr: "Ё" },
+                { lat: "yu", cyr: "ю" }, { lat: "Yu", cyr: "Ю" }, { lat: "YU", cyr: "Ю" },
+                { lat: "ya", cyr: "я" }, { lat: "Ya", cyr: "Я" }, { lat: "YA", cyr: "Я" },
+                { lat: "ye", cyr: "е" }, { lat: "Ye", cyr: "Е" }, { lat: "YE", cyr: "Е" }
+            ];
+
+            combinations.forEach(pair => {
+                const regex = new RegExp(pair.lat, 'g');
+                text = text.replace(regex, pair.cyr);
+            });
+
+            const mapping = {
+                'a': 'а', 'A': 'А',
+                'b': 'б', 'B': 'Б',
+                'd': 'д', 'D': 'Д',
+                'e': 'э', 'E': 'Э',
+                'f': 'ф', 'F': 'Ф',
+                'g': 'г', 'G': 'Г',
+                'h': 'ҳ', 'H': 'Ҳ',
+                'i': 'и', 'I': 'И',
+                'j': 'ж', 'J': 'Ж',
+                'k': 'к', 'K': 'К',
+                'l': 'л', 'L': 'Л',
+                'm': 'м', 'M': 'М',
+                'n': 'н', 'N': 'Н',
+                'o': 'о', 'O': 'О',
+                'p': 'п', 'P': 'П',
+                'q': 'қ', 'Q': 'Қ',
+                'r': 'р', 'R': 'Р',
+                's': 'с', 'S': 'С',
+                't': 'т', 'T': 'Т',
+                'u': 'у', 'U': 'У',
+                'v': 'в', 'V': 'В',
+                'x': 'х', 'X': 'Х',
+                'y': 'й', 'Y': 'Й',
+                'z': 'з', 'Z': 'З'
+            };
+
+            return text.split('').map(char => mapping[char] || char).join('');
+        }
+
+        // Live Cyrillic Translation Population in Admin Panel Promo form
+        function autoTranslatePromoFields() {
+            const titleUz = document.getElementById('promo-title-uz').value;
+            const descUz = document.getElementById('promo-desc-uz').value;
+
+            document.getElementById('promo-title-cy').value = latinToCyrillic(titleUz);
+            document.getElementById('promo-desc-cy').value = latinToCyrillic(descUz);
+        }
 
         // Admin tap tracking triggers
         let logoClickCount = 0;
@@ -980,28 +1028,32 @@
             return [];
         }
 
-        async function saveOrdersToCloud(ordersList) {
-            localStorage.setItem('mobiloft_db_orders', JSON.stringify(ordersList));
+        // Granular Cloud Save using Direct REST calls (highly reliable)
+        async function saveOrderToCloudDirect(order, isEdit) {
+            const url = isEdit 
+                ? `${SUPABASE_URL}/rest/v1/orders?id=eq.${order.id}` 
+                : `${SUPABASE_URL}/rest/v1/orders`;
+            const method = isEdit ? 'PATCH' : 'POST';
             
-            try {
-                await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
-                    method: 'POST',
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`,
-                        'Content-Type': 'application/json',
-                        'Prefer': 'resolution=merge-duplicates'
-                    },
-                    body: JSON.stringify(ordersList.map(o => ({
-                        id: String(o.id),
-                        phone: o.phone,
-                        owner: o.owner,
-                        device: o.device,
-                        status: parseInt(o.status)
-                    })))
-                });
-            } catch (e) {
-                console.error("Supabase write issue: ", e);
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    id: String(order.id),
+                    phone: String(order.phone),
+                    owner: String(order.owner),
+                    device: String(order.device),
+                    status: parseInt(order.status)
+                })
+            });
+            if (!response.ok) {
+                const errText = await response.text();
+                throw new Error(errText);
             }
         }
 
@@ -1047,29 +1099,32 @@
             return [];
         }
 
-        async function savePromosToCloud(promosList) {
-            localStorage.setItem('mobiloft_db_promos', JSON.stringify(promosList));
+        async function savePromoToCloudDirect(promo, isEdit) {
+            const url = isEdit 
+                ? `${SUPABASE_URL}/rest/v1/promos?id=eq.${promo.id}` 
+                : `${SUPABASE_URL}/rest/v1/promos`;
+            const method = isEdit ? 'PATCH' : 'POST';
             
-            try {
-                await fetch(`${SUPABASE_URL}/rest/v1/promos`, {
-                    method: 'POST',
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`,
-                        'Content-Type': 'application/json',
-                        'Prefer': 'resolution=merge-duplicates'
-                    },
-                    body: JSON.stringify(promosList.map(p => ({
-                        id: String(p.id),
-                        title_uz: p.title_uz,
-                        title_cy: p.title_cy,
-                        desc_uz: p.desc_uz,
-                        desc_cy: p.desc_cy,
-                        enabled: p.enabled
-                    })))
-                });
-            } catch (e) {
-                console.error("Supabase promos write issue: ", e);
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    id: String(promo.id),
+                    title_uz: String(promo.title_uz),
+                    title_cy: String(promo.title_cy),
+                    desc_uz: String(promo.desc_uz),
+                    desc_cy: String(promo.desc_cy),
+                    enabled: promo.enabled
+                })
+            });
+            if (!response.ok) {
+                const errText = await response.text();
+                throw new Error(errText);
             }
         }
 
@@ -1089,6 +1144,14 @@
 
         async function initApp() {
             try {
+                // Set localized welcome message inside boot sequences
+                const savedLang = localStorage.getItem('mobiloft_lang') || 'uz';
+                state.lang = savedLang;
+                const welcomeEl = document.getElementById('boot-welcome-msg');
+                if (welcomeEl) {
+                    welcomeEl.innerText = savedLang === 'uz' ? 'Xush kelibsiz' : 'Хуш келибсиз';
+                }
+
                 // Secure Telegram Web App detection
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
@@ -1116,15 +1179,15 @@
                 console.error("Critical boot sequence warning:", err);
                 updateDbStatusUI(false);
             } finally {
-                // Spatial Lens animated boot fade out
+                // Spatial Lens animated boot fade out with slightly more admiring buffer time
                 setTimeout(() => {
                     const curtain = document.getElementById('boot-curtain');
                     if (curtain) {
                         curtain.style.opacity = '0';
-                        curtain.style.transform = 'scale(1.1)';
-                        setTimeout(() => curtain.style.display = 'none', 700);
+                        curtain.style.transform = 'scale(1.05)';
+                        setTimeout(() => curtain.style.display = 'none', 1000);
                     }
-                }, 800);
+                }, 2800);
             }
         }
 
@@ -1153,6 +1216,7 @@
         // Language toggling controller
         function toggleLang() {
             state.lang = (state.lang === 'uz') ? 'cy' : 'uz';
+            localStorage.setItem('mobiloft_lang', state.lang);
             const btn = document.getElementById('lang-btn');
             if (btn) btn.innerText = (state.lang === 'uz') ? 'Lotin' : 'Кирилл';
             applyBilingualTranslations();
@@ -1224,16 +1288,6 @@
             safeSetText('form-owner-label', currentDict.formOwnerLabel);
             safeSetText('form-device-label', currentDict.formDeviceLabel);
             safeSetText('form-status-label', currentDict.formStatusLabel);
-
-            safeSetText('cleanup-title', currentDict.cleanupTitle);
-            safeSetText('cleanup-body', currentDict.cleanupBody);
-            safeSetText('cleanup-btn', currentDict.cleanupBtn);
-            safeSetText('passcode-title', currentDict.passcodeTitle);
-            safeSetText('passcode-subtitle', currentDict.passcodeSubtitle);
-            safeSetPlaceholder('passcode-field', currentDict.passcodeField);
-            safeSetText('passcode-cancel-btn', currentDict.passcodeCancelBtn);
-            safeSetText('passcode-enter-btn', currentDict.passcodeEnterBtn);
-            safeSetText('confirm-title-header', currentDict.confirmTitleHeader);
 
             // Translate Navigation tabs dynamically
             safeSetText('nav-text-home', state.lang === 'uz' ? 'Home' : 'Бош саҳифа');
@@ -1450,9 +1504,12 @@
 
         function matchQueryAndFilter(cleanQuery, normalizedPhoneQuery) {
             return state.orders.filter(order => {
+                const clientName = state.lang === 'cy' ? latinToCyrillic(order.owner) : order.owner;
+                const deviceName = state.lang === 'cy' ? latinToCyrillic(order.device) : order.device;
+
                 const idMatch = String(order.id).toLowerCase().includes(cleanQuery);
-                const ownerMatch = String(order.owner).toLowerCase().includes(cleanQuery);
-                const deviceMatch = String(order.device).toLowerCase().includes(cleanQuery);
+                const ownerMatch = String(order.owner).toLowerCase().includes(cleanQuery) || clientName.toLowerCase().includes(cleanQuery);
+                const deviceMatch = String(order.device).toLowerCase().includes(cleanQuery) || deviceName.toLowerCase().includes(cleanQuery);
 
                 const normalizedPhone = normalizeNumberTokens(order.phone);
                 const phoneMatch = normalizedPhoneQuery && normalizedPhone.includes(normalizedPhoneQuery);
@@ -1492,8 +1549,11 @@
             if (filteredOrders.length > 0) {
                 suggestionBox.classList.remove('hidden');
                 suggestionBox.innerHTML = filteredOrders.map(order => {
-                    const markedOwner = insertHighlighterMark(order.owner, cleanQuery);
-                    const markedDevice = insertHighlighterMark(order.device, cleanQuery);
+                    const displayName = state.lang === 'cy' ? latinToCyrillic(order.owner) : order.owner;
+                    const displayDevice = state.lang === 'cy' ? latinToCyrillic(order.device) : order.device;
+
+                    const markedOwner = insertHighlighterMark(displayName, cleanQuery);
+                    const markedDevice = insertHighlighterMark(displayDevice, cleanQuery);
                     const markedId = insertHighlighterMark(`#${order.id}`, cleanQuery);
 
                     return `
@@ -1567,8 +1627,11 @@
                 if (noResults) noResults.classList.add('hidden');
 
                 suggestionBox.innerHTML = filteredOrders.map(order => {
-                    const markedOwner = insertHighlighterMark(order.owner, cleanQuery);
-                    const markedDevice = insertHighlighterMark(order.device, cleanQuery);
+                    const displayName = state.lang === 'cy' ? latinToCyrillic(order.owner) : order.owner;
+                    const displayDevice = state.lang === 'cy' ? latinToCyrillic(order.device) : order.device;
+
+                    const markedOwner = insertHighlighterMark(displayName, cleanQuery);
+                    const markedDevice = insertHighlighterMark(displayDevice, cleanQuery);
                     const markedId = insertHighlighterMark(`#${order.id}`, cleanQuery);
 
                     return `
@@ -1631,8 +1694,8 @@
             if (timelineBox) {
                 timelineBox.classList.remove('hidden');
                 document.getElementById('result-order-id').innerText = `#${order.id}`;
-                document.getElementById('result-device-model').innerText = order.device;
-                document.getElementById('result-owner-name').innerText = order.owner;
+                document.getElementById('result-device-model').innerText = state.lang === 'cy' ? latinToCyrillic(order.device) : order.device;
+                document.getElementById('result-owner-name').innerText = state.lang === 'cy' ? latinToCyrillic(order.owner) : order.owner;
                 document.getElementById('result-owner-phone').innerText = order.phone;
 
                 renderVisualProgressTimeline(order.status);
@@ -1766,6 +1829,8 @@
                 [...state.orders].reverse().forEach(order => {
                     const stageMeta = STAGES[order.status - 1];
                     const stageLabel = stageMeta[state.lang];
+                    const clientName = state.lang === 'cy' ? latinToCyrillic(order.owner) : order.owner;
+                    const deviceName = state.lang === 'cy' ? latinToCyrillic(order.device) : order.device;
 
                     const card = document.createElement('div');
                     card.className = "p-4 rounded-2xl bg-white/[0.01] hover:bg-white/[0.04] border border-white/5 space-y-3 transition-all";
@@ -1779,9 +1844,9 @@
                         </div>
                         
                         <div class="space-y-1 text-xs font-light font-sans text-zinc-300">
-                            <div><strong class="text-zinc-500 font-normal">Mijoz:</strong> <span class="text-slate-100 font-medium">${order.owner}</span></div>
+                            <div><strong class="text-zinc-500 font-normal">Mijoz:</strong> <span class="text-slate-100 font-medium">${clientName}</span></div>
                             <div><strong class="text-zinc-500 font-normal">Telefon:</strong> <span class="text-slate-300">${order.phone}</span></div>
-                            <div><strong class="text-zinc-500 font-normal">Qurilma:</strong> <span class="text-slate-300">${order.device}</span></div>
+                            <div><strong class="text-zinc-500 font-normal">Qurilma:</strong> <span class="text-slate-300">${deviceName}</span></div>
                         </div>
 
                         <div class="pt-2 border-t border-white/5 flex items-center justify-between">
@@ -1813,46 +1878,42 @@
             }
 
             const editKey = document.getElementById('edit-mode-key').value;
+            const isEdit = editKey !== '';
 
             updateDbStatusUI(true);
 
-            if (editKey) {
-                const targetIdx = state.orders.findIndex(o => String(o.id) === String(editKey));
-                if (targetIdx >= 0) {
-                    state.orders[targetIdx] = {
-                        id: orderIdVal,
-                        phone: phoneVal,
-                        owner: ownerVal,
-                        device: deviceVal,
-                        status: statusVal
-                    };
+            const orderData = {
+                id: orderIdVal,
+                phone: phoneVal,
+                owner: ownerVal,
+                device: deviceVal,
+                status: statusVal
+            };
+
+            try {
+                // Save directly using granular endpoints (no bulk upload error risks!)
+                await saveOrderToCloudDirect(orderData, isEdit);
+
+                if (isEdit) {
+                    const targetIdx = state.orders.findIndex(o => String(o.id) === String(editKey));
+                    if (targetIdx >= 0) {
+                        state.orders[targetIdx] = orderData;
+                    }
                     triggerStatusToast("Buyurtma muvaffaqiyatli tahrirlandi", "success");
-                }
-            } else {
-                const collision = state.orders.find(o => String(o.id) === String(orderIdVal));
-                if (collision) {
-                    triggerStatusToast("Ushbu ID raqamli buyurtma allaqachon mavjud!", "error");
-                    updateDbStatusUI(false);
-                    return;
+                } else {
+                    state.orders.push(orderData);
+                    triggerStatusToast("Yangi buyurtma muvaffaqiyatli saqlandi", "success");
                 }
 
-                state.orders.push({
-                    id: orderIdVal,
-                    phone: phoneVal,
-                    owner: ownerVal,
-                    device: deviceVal,
-                    status: statusVal
-                });
-                triggerStatusToast("Yangi buyurtma muvaffaqiyatli saqlandi", "success");
+                resetAdminFormFields();
+                await syncMetricsAndDirectory();
+                executeHapticImpact('success');
+            } catch (err) {
+                console.error(err);
+                triggerStatusToast("Xatolik yuz berdi: " + err.message, "error");
+            } finally {
+                updateDbStatusUI(false);
             }
-
-            // Sync with global database
-            await saveOrdersToCloud(state.orders);
-            updateDbStatusUI(false);
-
-            resetAdminFormFields();
-            await syncMetricsAndDirectory();
-            executeHapticImpact('success');
         }
 
         function triggerOrderEditorMode(orderId) {
@@ -1900,16 +1961,18 @@
 
             document.getElementById('confirm-ok-btn').onclick = async function() {
                 updateDbStatusUI(true);
-                state.orders = state.orders.filter(o => String(o.id) !== String(orderId));
-                
-                await deleteOrderFromCloud(orderId);
-                await saveOrdersToCloud(state.orders);
-                updateDbStatusUI(false);
-
-                await syncMetricsAndDirectory();
-                dialog.classList.add('hidden');
-                triggerStatusToast("Ma'lumot o'chirildi", "success");
-                executeHapticImpact('heavy');
+                try {
+                    await deleteOrderFromCloud(orderId);
+                    state.orders = state.orders.filter(o => String(o.id) !== String(orderId));
+                    await syncMetricsAndDirectory();
+                    triggerStatusToast("Ma'lumot o'chirildi", "success");
+                    executeHapticImpact('heavy');
+                } catch(err) {
+                    triggerStatusToast("Xatolik: " + err.message, "error");
+                } finally {
+                    dialog.classList.add('hidden');
+                    updateDbStatusUI(false);
+                }
             };
 
             document.getElementById('confirm-cancel-btn').onclick = function() {
@@ -1966,43 +2029,44 @@
             }
 
             const editKey = document.getElementById('promo-edit-mode-key').value;
+            const isEdit = editKey !== '';
+            const promoId = isEdit ? editKey : 'promo-' + Date.now();
 
             updateDbStatusUI(true);
 
-            if (editKey) {
-                const idx = state.promos.findIndex(p => String(p.id) === String(editKey));
-                if (idx >= 0) {
-                    state.promos[idx] = {
-                        id: editKey,
-                        title_uz: titleUz,
-                        title_cy: titleCy,
-                        desc_uz: descUz,
-                        desc_cy: descCy,
-                        enabled: isEnabled
-                    };
+            const promoData = {
+                id: promoId,
+                title_uz: titleUz,
+                title_cy: titleCy,
+                desc_uz: descUz,
+                desc_cy: descCy,
+                enabled: isEnabled
+            };
+
+            try {
+                await savePromoToCloudDirect(promoData, isEdit);
+
+                if (isEdit) {
+                    const idx = state.promos.findIndex(p => String(p.id) === String(editKey));
+                    if (idx >= 0) {
+                        state.promos[idx] = promoData;
+                    }
                     triggerStatusToast("Aksiya muvaffaqiyatli yangilandi", "success");
+                } else {
+                    state.promos.push(promoData);
+                    triggerStatusToast("Yangi aksiya muvaffaqiyatli qo'shildi", "success");
                 }
-            } else {
-                const newId = 'promo-' + Date.now();
-                state.promos.push({
-                    id: newId,
-                    title_uz: titleUz,
-                    title_cy: titleCy,
-                    desc_uz: descUz,
-                    desc_cy: descCy,
-                    enabled: isEnabled
-                });
-                triggerStatusToast("Yangi aksiya muvaffaqiyatli qo'shildi", "success");
+
+                resetPromoFormFields();
+                await syncMetricsAndDirectory();
+                renderBannersOnHome();
+                executeHapticImpact('success');
+            } catch (err) {
+                console.error(err);
+                triggerStatusToast("Xatolik yuz berdi: " + err.message, "error");
+            } finally {
+                updateDbStatusUI(false);
             }
-
-            // Sync with global database
-            await savePromosToCloud(state.promos);
-            updateDbStatusUI(false);
-
-            resetPromoFormFields();
-            await syncMetricsAndDirectory();
-            renderBannersOnHome();
-            executeHapticImpact('success');
         }
 
         function triggerPromoEditorMode(promoId) {
@@ -2035,17 +2099,19 @@
 
             document.getElementById('confirm-ok-btn').onclick = async function() {
                 updateDbStatusUI(true);
-                state.promos = state.promos.filter(p => String(p.id) !== String(promoId));
-                
-                await deletePromoFromCloud(promoId);
-                await savePromosToCloud(state.promos);
-                updateDbStatusUI(false);
-
-                await syncMetricsAndDirectory();
-                renderBannersOnHome();
-                dialog.classList.add('hidden');
-                triggerStatusToast("Aksiya o'chirildi", "success");
-                executeHapticImpact('heavy');
+                try {
+                    await deletePromoFromCloud(promoId);
+                    state.promos = state.promos.filter(p => String(p.id) !== String(promoId));
+                    await syncMetricsAndDirectory();
+                    renderBannersOnHome();
+                    triggerStatusToast("Aksiya o'chirildi", "success");
+                    executeHapticImpact('heavy');
+                } catch(err) {
+                    triggerStatusToast("Xatolik: " + err.message, "error");
+                } finally {
+                    dialog.classList.add('hidden');
+                    updateDbStatusUI(false);
+                }
             };
 
             document.getElementById('confirm-cancel-btn').onclick = function() {
@@ -2057,15 +2123,21 @@
             const idx = state.promos.findIndex(p => String(p.id) === String(promoId));
             if (idx >= 0) {
                 updateDbStatusUI(true);
-                state.promos[idx].enabled = !state.promos[idx].enabled;
+                const originalState = state.promos[idx].enabled;
+                state.promos[idx].enabled = !originalState;
                 
-                await savePromosToCloud(state.promos);
-                updateDbStatusUI(false);
-
-                await syncMetricsAndDirectory();
-                renderBannersOnHome();
-                triggerStatusToast("Aksiya holati o'zgartirildi", "success");
-                executeHapticImpact('light');
+                try {
+                    await savePromoToCloudDirect(state.promos[idx], true);
+                    await syncMetricsAndDirectory();
+                    renderBannersOnHome();
+                    triggerStatusToast("Aksiya holati o'zgartirildi", "success");
+                    executeHapticImpact('light');
+                } catch(err) {
+                    state.promos[idx].enabled = originalState; // rollback
+                    triggerStatusToast("Xatolik: " + err.message, "error");
+                } finally {
+                    updateDbStatusUI(false);
+                }
             }
         }
 
