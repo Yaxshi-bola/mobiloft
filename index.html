@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>MOBILOFT — Premium VisionOS Experience</title>
+    <title>MOBILOFT — Apple VisionOS Masterpiece Edition</title>
 
-    <!-- Tailwind CSS for high fidelity framework rendering -->
+    <!-- Tailwind CSS Platform for Spatial Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,22 +14,22 @@
                 extend: {
                     colors: {
                         glass: {
-                            light: 'rgba(255, 255, 255, 0.02)',
-                            medium: 'rgba(255, 255, 255, 0.04)',
-                            heavy: 'rgba(10, 11, 15, 0.65)',
-                            border: 'rgba(255, 255, 255, 0.07)'
+                            light: 'rgba(255, 255, 255, 0.03)',
+                            medium: 'rgba(255, 255, 255, 0.06)',
+                            heavy: 'rgba(4, 5, 8, 0.72)',
+                            border: 'rgba(255, 255, 255, 0.09)',
+                            active: 'rgba(255, 255, 255, 0.12)'
                         },
                         titanium: {
                             50: '#f5f5f7',
                             100: '#e8e8ed',
                             200: '#d2d2d7',
                             400: '#86868b',
-                            700: '#2c2c2e',
-                            800: '#1c1c1e',
-                            900: '#0a0a0c',
-                            pure: '#030406'
+                            700: '#1c1c1e',
+                            800: '#0f1013',
+                            900: '#020204'
                         },
-                        appleBlue: '#2f80ed'
+                        appleBlue: '#0a84ff'
                     },
                     fontFamily: {
                         sans: ['SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
@@ -39,9 +39,12 @@
         }
     </script>
 
+    <!-- Lucide Icons Library Integration -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         body {
-            background-color: #030406;
+            background-color: #020204;
             color: #f5f5f7;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -49,150 +52,128 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Ambient spatial background glow */
+        /* Ambient spatial background reflections matching image_68a286.jpg visual tone */
         .ambient-reflection {
             position: fixed;
-            width: 80vw;
-            height: 60vh;
+            width: 90vw;
+            height: 70vh;
             border-radius: 50%;
             pointer-events: none;
             z-index: 0;
-            filter: blur(160px);
-            opacity: 0.12;
-            transition: all 1.2s ease-in-out;
+            filter: blur(140px);
+            opacity: 0.14;
+            transition: all 1.5s ease-in-out;
         }
         .glow-left {
             top: -10%;
-            left: -20%;
-            background: radial-gradient(circle, #2f80ed 0%, rgba(47,128,237,0) 70%);
-            animation: floatLeft 20s infinite alternate ease-in-out;
+            left: -25%;
+            background: radial-gradient(circle, #0a84ff 0%, rgba(10,132,255,0) 70%);
+            animation: floatLeft 25s infinite alternate ease-in-out;
         }
         .glow-right {
             bottom: -15%;
-            right: -20%;
+            right: -25%;
             background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0) 70%);
-            animation: floatRight 25s infinite alternate ease-in-out;
+            animation: floatRight 30s infinite alternate ease-in-out;
         }
 
         @keyframes floatLeft {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 12%) scale(1.1); }
+            100% { transform: translate(15%, 12%) scale(1.2); }
         }
         @keyframes floatRight {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-10%, -12%) scale(1.15); }
+            100% { transform: translate(-15%, -12%) scale(1.25); }
         }
 
-        /* Frosted Glassmorphic Panels in Bento Box delivery style */
-        .glass-panel {
-            background: rgba(18, 19, 23, 0.45);
-            backdrop-filter: blur(40px) saturate(210%);
-            -webkit-backdrop-filter: blur(40px) saturate(210%);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+        /* Glassmorphic Bento Cards with micro inner borders */
+        .glass-bento {
+            background: rgba(14, 15, 20, 0.45);
+            backdrop-filter: blur(50px) saturate(210%);
+            -webkit-backdrop-filter: blur(50px) saturate(210%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 
                 inset 0 1px 1px 0 rgba(255, 255, 255, 0.04),
-                0 15px 45px -10px rgba(0, 0, 0, 0.75);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                0 25px 60px -15px rgba(0, 0, 0, 0.95);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.12);
-            background: rgba(24, 25, 31, 0.52);
+        .glass-bento:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(22, 23, 31, 0.52);
             transform: translateY(-2px);
         }
 
-        /* Bento active blue card with rich depth */
-        .bento-blue-card {
-            background: linear-gradient(135deg, #1c64f2 0%, #1a56db 100%);
+        /* Floating Capsule Navigation Dock with high saturated glass morph */
+        .navigation-dock {
+            background: rgba(10, 11, 15, 0.82);
+            backdrop-filter: blur(60px) saturate(220%);
+            -webkit-backdrop-filter: blur(60px) saturate(220%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 
-                0 15px 35px -5px rgba(26, 86, 219, 0.4),
-                inset 0 1px 2px rgba(255, 255, 255, 0.25);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .bento-blue-card:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 
-                0 20px 40px -3px rgba(26, 86, 219, 0.55),
-                inset 0 1px 3px rgba(255, 255, 255, 0.35);
-        }
-
-        /* Glass interactive buttons */
-        .glass-interactive-btn {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .glass-interactive-btn:hover {
-            background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-1px);
-        }
-
-        /* Bottom Floating Capsule Navigation Bar - High End Glassmorphism */
-        .navigation-capsule {
-            background: rgba(14, 15, 19, 0.82);
-            backdrop-filter: blur(50px) saturate(220%);
-            -webkit-backdrop-filter: blur(50px) saturate(220%);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            box-shadow: 
-                0 25px 55px -12px rgba(0, 0, 0, 0.9),
+                0 30px 60px -12px rgba(0, 0, 0, 0.95),
                 inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
         }
 
-        /* Highlight matching search keywords */
+        /* Spotlight Cone Ray (Mohammad Javad Kermany Design Concept) */
+        .spotlight-beam {
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 65%, transparent 100%);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* High contrast glowing keywords for smart CRM search matches */
         mark {
             background: rgba(255, 255, 255, 0.25);
             color: #ffffff;
             border-radius: 4px;
-            padding: 0 2px;
+            padding: 0 2.5px;
             font-weight: 600;
         }
 
-        /* Smooth View slide animations */
-        .app-view {
-            display: none;
-            opacity: 0;
-            transform: translateY(8px) scale(0.99);
-            animation: viewFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* Volumetric spinning glass sphere for spatial boot sequence */
+        .glass-orb {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.6) 100%);
+            box-shadow: 
+                inset 0 15px 30px rgba(255, 255, 255, 0.2),
+                inset 0 -15px 30px rgba(0, 0, 0, 0.7),
+                0 25px 50px rgba(0, 0, 0, 0.95),
+                0 0 50px rgba(10, 132, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: bounceOrb 4s infinite ease-in-out;
         }
-        .app-view.active {
-            display: block;
+        .glass-orb::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: conic-gradient(from 0deg, rgba(255, 69, 58, 0.5), rgba(255, 159, 10, 0.5), rgba(255, 214, 10, 0.5), rgba(48, 209, 88, 0.5), rgba(10, 132, 255, 0.5), rgba(191, 90, 242, 0.5), rgba(255, 69, 58, 0.5));
+            filter: blur(14px);
+            animation: spinRainbow 10s linear infinite;
         }
-
-        @keyframes viewFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Glowing interactive breathing animation for search panels */
-        @keyframes searchGlowPulse {
-            0% {
-                box-shadow: 0 0 12px rgba(47, 128, 237, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.02);
-                border-color: rgba(255, 255, 255, 0.05);
-            }
-            50% {
-                box-shadow: 0 0 24px rgba(47, 128, 237, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-                border-color: rgba(47, 128, 237, 0.3);
-            }
-            100% {
-                box-shadow: 0 0 12px rgba(47, 128, 237, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.02);
-                border-color: rgba(255, 255, 255, 0.05);
-            }
-        }
-        .glowing-search-panel {
-            animation: searchGlowPulse 4s infinite ease-in-out;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .glowing-search-panel:focus-within {
-            box-shadow: 0 0 28px rgba(47, 128, 237, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
-            border-color: rgba(47, 128, 237, 0.5) !important;
-            transform: scale(1.005);
+        .glass-orb::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 28px;
+            width: 35px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            filter: blur(1.5px);
         }
 
-        /* Shimmer Sweeps for modern visual cue */
+        @keyframes bounceOrb {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.03) translateY(-6px); }
+        }
+        @keyframes spinRainbow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Shimmer sweep effect loop */
         .shimmer-sweep {
             position: relative;
             overflow: hidden;
@@ -205,30 +186,30 @@
             width: 150%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-            transform: skewX(-15deg);
-            animation: activeShimmer 4.5s infinite ease-in-out;
+            transform: skewX(-20deg);
+            animation: runShimmer 4.5s infinite ease-in-out;
         }
-        @keyframes activeShimmer {
+        @keyframes runShimmer {
             0% { left: -150%; }
-            30% { left: 150%; }
+            35% { left: 150%; }
             100% { left: 150%; }
         }
 
-        /* Keynote Logo Reveal and Title entrance */
-        @keyframes bootLogoReveal {
-            0% { transform: scale(0.65) translateY(10px); opacity: 0; filter: blur(10px); }
-            100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
+        /* View slide transitions */
+        .view-pane {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px) scale(0.995);
+            animation: slideUpIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .animate-boot-logo {
-            animation: bootLogoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .view-pane.active {
+            display: block;
         }
-
-        @keyframes revealTitle {
-            0% { letter-spacing: 0.05em; opacity: 0; filter: blur(4px); }
-            100% { letter-spacing: 0.25em; opacity: 1; filter: blur(0); }
-        }
-        .animate-reveal-title {
-            animation: revealTitle 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        @keyframes slideUpIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
     </style>
 </head>
@@ -237,32 +218,37 @@
     <div class="ambient-reflection glow-left"></div>
     <div class="ambient-reflection glow-right"></div>
 
-    <!-- HIGH-END SPATIAL GLASS BOOT SEQUENCE -->
-    <div id="boot-curtain" class="fixed inset-0 bg-[#040507] z-50 flex flex-col items-center justify-center transition-all duration-1000 ease-out">
-        <div class="relative flex flex-col items-center space-y-6 text-center px-6">
-            <!-- Pulsating Backdrop Ambient Glow -->
-            <div class="absolute w-64 h-64 bg-appleBlue/5 rounded-full filter blur-[70px] pointer-events-none -translate-y-6 animate-pulse"></div>
-            
-            <!-- Volumetric Logo Glass Shell -->
-            <div class="w-24 h-24 rounded-[30px] overflow-hidden bg-white/[0.02] border border-white/10 shadow-[0_0_40px_rgba(47,128,237,0.15)] p-1.5 relative flex items-center justify-center animate-boot-logo">
-                <img src="https://github.com/Yaxshi-bola/rasmlar/blob/main/Generated%20Image%20May%2024,%202026%20-%205_39PM.jpg?raw=true" 
-                     alt="MOBILOFT" 
-                     class="w-full h-full object-cover rounded-[24px]"
-                     onerror="this.src='https://placehold.co/150/11141a/ffffff?text=MOBILOFT'">
-                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none"></div>
+    <!-- 1. CINEMATIC STARTUP EXPERIENCE (Boot Screen - 1-ekran) -->
+    <div id="boot-curtain" class="fixed inset-0 bg-[#020204] z-50 flex flex-col items-center justify-center transition-all duration-1000 ease-out">
+        <div class="relative flex flex-col items-center space-y-8 text-center px-6">
+            <!-- Volumetric Spinning Glass Sphere -->
+            <div class="glass-orb flex items-center justify-center">
+                <div class="absolute inset-2 bg-[#020204]/90 rounded-full backdrop-blur-xl"></div>
+                <div class="z-10 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shadow-inner">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5f5f7" stroke-width="1.5">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                </div>
             </div>
 
-            <!-- Keynote Typography -->
-            <div class="space-y-1 z-10">
-                <h2 class="text-xl tracking-[0.25em] font-light text-white uppercase animate-reveal-title opacity-0" style="animation-delay: 0.3s; animation-fill-mode: forwards;">MOBILOFT</h2>
-                <p class="text-[10px] text-zinc-500 font-light tracking-wide opacity-0" style="animation-delay: 1.2s; animation-fill-mode: forwards;" id="boot-welcome-msg">Xush kelibsiz</p>
+            <!-- Typographic Branding Sequence -->
+            <div class="space-y-2 z-10">
+                <h1 class="text-xl tracking-[0.25em] font-light text-white uppercase animate-pulse">MOBILOFT</h1>
+                <p class="text-xs text-zinc-500 font-light tracking-widest" id="boot-welcome">Xush kelibsiz</p>
+            </div>
+            
+            <!-- Sleek Minimal Progress line -->
+            <div class="w-32 h-[1px] bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-white/40 w-0 transition-all duration-[1300ms] cubic-bezier(0.1, 0.8, 0.2, 1)" id="boot-bar"></div>
             </div>
         </div>
     </div>
 
     <!-- GLOBAL TOAST NOTIFICATION CONTAINER -->
-    <div id="toast-container" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm pointer-events-none transform transition-all duration-500 translate-y-[-100px] opacity-0">
-        <div class="glass-panel px-4 py-3.5 rounded-[22px] flex items-center gap-3 shadow-2xl">
+    <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm pointer-events-none transform transition-all duration-500 translate-y-[-100px] opacity-0">
+        <div class="glass-bento px-4 py-3.5 rounded-[22px] flex items-center gap-3 shadow-2xl">
             <div id="toast-icon-box" class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0"></div>
             <div class="flex-1 min-w-0">
                 <p id="toast-message" class="text-xs font-light text-slate-100 leading-tight"></p>
@@ -270,10 +256,10 @@
         </div>
     </div>
 
-    <!-- GLOBAL CONTAINER WRAPPER -->
+    <!-- GLOBAL LAYOUT WRAPPER -->
     <div class="w-full max-w-lg mx-auto px-4 pt-4 pb-32 z-10 flex-grow relative">
 
-        <!-- STATUS BAR & LIVE CLOCK (Premium delivery app vibe) -->
+        <!-- PREMIUM REAL-TIME STATUS BAR (TMA Native Vibe) -->
         <div class="flex items-center justify-between mb-4 px-2">
             <!-- Left: Profile and Time Info -->
             <div class="flex items-center gap-2.5">
@@ -303,12 +289,18 @@
             </div>
         </div>
 
-        <!-- HERO BRANDING SECTION (Admin Trigger integrated on clicks) -->
-        <header class="flex flex-col items-center justify-center text-center mb-5 relative">
+        <!-- 3D HERO BRANDING HEADER (Logo triggers secret admin authentication - 8-ekran) -->
+        <header class="flex flex-col items-center justify-center text-center mb-6 relative">
             <div class="absolute top-1/2 -translate-y-1/2 w-48 h-48 bg-white/[0.01] rounded-full filter blur-3xl pointer-events-none"></div>
 
-            <!-- Tap 4 times on this branding container to open admin gate -->
-            <div class="w-16 h-16 rounded-[24px] overflow-hidden bg-white/[0.02] border border-white/10 shadow-xl mb-2.5 relative flex items-center justify-center p-1 group cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95" onclick="handleLogoClicks()">
+            <!-- Holding logo down for 3 seconds triggers security FaceID gate -->
+            <div id="secure-logo-trigger"
+                 class="w-18 h-18 rounded-[24px] overflow-hidden bg-white/[0.02] border border-white/10 shadow-xl mb-3 relative flex items-center justify-center p-1 group cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95"
+                 onmousedown="startLogoAuthHold()" 
+                 onmouseup="clearLogoAuthHold()" 
+                 onmouseleave="clearLogoAuthHold()"
+                 ontouchstart="startLogoAuthHold()"
+                 ontouchend="clearLogoAuthHold()">
                 <img id="brand-logo" src="https://github.com/Yaxshi-bola/rasmlar/blob/main/Generated%20Image%20May%2024,%202026%20-%205_39PM.jpg?raw=true" 
                      alt="MOBILOFT Logo" class="w-full h-full object-cover rounded-[20px]">
                 <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none"></div>
@@ -317,7 +309,7 @@
             <div class="space-y-1">
                 <h1 class="text-lg font-light tracking-[0.2em] text-white uppercase">MOBILOFT</h1>
                 <p class="text-[10px] text-titanium-400 font-light tracking-wide max-w-xs mx-auto" id="hero-subtitle">
-                    Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'idagi telefon ta'mirlash va aksessuarlar do'koni.
+                    Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'i. Telefon ta'mirlash va aksessuarlar do'koni.
                 </p>
                 <div class="flex justify-center gap-1">
                     <span id="admin-badge" class="hidden text-[8px] bg-white/10 border border-white/10 text-white/75 px-1.5 py-0.2 rounded font-light uppercase tracking-wider mt-1">Admin Mode Active</span>
@@ -325,50 +317,35 @@
             </div>
         </header>
 
-        <!-- VIEW: HOME -->
-        <div id="view-home" class="app-view active space-y-5">
+        <!-- VIEW: HOME (2-ekran - Dashboard) -->
+        <div id="view-home" class="view-pane active space-y-5">
 
-            <!-- PREMIUM BENTO-GRID STATISTICS PANEL (1:1 styling with image_693526.jpg) -->
+            <!-- HIGH-END STATISTICAL BENTO GRID -->
             <div class="grid grid-cols-2 gap-3">
-                <!-- Bento Block 1: Completed Repairs (Stunning Royal Blue 3D style) -->
-                <div class="bento-blue-card rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="swapActiveTab('search')">
-                    <!-- Subtle abstract light flare -->
-                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-white/10 rounded-full filter blur-xl"></div>
-                    
+                <!-- Bento 1: Ready to Deliver (Premium Royal Blue 3D style) -->
+                <div class="glass-bento rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer border-white/10" style="background: linear-gradient(135deg, rgba(10,132,255,0.15) 0%, rgba(10,132,255,0.03) 100%);" onclick="swapActiveTab('search')">
                     <div class="flex items-center justify-between">
-                        <!-- Premium 3D-feeling Box/Check icon representation -->
-                        <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                                <line x1="12" y1="22.08" x2="12" y2="12"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-xl bg-appleBlue/20 flex items-center justify-center border border-appleBlue/30 text-appleBlue">
+                            <i data-lucide="package-check" class="w-5 h-5"></i>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5">
-                                <polyline points="7 17 12 12 7 7"/>
-                            </svg>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-400"></i>
                         </div>
                     </div>
                     <div>
-                        <span class="text-[10px] text-white/70 block uppercase tracking-wider" id="stats-ready-title">Tayyor bo'lganlar</span>
+                        <span class="text-[10px] text-zinc-400 block uppercase tracking-wider" id="stats-ready-title">Tayyor bo'lganlar</span>
                         <h4 id="stat-ready-count" class="text-2xl font-semibold text-white tracking-tight">0</h4>
                     </div>
                 </div>
 
-                <!-- Bento Block 2: In-Process Repairs (Dark Platinum Glass) -->
-                <div class="glass-panel rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="swapActiveTab('search')">
+                <!-- Bento 2: Active Repairs (Dark Bento design) -->
+                <div class="glass-bento rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="swapActiveTab('search')">
                     <div class="flex items-center justify-between">
-                        <!-- Premium 3D-feeling Cash Register/Tool icon representation -->
-                        <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400">
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a1a1a6" stroke-width="2">
-                                <polyline points="7 17 12 12 7 7"/>
-                            </svg>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-400"></i>
                         </div>
                     </div>
                     <div>
@@ -377,18 +354,14 @@
                     </div>
                 </div>
 
-                <!-- Bento Block 3: Low Diagnostics/Queue (Dark Bento Glass) -->
-                <div class="glass-panel rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="swapActiveTab('search')">
+                <!-- Bento 3: Queue Pending / Diagnosing -->
+                <div class="glass-bento rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="swapActiveTab('search')">
                     <div class="flex items-center justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400">
+                            <i data-lucide="hourglass" class="w-5 h-5"></i>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a1a1a6" stroke-width="2">
-                                <polyline points="7 17 12 12 7 7"/>
-                            </svg>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-400"></i>
                         </div>
                     </div>
                     <div>
@@ -397,18 +370,14 @@
                     </div>
                 </div>
 
-                <!-- Bento Block 4: Total Repairs Archive (Dark Bento Glass - STRICT PASSWORD PROTECTION) -->
-                <div class="glass-panel rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="handleSecureBentoAdminClick()">
+                <!-- Bento 4: Total CRM Archive (Locked unless Admin) -->
+                <div class="glass-bento rounded-[28px] p-5 flex flex-col justify-between h-[155px] relative overflow-hidden group cursor-pointer" onclick="handleSecureBentoAdminClick()">
                     <div class="flex items-center justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400">
+                            <i data-lucide="folder-git" class="w-5 h-5"></i>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a1a1a6" stroke-width="2">
-                                <polyline points="7 17 12 12 7 7"/>
-                            </svg>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+                            <i data-lucide="lock" class="w-3.5 h-3.5 text-zinc-500"></i>
                         </div>
                     </div>
                     <div>
@@ -418,38 +387,11 @@
                 </div>
             </div>
 
-            <!-- GLOWING INTERACTIVE HOME SEARCH PANEL (Moved below Stats Grid, but above Promos) -->
-            <div class="space-y-2 pt-2">
-                <label class="text-[9px] text-titanium-400 font-semibold tracking-widest uppercase px-1" id="search-label-home">
-                    Tezkor qidiruv tizimi
-                </label>
-                <div class="glowing-search-panel glass-panel rounded-[24px] p-1.5 relative shimmer-sweep">
-                    <div class="flex items-center gap-2">
-                        <div class="pl-2.5 text-slate-400">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                            </svg>
-                        </div>
-                        <input type="text" id="home-search-input" oninput="handleHomeQuery(this.value)" 
-                               placeholder="Ism, telefon, order ID, model..." 
-                               class="w-full bg-transparent border-0 text-xs text-white placeholder-zinc-500 focus:ring-0 focus:outline-none font-light py-2">
-                        <button onclick="clearHomeSearch()" id="home-clear-search-btn" class="hidden text-zinc-500 hover:text-white p-1">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Instant search results suggestion box -->
-                <div id="home-search-suggestions" class="hidden mt-2 space-y-2"></div>
-            </div>
-
-            <!-- PROMO DISPLAY BANNER -->
+            <!-- PROMOTION BANNERS AREA (6-ekran) -->
             <div id="promo-banner-container" class="space-y-3"></div>
 
-            <!-- MAP & ADDRESS CONTAINER WITH CORRECT GEOTAGS -->
-            <div class="glass-panel rounded-[26px] p-5 space-y-3">
+            <!-- PREMIUM GEOTAG MAP LOCATION CONTAINER -->
+            <div class="glass-bento rounded-[26px] p-5 space-y-3 relative overflow-hidden">
                 <div class="flex items-center gap-2">
                     <span class="w-[2px] h-3.5 bg-white/40 rounded-full"></span>
                     <h3 class="text-xs font-semibold text-slate-200" id="address-title">Manzilimiz</h3>
@@ -472,28 +414,24 @@
 
         </div>
 
-        <!-- VIEW: SEARCH (DEDICATED PANEL) -->
-        <div id="view-search" class="app-view space-y-5">
+        <!-- VIEW: SEARCH (3-ekran - Dedicated Spotlight Search Pane) -->
+        <div id="view-search" class="view-pane space-y-5">
             <div class="space-y-1">
                 <h2 class="text-lg font-light text-white" id="search-tab-title">CRM Qidiruv Tizimi</h2>
                 <p class="text-xs text-titanium-400 font-light" id="search-tab-subtitle">Buyurtmalar real vaqt holati va ta'mirlash tarixi</p>
             </div>
 
-            <!-- SEARCH CONTROL UNIT -->
-            <div class="glass-panel rounded-[24px] p-2 relative">
+            <!-- SHIMMERING ACTIVE SPOTLIGHT SEARCH BAR -->
+            <div class="glowing-search-panel glass-bento rounded-[24px] p-2 relative shimmer-sweep">
                 <div class="flex items-center gap-2">
                     <div class="pl-2 text-slate-400">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                        </svg>
+                        <i data-lucide="search" class="w-4 h-4"></i>
                     </div>
                     <input type="text" id="dedicated-search-input" oninput="handleDedicatedSearch(this.value)" 
                            placeholder="Ism, telefon, order kodi, qurilma modeli..." 
                            class="w-full bg-transparent border-0 text-xs text-white placeholder-zinc-500 focus:outline-none focus:ring-0 font-light py-2">
                     <button onclick="clearDedicatedSearch()" id="dedicated-clear-btn" class="hidden text-zinc-500 hover:text-white p-1">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
+                        <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
@@ -501,9 +439,9 @@
             <!-- DETAILED VIEW SUGGESTION SHEETS -->
             <div id="dedicated-search-suggestions" class="space-y-3"></div>
 
-            <!-- DETAILED REPAIR PROCESS TIMELINE SHEET -->
+            <!-- DETAILED REPAIR PROCESS TIMELINE SHEET (5-ekran) -->
             <div id="timeline-box" class="hidden">
-                <div class="glass-panel rounded-[28px] p-5 relative overflow-hidden">
+                <div class="glass-bento rounded-[28px] p-5 relative overflow-hidden">
                     <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-3">
                         <div>
                             <span class="text-[9px] text-zinc-400 uppercase tracking-widest" id="order-id-label">Buyurtma kodi</span>
@@ -533,11 +471,9 @@
             </div>
 
             <!-- PLACEHOLDER RECORD NOT FOUND -->
-            <div id="no-results-panel" class="hidden glass-panel rounded-[24px] p-6 text-center space-y-3">
+            <div id="no-results-panel" class="hidden glass-bento rounded-[24px] p-6 text-center space-y-3">
                 <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-500 mx-auto">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-                    </svg>
+                    <i data-lucide="info" class="w-5 h-5"></i>
                 </div>
                 <div class="space-y-1">
                     <h3 class="text-xs font-semibold text-slate-200" id="not-found-title">Hech narsa topilmadi</h3>
@@ -548,21 +484,19 @@
             </div>
         </div>
 
-        <!-- VIEW: CONTACT -->
-        <div id="view-contact" class="app-view space-y-5">
+        <!-- VIEW: CONTACT (7-ekran - Contacts list) -->
+        <div id="view-contact" class="view-pane space-y-5">
             <div class="space-y-1">
                 <h2 class="text-lg font-light text-white" id="contact-tab-title">Aloqa va Qo'llab-quvvatlash</h2>
                 <p class="text-xs text-titanium-400 font-light" id="contact-tab-subtitle">Mutaxassislarimiz bilan to'g'ridan-to'g'ri bog'laning</p>
             </div>
 
-            <div class="glass-panel rounded-[28px] p-4 space-y-3">
+            <div class="glass-bento rounded-[28px] p-4 space-y-3">
                 <!-- Phone Support Card -->
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-slate-300">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
+                            <i data-lucide="phone" class="w-4 h-4"></i>
                         </div>
                         <div>
                             <span class="text-[8px] text-zinc-500 uppercase tracking-widest block" id="contact-owner">Abdujalil Usta</span>
@@ -576,9 +510,7 @@
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-slate-300">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
+                            <i data-lucide="message-square" class="w-4 h-4"></i>
                         </div>
                         <div>
                             <span class="text-[8px] text-zinc-500 uppercase tracking-widest block" id="contact-tg-label">Telegram aloqa</span>
@@ -592,12 +524,7 @@
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.01] border border-white/5">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-slate-300">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="16" rx="2" ry="2" />
-                                <line x1="16" y1="2" x2="16" y2="6" />
-                                <line x1="8" y1="2" x2="8" y2="6" />
-                                <line x1="3" y1="10" x2="21" y2="10" />
-                            </svg>
+                            <i data-lucide="user-cog" class="w-4 h-4"></i>
                         </div>
                         <div>
                             <span class="text-[8px] text-zinc-500 uppercase tracking-widest block">Admin lichkasi</span>
@@ -609,7 +536,7 @@
             </div>
 
             <!-- GEOLOCATION INTERACTIVE CARD COMPONENT -->
-            <div class="glass-panel rounded-[26px] p-5 space-y-4">
+            <div class="glass-bento rounded-[26px] p-5 space-y-4">
                 <div class="flex items-center gap-2">
                     <span class="w-[2px] h-3.5 bg-white/40 rounded-full"></span>
                     <h3 class="text-xs font-semibold text-slate-200" id="contact-address-title">Ustaxona manzili</h3>
@@ -625,8 +552,8 @@
             </div>
         </div>
 
-        <!-- VIEW: VIEW_ADMIN -->
-        <div id="view-admin" class="app-view space-y-6">
+        <!-- VIEW: VIEW_ADMIN (9 & 10-ekran - Admin Boshqaruv & CRUD) -->
+        <div id="view-admin" class="view-pane space-y-6">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-lg font-light text-white" id="admin-tab-title">Admin boshqaruv paneli</h2>
@@ -636,7 +563,7 @@
             </div>
 
             <!-- REAL-TIME CLOUD DATABASE CONNECTION STATUS CARD -->
-            <div class="glass-panel rounded-2xl p-4 flex flex-col gap-3 border-white/10">
+            <div class="glass-bento rounded-2xl p-4 flex flex-col gap-3 border-white/10">
                 <div class="flex items-center justify-between">
                     <div class="space-y-1">
                         <span class="text-[8px] text-zinc-400 uppercase tracking-widest block font-semibold">Ulanish Tizimi</span>
@@ -651,7 +578,7 @@
             </div>
 
             <!-- ADD / EDIT CRM ORDER COMPONENT -->
-            <div class="glass-panel rounded-[28px] p-5 space-y-4">
+            <div class="glass-bento rounded-[28px] p-5 space-y-4">
                 <div class="flex items-center justify-between border-b border-white/5 pb-2">
                     <h3 class="text-xs font-semibold text-slate-200" id="form-title">Yangi buyurtma kiritish</h3>
                     <button onclick="resetAdminFormFields()" class="text-[10px] text-zinc-500 hover:text-white" id="form-clear">Tozalash</button>
@@ -704,7 +631,7 @@
             </div>
 
             <!-- PROMO (AKSIYA) MANAGEMENT SECTION -->
-            <div class="glass-panel rounded-[28px] p-5 space-y-4">
+            <div class="glass-bento rounded-[28px] p-5 space-y-4">
                 <div class="flex items-center justify-between border-b border-white/5 pb-2">
                     <h3 class="text-xs font-semibold text-slate-200" id="promo-form-title">Yangi Aksiya qo'shish</h3>
                     <button onclick="resetPromoFormFields()" class="text-[10px] text-zinc-500 hover:text-white" id="promo-form-clear">Tozalash</button>
@@ -749,13 +676,13 @@
             </div>
 
             <!-- PROMOS DIRECTORY -->
-            <div class="glass-panel rounded-[28px] p-5 space-y-3">
+            <div class="glass-bento rounded-[28px] p-5 space-y-3">
                 <h3 class="text-xs font-semibold text-slate-200 border-b border-white/5 pb-2">Barcha mavjud aksiyalar</h3>
                 <div id="promos-directory-list" class="space-y-3 max-h-60 overflow-y-auto pr-1"></div>
             </div>
 
-            <!-- TOTAL CRM RECORDS DIRECTORY -->
-            <div class="glass-panel rounded-[28px] p-5 space-y-4">
+            <!-- TOTAL CRM RECORDS DIRECTORY (10-ekran - Orders List CRUD) -->
+            <div class="glass-bento rounded-[28px] p-5 space-y-4">
                 <div class="flex items-center justify-between border-b border-white/5 pb-2">
                     <h3 class="text-xs font-semibold text-slate-200" id="crm-title">Barcha mavjud buyurtmalar</h3>
                     <span id="crm-total-badge" class="text-[10px] bg-white/5 px-2 py-0.5 rounded-full text-slate-300 font-light">0</span>
@@ -766,14 +693,15 @@
 
     </div>
 
-    <!-- SECURE PASSCODE CAPSULE VIEW (Sahobiddin12) -->
+    <!-- FACE ID INSPIRED AUTHENTICATION SECURE PASSCODE OVERLAY (8-ekran) -->
     <div id="passcode-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/85 backdrop-blur-md">
-        <div class="w-80 glass-panel rounded-[28px] p-6 space-y-4 text-center">
-            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mx-auto text-white border border-white/5">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
+        <div class="w-80 glass-bento rounded-[28px] p-6 space-y-5 text-center">
+            <!-- Face ID Scanner Graphic Simulation -->
+            <div class="w-16 h-16 rounded-3xl border border-white/10 bg-white/[0.02] flex items-center justify-center mx-auto text-white animate-pulse relative">
+                <i data-lucide="scan-face" class="w-8 h-8 text-appleBlue"></i>
+                <div class="absolute inset-0 border border-appleBlue/20 rounded-3xl scale-110"></div>
             </div>
+            
             <div class="space-y-1">
                 <h3 class="font-normal text-sm text-white" id="passcode-title">Xavfsizlik paroli</h3>
                 <p class="text-[10px] text-titanium-400 font-light" id="passcode-subtitle">Tizim administratsiyasiga kirish</p>
@@ -782,15 +710,15 @@
             <input type="password" id="passcode-field" placeholder="Parolni kiriting..." class="w-full text-center bg-black/50 border border-white/10 rounded-2xl py-3 text-white focus:outline-none focus:border-white/20 font-light tracking-widest text-sm">
             
             <div class="flex gap-2 pt-1">
-                <button onclick="hidePasscodeGate()" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2" id="passcode-cancel-btn">Bekor qilish</button>
+                <button onclick="hidePasscodeGate()" class="w-1/2 bg-white/5 text-slate-400 font-light text-xs py-2 rounded-xl" id="passcode-cancel-btn">Bekor qilish</button>
                 <button onclick="authenticatePasscodeValue()" class="w-1/2 bg-white text-black font-semibold text-xs py-2 rounded-xl" id="passcode-enter-btn">Kirish</button>
             </div>
         </div>
     </div>
 
-    <!-- NATIVE SYSTEM DECISION OVERLAYS -->
+    <!-- IOS GLASS CONFIRM DIALOG OVERLAY -->
     <div id="confirm-dialog" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/85 backdrop-blur-md">
-        <div class="w-72 glass-panel rounded-[24px] p-5 space-y-4 text-center">
+        <div class="w-72 glass-bento rounded-[24px] p-5 space-y-4 text-center">
             <h4 class="font-semibold text-xs text-slate-400 uppercase tracking-widest" id="confirm-title-header">Tasdiqlash</h4>
             <p id="confirm-description" class="text-xs font-light text-slate-200 leading-relaxed"></p>
             <div class="flex gap-2 pt-1">
@@ -800,20 +728,16 @@
         </div>
     </div>
 
-    <!-- FLOATING SPATIAL NAVIGATION CAPSULE BAR WITH CENTRAL ACTION "+" BUTTON (Directly adapted from delivery app reference image_693526.jpg) -->
-    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-[430px] rounded-[32px] py-1 px-2.5 navigation-capsule">
+    <!-- FLOATING IRIDESCENT NAVIGATION DOCK (Mohammad Javad Kermany Visual Concept) -->
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-[430px] rounded-[32px] py-1.5 px-2.5 navigation-dock">
         <div class="flex justify-between items-center relative h-16">
             
             <!-- Tab: Home -->
             <button onclick="swapActiveTab('home')" id="nav-item-home" class="flex-1 h-full relative flex flex-col items-center justify-center transition-all duration-300">
-                <div id="spotlight-home" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden" style="background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 65%, transparent 100%);">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[3px] bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)]"></div>
-                </div>
+                <div id="spotlight-home" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden spotlight-beam"></div>
                 <div class="flex flex-col items-center justify-center relative z-10 transition-transform duration-300" id="content-home">
                     <div class="w-6 h-6 flex items-center justify-center text-zinc-400 transition-colors duration-300" id="icon-home-box">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
+                        <i data-lucide="home" class="w-5 h-5"></i>
                     </div>
                     <span id="nav-text-home" class="text-[9px] font-semibold tracking-wider uppercase mt-1 opacity-0 h-0 overflow-hidden transition-all duration-300">Home</span>
                 </div>
@@ -821,38 +745,28 @@
 
             <!-- Tab: Dedicated Search -->
             <button onclick="swapActiveTab('search')" id="nav-item-search" class="flex-1 h-full relative flex flex-col items-center justify-center transition-all duration-300">
-                <div id="spotlight-search" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden" style="background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 65%, transparent 100%);">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[3px] bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)]"></div>
-                </div>
+                <div id="spotlight-search" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden spotlight-beam"></div>
                 <div class="flex flex-col items-center justify-center relative z-10 transition-transform duration-300" id="content-search">
                     <div class="w-6 h-6 flex items-center justify-center text-zinc-400 transition-colors duration-300" id="icon-search-box">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                        </svg>
+                        <i data-lucide="search" class="w-5 h-5"></i>
                     </div>
                     <span id="nav-text-search" class="text-[9px] font-semibold tracking-wider uppercase mt-1 opacity-0 h-0 overflow-hidden transition-all duration-300">Qidiruv</span>
                 </div>
             </button>
 
-            <!-- Central Custom Floating Plus/Action Button (Exactly like image_693526.jpg blue "+" button) -->
+            <!-- Central Custom Floating Blue Action Button ("+" trigger for Spotlight Search) -->
             <div class="flex-1 h-full flex items-center justify-center relative z-20">
-                <button onclick="handleCentralFloatingAction()" class="w-12 h-12 rounded-full bento-blue-card flex items-center justify-center shadow-lg border border-white/20 transform hover:scale-110 active:scale-95 transition-all">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" id="central-action-icon">
-                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                    </svg>
+                <button onclick="handleCentralFloatingAction()" class="w-12 h-12 rounded-full flex items-center justify-center border border-white/20 transform hover:scale-110 active:scale-95 transition-all shadow-lg" style="background: linear-gradient(135deg, #1c64f2 0%, #1a56db 100%);">
+                    <i data-lucide="plus" class="w-6 h-6 text-white"></i>
                 </button>
             </div>
 
             <!-- Tab: Contact -->
             <button onclick="swapActiveTab('contact')" id="nav-item-contact" class="flex-1 h-full relative flex flex-col items-center justify-center transition-all duration-300">
-                <div id="spotlight-contact" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden" style="background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 65%, transparent 100%);">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[3px] bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)]"></div>
-                </div>
+                <div id="spotlight-contact" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden spotlight-beam"></div>
                 <div class="flex flex-col items-center justify-center relative z-10 transition-transform duration-300" id="content-contact">
                     <div class="w-6 h-6 flex items-center justify-center text-zinc-400 transition-colors duration-300" id="icon-contact-box">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        </svg>
+                        <i data-lucide="message-square" class="w-5 h-5"></i>
                     </div>
                     <span id="nav-text-contact" class="text-[9px] font-semibold tracking-wider uppercase mt-1 opacity-0 h-0 overflow-hidden transition-all duration-300">Aloqa</span>
                 </div>
@@ -860,14 +774,10 @@
 
             <!-- Tab: Admin Panel -->
             <button onclick="swapActiveTab('admin')" id="nav-item-admin" class="hidden flex-1 h-full relative flex flex-col items-center justify-center transition-all duration-300">
-                <div id="spotlight-admin" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden" style="background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 65%, transparent 100%);">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[3px] bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)]"></div>
-                </div>
+                <div id="spotlight-admin" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-300 rounded-[32px] overflow-hidden spotlight-beam"></div>
                 <div class="flex flex-col items-center justify-center relative z-10 transition-transform duration-300" id="content-admin">
                     <div class="w-6 h-6 flex items-center justify-center text-zinc-400 transition-colors duration-300" id="icon-admin-box">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        </svg>
+                        <i data-lucide="lock" class="w-5 h-5"></i>
                     </div>
                     <span id="nav-text-admin" class="text-[9px] font-semibold tracking-wider uppercase mt-1 opacity-0 h-0 overflow-hidden transition-all duration-300">Admin</span>
                 </div>
@@ -878,7 +788,7 @@
 
     <script>
         // ========================================================
-        // LIVE PRODUCTION SUPABASE CONFIGURATION (Securely integrated)
+        // LIVE PRODUCTION SUPABASE CONFIGURATION (Dynamic Schema Adaptive)
         // ========================================================
         const SUPABASE_URL = 'https://gmdbrbtvqpksgxrprili.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_HdIa2fTU10TdB1K1v_41hw_L8yMF_Ue'; 
@@ -888,7 +798,7 @@
             uz: {
                 online: "Online",
                 bootStatus: "Tizim sozlamalari tiklanmoqda...",
-                heroSubtitle: "Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'idagi telefon ta'mirlash va aksessuarlar do'koni.",
+                heroSubtitle: "Farg'ona viloyati, Uchko'prik tumani, Rahmatillo qishlog'i. Telefon ta'mirlash va aksessuarlar do'koni.",
                 introSmall: "Abdujalil Ustaxonasi",
                 introTitle: "Mijozlarimizga xizmat ko'rsatish tizimi",
                 introBody: "Qurilmangizni topshirgan bo'lsangiz, uning hozirgi ta'mirlash holatini real vaqt rejimida ushbu interaktiv platforma orqali kuzatib boring.",
@@ -936,8 +846,8 @@
             cy: {
                 online: "Онлайн",
                 bootStatus: "Тизим созламалари тикланмоқда...",
-                heroSubtitle: "Фарғона вилояти, Учқўприк тумани, Раҳматилло қишлоғидаги телефон таъмирлаш ва аксессуарлар дўкони.",
-                introSmall: "Абдужалил Дўкони",
+                heroSubtitle: "Фарғона вилояти, Учқўприк тумани, Раҳматилло қишлоғи. Телефон таъмирлаш ва аксессуарлар дўкони.",
+                introSmall: "Абдужалил Устахонаси",
                 introTitle: "Мижозларимизга хизмат кўрсатиш тизими",
                 introBody: "Қурилмангизни топширган бўлсангиз, унинг ҳозирги таъмирлаш ҳолатини реал вақт режимида ушбу интерактив платформа орқали кузатиб боринг.",
                 searchLabelHome: "Тезкор қидирув тизими",
@@ -986,10 +896,10 @@
         // 6-stage repair process status definitions
         const STAGES = [
             { id: 1, uz: "Qabul qilindi", cy: "Қабул қилинди", descUz: "Qurilma qabul qilinib hisobga olindi", descCy: "Қурилма қабул қилиниб ҳисобга олинди", icon: "📥" },
-            { id: 2, uz: "Tashxis qilinmoqda", cy: "Таххис қилинмоқда", descUz: "Muhandis nosozlik sabablarini o'rganmoqda", descCy: "Муҳандис носозлик сабабларини ўрганмоқда", icon: "🔍" },
+            { id: 2, uz: "Tashxis qilinmoqda", cy: "Ташхис қилинмоқда", descUz: "Muhandis nosozlik sabablarini o'rganmoqda", descCy: "Муҳандис носозлик сабабларини ўрганмоқда", icon: "🔍" },
             { id: 3, uz: "Ehtiyot qism kutilmoqda", cy: "Эҳтиёт қисм кутилмоқда", descUz: "Zarur bo'lgan ehtiyot qismlarga buyurtma berilgan", descCy: "Зарур бўлган эҳтиёт қисмларга буюртма берилган", icon: "⏳" },
-            { id: 4, uz: "Ta'mirlanmoqda", cy: "Ta'mirlanmoqda", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
-            { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовdan o'tmoqda", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий ва техник тест жараёни бажарилмоқда", icon: "✅" },
+            { id: 4, uz: "Ta'mirlanmoqda", cy: "Таъмирланмоқда", descUz: "Texnik qismlar va platalar sozlanmoqda", descCy: "Техник қисмлар ва платалар созланмоқда", icon: "🔧" },
+            { id: 5, uz: "Sinovdan o'tmoqda", cy: "Синовдан ўтмоқда", descUz: "Dasturiy va texnik test jarayoni bajarilmoqda", descCy: "Дастурий ва техник тест жараёни бажарилмоқда", icon: "✅" },
             { id: 6, uz: "Tayyor", cy: "Тайёр", descUz: "Smartfon to'liq sozlandi va topshirishga tayyor", descCy: "Смартфон тўлиқ созланdi ва топширишга тайёр", icon: "🎉" }
         ];
 
@@ -1064,24 +974,18 @@
             document.getElementById('promo-desc-cy').value = latinToCyrillic(descUz);
         }
 
-        // Admin tap tracking triggers
-        let logoClickCount = 0;
-        let lastLogoClickTime = 0;
-
-        function handleLogoClicks() {
-            const currentTime = Date.now();
-            if (currentTime - lastLogoClickTime > 2000) {
-                logoClickCount = 0; // reset if delay is more than 2s
-            }
-            lastLogoClickTime = currentTime;
-            logoClickCount++;
-
-            if (logoClickCount === 4) {
-                logoClickCount = 0; // reset
-                executeHapticImpact('success');
+        // Admin Logo press hold detector (8-ekran auth trigger - 3 seconds hold)
+        let logoHoldTimer = null;
+        function startLogoAuthHold() {
+            logoHoldTimer = setTimeout(() => {
+                executeHapticImpact('heavy');
                 triggerPasscodeGate();
-            } else {
-                executeHapticImpact('light');
+            }, 1500); // 1.5 seconds is the premium swift response time
+        }
+        function clearLogoAuthHold() {
+            if (logoHoldTimer) {
+                clearTimeout(logoHoldTimer);
+                logoHoldTimer = null;
             }
         }
 
@@ -1325,10 +1229,13 @@
 
         async function initApp() {
             try {
+                // Initialize Lucide Icons for premium 3D vectors
+                lucide.createIcons();
+
                 // Set localized welcome message inside boot sequences
                 const savedLang = localStorage.getItem('mobiloft_lang') || 'uz';
                 state.lang = savedLang;
-                const welcomeEl = document.getElementById('boot-welcome-msg');
+                const welcomeEl = document.getElementById('boot-welcome');
                 if (welcomeEl) {
                     welcomeEl.innerText = savedLang === 'uz' ? 'Xush kelibsiz' : 'Хуш келибсиз';
                 }
@@ -1346,6 +1253,12 @@
                 renderBentoStats();
                 initClockLoop();
                 updateNavigationHighlight('home');
+
+                // Animate progress bar in boot sequence
+                const bootBar = document.getElementById('boot-bar');
+                if (bootBar) {
+                    setTimeout(() => { bootBar.style.width = '100%'; }, 100);
+                }
 
             } catch (err) {
                 console.error("Critical boot sequence warning:", err);
@@ -1733,7 +1646,7 @@
                     const markedId = insertHighlighterMark(`#${order.id}`, cleanQuery);
 
                     return `
-                        <div onclick="selectOrderFromHome('${order.id}')" class="p-4 rounded-2xl bg-white/[0.02] hover:bg-white/[0.08] border border-white/5 cursor-pointer flex justify-between items-center transition-all">
+                        <div onclick="selectOrderFromHome('${order.id}')" class="p-4 rounded-2xl bg-white/[0.02] hover:bg-white/[0.08] border border-white/5 cursor-pointer flex justify-between items-center transition-all animate-[viewFadeIn_0.3s_ease]">
                             <div class="space-y-0.5">
                                 <span class="text-[9px] text-zinc-500 font-semibold tracking-wider block">${markedId}</span>
                                 <h4 class="text-xs font-semibold text-slate-100">${markedOwner}</h4>
@@ -1750,7 +1663,7 @@
             } else {
                 suggestionBox.classList.remove('hidden');
                 suggestionBox.innerHTML = `
-                    <div class="glass-panel rounded-2xl p-4 text-center">
+                    <div class="glass-bento rounded-2xl p-4 text-center">
                         <p class="text-[10px] text-zinc-500">${DICT[state.lang].notFoundTitle}</p>
                     </div>
                 `;
@@ -1915,7 +1828,7 @@
                 const labelDesc = state.lang === 'uz' ? stage.descUz : stage.descCy;
 
                 const step = document.createElement('div');
-                step.className = "flex gap-4 relative";
+                step.className = "flex gap-4 relative animate-[viewFadeIn_0.35s_ease]";
                 step.innerHTML = `
                     ${idx < STAGES.length - 1 ? `<div class="${connectorClasses}"></div>` : ''}
                     <div class="${bulletClasses}">
@@ -1941,6 +1854,15 @@
             if (modal && field) {
                 modal.classList.remove('hidden');
                 field.focus();
+            }
+        }
+
+        // Re-align and initialize SVG Icons using Lucide globally
+        function reinitLucideIcons() {
+            try {
+                lucide.createIcons();
+            } catch (e) {
+                console.warn("Lucide load issue: ", e);
             }
         }
 
@@ -1977,9 +1899,13 @@
         }
 
         async function syncMetricsAndDirectory() {
+            const totalCount = document.getElementById('stat-all-count');
+            const activeCount = document.getElementById('stat-active-count');
+            const promoCount = document.getElementById('stat-promo-count');
+            const totalBadge = document.getElementById('crm-total-badge');
             const directory = document.getElementById('crm-orders-directory');
 
-            if (!directory) return;
+            if (!totalCount || !activeCount || !promoCount || !totalBadge || !directory) return;
 
             // Fetch latest before rendering to keep in sync with cloud
             state.orders = await fetchOrdersFromCloud();
@@ -1988,8 +1914,7 @@
             renderBentoStats();
 
             const total = state.orders.length;
-            const totalBadge = document.getElementById('crm-total-badge');
-            if (totalBadge) totalBadge.innerText = total;
+            totalBadge.innerText = total;
 
             directory.innerHTML = '';
 
@@ -2031,6 +1956,7 @@
             }
 
             syncPromosDirectory();
+            reinitLucideIcons();
         }
 
         async function handleOrderFormSaving(event) {
@@ -2166,7 +2092,7 @@
                 const desc = state.lang === 'uz' ? promo.desc_uz : promo.desc_cy;
 
                 const promoCard = document.createElement('div');
-                promoCard.className = "glass-panel rounded-[24px] p-4 relative overflow-hidden border-white/10 hover:border-white/20 transition-all";
+                promoCard.className = "glass-bento rounded-[24px] p-4 relative overflow-hidden border-white/10 hover:border-white/20 transition-all";
                 promoCard.innerHTML = `
                     <div class="flex items-start gap-3 relative z-10">
                         <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/5">
